@@ -1,0 +1,248 @@
+<script type="text/ng-template" id="event.html">
+  <div class="modal-header">
+    <button type="button" class="close" ng-click="closeModal()"><span aria-hidden="true">&times;</span></button>
+    <h3 class="modal-title">{{'ocsp_web_streams_cep3' | translate}}</h3>
+  </div>
+  <div class="modal-body">
+    <form name="eventForm" id="eventForm">
+      <div class="panel panel-default">
+        <div class="panel-heading">{{'ocsp_web_streams_cep_setting' | translate}}</div>
+        <div class="panel-body">
+          <div class="form-group">
+            <label>{{'ocsp_web_streams_cep_eventtype' | translate}}</label>
+            <ui-select ng-model="newEvent.parent" ng-required="true" name="eventTypes">
+              <ui-select-match>
+                <span ng-bind="$select.selected.vname"></span>
+              </ui-select-match>
+              <ui-select-choices
+                repeat="item in (types | filter: $select.search) track by item.id">
+                <span ng-bind="item.vname"></span>
+              </ui-select-choices>
+            </ui-select>
+            <span class="redtip" ng-messages="eventForm.eventTypes.$error" ng-if="eventForm.eventTypes.$touched">
+              <div ng-message="required">{{'ocsp_web_common_027' | translate}}</div>
+            </span>
+          </div>
+          <div class="form-group">
+            <label>{{'ocsp_web_streams_cep_eventcode' | translate}}*</label>
+            <input type="text" class="form-control" ng-focus="focusEventCode()" ng-blur="unfocusEventCode(newEvent.cep.code)" ng-model="newEvent.cep.code" name="eventsCode" required>
+            <span class="redtip"
+                  ng-show="eventForm['eventsCode'].$touched && eventForm['eventsCode'].$error.required">{{'ocsp_web_common_027' | translate}}</span>
+            <span class="redtip"
+                  ng-show="eventcodealreadyexists">{{'ocsp_web_streams_cep_eventcodeexists' | translate}}</span>
+          </div>
+          <div class="form-group">
+            <label>{{'ocsp_web_streams_cep_eventidentifier' | translate}}</label>
+            <input type="text" class="form-control" ng-model="newEvent.cep.identifier">
+          </div>
+          <div class="form-group">
+            <label>{{'ocsp_web_streams_cep_eventbussinessdescription' | translate}}</label>
+            <input type="text" class="form-control" ng-model="newEvent.description">
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">{{'ocsp_web_streams_cep_rule' | translate}}</div>
+        <div class="panel-body">
+          <div class="form-group">
+            <label>{{'ocsp_web_streams_cep_relatedstream' | translate}}*</label>
+            <ui-select ng-model="newEvent.task" ng-required="true" name="streams" on-select="selectEventStream($item)">
+              <ui-select-match>
+                <span ng-bind="$select.selected.name"></span>
+              </ui-select-match>
+              <ui-select-choices
+                repeat="task in (tasks | filter: $select.search) track by task.id">
+                <span ng-bind="task.name"></span>
+              </ui-select-choices>
+            </ui-select>
+            <span class="redtip" ng-messages="eventForm.streams.$error" ng-if="eventForm.streams.$touched">
+              <div ng-message="required">{{'ocsp_web_common_027' | translate}}</div>
+            </span>
+          </div>
+          <div class="form-group">
+            <label>{{'ocsp_web_streams_manage_017' | translate}}*</label>
+            <input type="text" name="name" class="form-control" ng-model="newEvent.name" required>
+            <span class="redtip" ng-messages="eventForm.name.$error" ng-if="eventForm.name.$touched">
+              <div ng-message="required">{{'ocsp_web_common_027' | translate}}</div>
+            </span>
+          </div>
+          <div class="form-group">
+            <label>{{'ocsp_web_streams_manage_018' | translate}}*</label>
+            <tokenfield inputs="{{getAllPossibleFields(newEvent.inputFields,userFieldsFromDB)}}" labels="{{newEvent.labels}}" name="eventsFields" ng-model="newEvent.select_expr" checkinputfield=true required="true"></tokenfield>
+            <span class="redtip" ng-show="eventForm['eventsFields'].$touched && eventForm['eventsFields'].$error.required">{{'ocsp_web_common_027' | translate}}</span>
+            <span class="redtip" ng-show="outputFieldsInvalid">{{outputFieldsInvalidMessage}}</span>
+          </div>
+          <div class="form-group">
+            <label>{{'ocsp_web_streams_manage_019' | translate}}*</label>
+            <input type="text" class="form-control" ng-model="newEvent.delim" required name="delim">
+            <span class="redtip" ng-show="eventForm['delim'].$touched && eventForm['delim'].$error.required">{{'ocsp_web_common_027' | translate}}</span>
+          </div>
+          <div class="form-group">
+            <label>{{'ocsp_web_streams_cep_eventtriggercondition' | translate}}</label>
+            <input type="text" class="form-control" ng-model="newEvent.filter_expr">
+          </div>
+          <div class="form-group">
+            <label>{{'ocsp_web_streams_manage_020' | translate}}({{'ocsp_web_common_023' | translate}})*</label>
+            <input type="number" class="form-control" ng-model="newEvent.interval" ng-pattern="/^(0|[1-9][0-9]*)$/" name="eventsInterval" required>
+            <span class="redtip"
+                  ng-show="eventForm['eventsInterval'].$touched && eventForm['eventsInterval'].$error.required">{{'ocsp_web_common_027' | translate}}</span>
+            <span class="redtip"
+                  ng-show="eventForm['eventsInterval'].$touched && eventForm['eventsInterval'].$error.pattern">{{'ocsp_web_common_034' | translate}}</span>
+          </div>
+          <div class="form-group">
+            <label>{{'ocsp_web_streams_cep_filedaskey' | translate}}*</label>
+            <input type="text" class="form-control" ng-model="newEvent.output.uniqueKey" required name="uniqueKey">
+            <span class="redtip" ng-show="eventForm['uniqueKey'].$touched && eventForm['uniqueKey'].$error.required">{{'ocsp_web_common_027' | translate}}</span>
+          </div>
+          <div class="form-group">
+            <label>{{'ocsp_web_streams_manage_021' | translate}}*</label>
+            <ui-select ng-model="newEvent.output.datasource" ng-required="true" name="output_datasource">
+              <ui-select-match>
+                <span ng-bind="$select.selected.name"></span>
+              </ui-select-match>
+              <ui-select-choices
+                repeat="datasource in (datasources | filter: $select.search) track by datasource.id">
+                <span ng-bind="datasource.name"></span>
+              </ui-select-choices>
+            </ui-select>
+            <span class="redtip" ng-messages="eventForm.output_datasource.$error" ng-if="eventForm.output_datasource.$touched">
+              <div ng-message="required">{{'ocsp_web_common_027' | translate}}</div>
+            </span>
+          </div>
+          <div class="form-group" ng-if="newEvent.output.datasource.type == 'kafka'">
+            <label>{{'ocsp_web_streams_manage_010' | translate}}*</label>
+            <input type="text" class="form-control" ng-model="newEvent.output.topic" required name="topic">
+            <span class="redtip" ng-show="eventForm['topic'].$touched && eventForm['topic'].$error.required">{{'ocsp_web_common_027' | translate}}</span>
+          </div>
+          <div class="form-group" ng-if="newEvent.output.datasource.type == 'codis'">
+            <label>{{'ocsp_web_streams_manage_022' | translate}}*</label>
+            <input type="text" class="form-control" ng-model="newEvent.output.codisKeyPrefix" required name="keyPrefix">
+            <span class="redtip" ng-show="eventForm['keyPrefix'].$touched && eventForm['keyPrefix'].$error.required">{{'ocsp_web_common_027' | translate}}</span>
+          </div>
+        </div>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">{{'ocsp_web_streams_cep_noteoofupdate' | translate}}</div>
+        <div class="panel-body">
+          <div class="form-group">
+            <div text-angular ng-model="newEvent.note" ta-toolbar="[['bold', 'italics', 'underline']]"
+                 ta-text-editor-class="form-control editor-height"
+                 ta-html-editor-class="form-control editor-height"
+                 placeholder="{{'ocsp_web_streams_cep_inputsubmissionsumary' | translate}}">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button type="button" ng-disabled="outputFieldsInvalid" class="btn oc-button" ng-click="saveEvent()">{{'ocsp_web_common_009' | translate}}</button>
+      </div>
+    </form>
+  </div>
+</script>
+<script type="text/ng-template" id="search.html">
+  <div class="modal-header">
+    <button type="button" class="close" ng-click="closeModal()"><span aria-hidden="true">&times;</span></button>
+    <h3 class="modal-title">{{'ocsp_web_streams_cep_search' | translate}}</h3>
+  </div>
+  <div class="modal-body">
+    <form name="typeForm" id="searchForm">
+      <div class="form-group">
+        <label>{{'ocsp_web_common_011' | translate}}</label>
+        <input type="text" name="name" class="form-control" ng-model="searchItem.name">
+      </div>
+      <div class="form-group">
+        <label>{{'ocsp_web_streams_cep_eventcode' | translate}}</label>
+        <input type="text" class="form-control" ng-model="searchItem.code" name="eventsCode">
+      </div>
+      <div class="form-group">
+        <label>{{'ocsp_web_streams_cep_classify' | translate}}</label>
+        <ui-select ng-model="searchItem.parent">
+          <ui-select-match>
+            <span ng-bind="$select.selected.vname"></span>
+          </ui-select-match>
+          <ui-select-choices
+            repeat="item in (types | filter: $select.search) track by item.id">
+            <span ng-bind="item.vname"></span>
+          </ui-select-choices>
+        </ui-select>
+      </div>
+      <div class="form-group">
+        <label>{{'ocsp_web_streams_cep_relatedstream' | translate}}</label>
+        <ui-select ng-model="searchItem.task">
+          <ui-select-match>
+            <span ng-bind="$select.selected.name"></span>
+          </ui-select-match>
+          <ui-select-choices
+            repeat="task in (tasks | filter: $select.search) track by task.id">
+            <span ng-bind="task.name"></span>
+          </ui-select-choices>
+        </ui-select>
+      </div>
+      <div class="form-group">
+        <label>{{'ocsp_web_streams_cep_eventbussinessdescription' | translate}}</label>
+        <input type="text" class="form-control" ng-model="searchItem.description">
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn oc-button" ng-click="search()">{{'ocsp_web_streams_cep_search' | translate}}</button>
+      </div>
+    </form>
+  </div>
+</script>
+<script type="text/ng-template" id="type.html">
+  <div class="modal-header">
+    <button type="button" class="close" ng-click="closeModal()"><span aria-hidden="true">&times;</span></button>
+    <h3 class="modal-title">{{'ocsp_web_streams_cep_createclass' | translate}}</h3>
+  </div>
+  <div class="modal-body">
+    <form name="typeForm" id="typeForm">
+      <div class="form-group">
+        <label>{{'ocsp_web_common_011' | translate}}</label>
+        <input type="text" name="name" class="form-control" ng-model="newType.type_name" required>
+        <span class="redtip" ng-messages="typeForm.name.$error" ng-if="typeForm.name.$touched">
+          <div ng-message="required">{{'ocsp_web_common_027' | translate}}</div>
+        </span>
+      </div>
+      <div class="form-group">
+        <label>{{'ocsp_web_streams_cep_fathertype' | translate}}</label>
+        <ui-select name="parentType" ng-model="newType.parent">
+          <ui-select-match>
+            <span ng-bind="$select.selected.type_name"></span>
+          </ui-select-match>
+          <ui-select-choices
+            repeat="item in (types | filter: $select.search) track by item.id">
+            <span ng-bind="item.type_name"></span>
+          </ui-select-choices>
+        </ui-select>
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn oc-button" ng-click="saveType()">{{'ocsp_web_common_009' | translate}}</button>
+      </div>
+    </form>
+  </div>
+</script>
+
+
+<script type="text/ng-template" id="eventsOperateStatisticInfo.html">
+  <div class="modal-header">
+    <button type="button" class="close" ng-click="closeModal()"><span aria-hidden="true">&times;</span></button>
+    <h3 class="modal-title">{{ 'ocsp_web_common_statisticinfo' | translate }}</h3>
+  </div>
+  <div class="modal-body">
+    <div class="alert alert-danger" role="alert">
+      <label>{{summaryMessage}}</label>
+    </div>
+    <form name="typeForm" id="typeForm">
+      <div class="form-group">
+          <label>{{'ocsp_web_common_current' | translate }} {{ 'ocsp_web_streams_manage_024'| translate }} {{'ocsp_web_streams_manage_017' | translate}} </label>
+        <input type="text" name="startedEventsNames" class="form-control" ng-model="startedEventsNames" required>
+      </div>
+      <div class="form-group">
+        <label>{{'ocsp_web_common_current' | translate }} {{ 'ocsp_web_streams_manage_025'| translate }} {{'ocsp_web_streams_manage_017' | translate}} </label>
+        <input type="text" name="stoppedEventsNames" class="form-control" ng-model="stoppedEventsNames">
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn oc-button" ng-click="operateEvents()">{{'ocsp_web_common_038' | translate}}</button>
+      </div>
+    </form>
+  </div>
+</script>

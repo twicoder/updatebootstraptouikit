@@ -1,0 +1,467 @@
+.browsehappy {
+  margin: 0.2em 0;
+  background: #ccc;
+  color: #000;
+  padding: 0.2em 0;
+}
+
+html, body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+}
+
+.col-centered {
+  float: none;
+  margin: 0 auto;
+}
+
+.main-container {
+  min-height: 100%;
+  margin-bottom: -50px;
+}
+
+.footer {
+  border-top: solid 1px #e7e7e7;
+  background-color: #f8f8f8;
+  bottom: 0;
+  height: 50px;
+}
+
+/* Custom css*/
+.sidebar {
+  background-color: #f5f5f5;
+  border-top: 1px solid #e5e5e5;
+  border-right: 1px solid #e5e5e5;
+  padding: 20px;
+}
+
+.panel {
+  margin-top: 10px;
+}
+
+.navbar-oc {
+  background-color: #C6C6C6;
+  margin-bottom: 0;
+}
+
+.navbar-oc .navbar-nav > li > a {
+  color: dimgrey;
+  font-size: 14px;
+  font-weight: normal;
+}
+
+.navbar-oc .navbar-nav > li > a:focus {
+  color: black;
+  background-color: transparent;
+}
+
+.navbar-oc .navbar-nav > li.active > a:hover {
+  color: black;
+  background-color: #979A9A;
+  border-bottom: 0;
+}
+
+.navbar-oc .navbar-nav > li > a:hover {
+  color: black;
+  background-color: #979A9A;
+  box-sizing: border-box;
+  border-bottom: solid 2px #979A9A;
+}
+
+.navbar-oc .navbar-nav > li:focus,
+.navbar-oc .navbar-nav > li.active {
+  color: black;
+  box-sizing: border-box;
+  border-bottom: solid 2px orange;
+}
+
+.navbar-oc .navbar-nav > li.placeholder > a:hover {
+  color: transparent;
+  background-color: transparent;
+  box-sizing: border-box;
+  border-bottom: 0;
+}
+
+.navbar-header .brand {
+  color: dimgrey;
+  font-size: 16px;
+}
+
+.navbar-header .brand:hover {
+  color: black;
+}
+
+.nav .open > a, .nav .open > a:hover, .nav .open > a:focus {
+  background-color: transparent;
+  box-sizing: border-box;
+  border-bottom: solid 2px #C6C6C6;
+}
+
+.divider-vertical {
+  height: 51px;
+  border-left: 1px solid #979A9A;
+  border-right: 1px solid #979A9A;
+}
+
+a.oc-link {
+  color: #FFBC73;
+  cursor: pointer;
+}
+
+a.oc-link:hover {
+  color: orange;
+}
+
+.oc-button {
+  color: orange;
+  border: solid 1px orange;
+}
+
+.oc-button:hover {
+  color: white;
+  background-color: orange;
+}
+
+.oc-button:hover[disabled='disabled'] {
+  color: white;
+  background-color: #AAA;
+}
+
+.panel-body {
+  border: solid 20px #f5f5f5 !important;
+}
+
+.panel-heading {
+  border-color: transparent !important;
+}
+
+.wizard-card-container {
+  height: 300px;
+  overflow-y: scroll;
+}
+
+.handle {
+  cursor: move;
+}
+
+.flash {
+  -webkit-animation-name: flash;
+  animation-name: flash;
+  -webkit-animation-duration: 4s;
+  animation-duration: 4s;
+}
+
+a.choose,
+a.choose:hover,
+a.list-group-item:focus,
+ul#actions > li > a:hover,
+ul#quick > li > a:hover {
+  background-color: #999999;
+  color: #ffffff;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+}
+
+i.danger {
+  color: red;
+}
+
+i.success {
+  color: green;
+}
+
+i.warning {
+  color: orange;
+}
+
+ul#actions > li.disabled > a:hover {
+  background-color: #999999;
+  color: #777777;
+  text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+}
+
+g div {
+  color: black;
+  font-size: 14px;
+}
+
+.text-center {
+  text-align: center;
+}
+
+a:hover, a:focus {
+  text-decoration: none;
+}
+
+input.ng-invalid.ng-touched,
+div.ng-invalid.ng-touched div.tokenfield,
+div.ng-invalid.ng-touched.ui-select-container span.ui-select-toggle {
+  border: 1px solid red;
+}
+
+#mainFrame input.ng-invalid.ng-touched + span.input-group-btn button {
+  border: 1px solid red;
+  color: red;
+}
+
+span.redtip,
+div.ng-invalid.ng-touched.ui-select-container i.caret.pull-right {
+  color: red;
+}
+
+.popover-content {
+  width: 200px;
+}
+
+.btn-circle {
+  width: 30px;
+  height: 30px;
+  text-align: center;
+  padding: 6px 0;
+  font-size: 12px;
+  line-height: 1.428571429;
+  border-radius: 15px;
+  outline: 0 !important;
+}
+
+ul.ui-autocomplete {
+  width: 112px !important;
+  z-index: 1100 !important;
+}
+
+table a {
+  cursor: pointer;
+}
+
+table thead th {
+  background-color: #f5f5f5;
+  border-bottom: 0 !important;
+  border-right: solid 2px white;
+}
+
+table tbody tr:hover {
+  background-color: rgba(243, 156, 18, 0.1);
+}
+
+table tbody tr td input,
+table tbody tr td div {
+  margin-top: 8px;
+  margin-bottom: 8px;
+}
+
+.cep {
+  background-color: #a00;
+  box-shadow: 0 0 10px #888;
+  color: #FFF;
+}
+
+.affix {
+  top: 0;
+  width: 100%;
+  z-index: 9999;
+}
+
+.affix + .container-fluid {
+  padding-top: 70px;
+}
+
+.navbar-brand.logo {
+  padding: 10px 15px;
+}
+
+/* enable absolute positioning */
+.inner-addon {
+  position: relative;
+}
+
+/* style icon */
+.inner-addon .glyphicon {
+  position: absolute;
+  padding: 10px;
+  pointer-events: none;
+}
+
+/* align icon */
+.right-addon .glyphicon {
+  right: 0px;
+}
+
+/* add padding  */
+.left-addon input {
+  padding-left: 30px;
+}
+
+.right-addon input {
+  padding-right: 30px;
+}
+
+.icon-2x {
+  font-size: 2em;
+}
+
+.abn-tree i {
+  margin-right: 5px;
+  outline: none;
+}
+
+.modal-dialog {
+  margin-top: 90px;
+}
+
+.ta-root {
+  outline: none;
+}
+
+.ta-editor.form-control.editor-height, .ta-scroll-window.form-control.editor-height {
+  height: 100px;
+  min-height: 100px;
+  overflow: hidden;
+  font-family: inherit;
+  font-size: 100%;
+}
+
+.form-control.editor-height > .ta-bind {
+  min-height: 100px;
+}
+
+.form-control.editor-height .placeholder-text::before {
+  color: #999999;
+}
+
+.task-name {
+  color: orange;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.task-name:hover {
+  color: orangered;
+  text-decoration: none;
+}
+
+.ng-table-pagination {
+  float: right;
+}
+
+.breadcrumb > li + li:before {
+  color: #CCCCCC;
+  content: "/ ";
+  padding: 0 5px;
+}
+
+.panelOfStreamConfigPage .streamconfigheader {
+  margin-bottom: 0px;
+  margin-top: 30px;
+  height: 50px;
+  background-color: #f0f0f0;
+}
+
+.panelOfStreamConfigPage .leftPagePanel {
+  background: #F0F0F0;
+  height: 800px;
+}
+
+.panelOfStreamConfigPage .leftPage {
+  background: #F0F0F0;
+  height: 1200px;
+  padding-left: 0px;
+}
+
+.panelOfStreamConfigPage .rightPage {
+  margin-top: 0px;
+}
+
+.panelOfStreamConfigPage > ul {
+  margin-left: 0;
+  margin-right: 0;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+.panelOfStreamConfigPage .leftPage {
+  margin-bottom: 0px;
+}
+
+.panelOfStreamConfigPage .leftPage > li {
+  margin: 0px 0px 0px 0px;
+  list-style-type: none;
+  border-width: auto;
+  padding: 10px 0px 10px 0px;
+  width: 100%;
+  border-left: solid 5px #F0F0F0;
+}
+
+.panelOfStreamConfigPage .leftPage > li > a {
+  margin-left: 50px;
+  background-color: whitesmoke;
+}
+
+.panelOfStreamConfigPage .leftPage .active {
+  background-color: white;
+  border-left: solid 5px orange;
+}
+
+.panelOfStreamConfigPage .rightPage {
+  margin-top: 15px;
+}
+
+.cusPagination > ul > li {
+  display: inline-block;
+  padding-left: 0px;
+}
+
+.cuspagination_stream_management {
+  float: right;
+}
+
+.row {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.row > input {
+  border-radius: 0;
+}
+
+.row .btn-group > label {
+  border-radius: 0;
+}
+
+.row > textarea {
+  border-radius: 0;
+}
+
+.border0px {
+  border-radius: 0;
+}
+
+.switchbtn {
+  background-color: #FFF;
+  color: #FFBC73;
+  border: 1px solid #FFBC73;
+  cursor: pointer;
+}
+
+.switchbtn:hover {
+  background-color: #FFF;
+  color: #FFBC73;
+  border: 1px solid #FFBC73;
+  cursor: pointer;
+}
+
+.centertext {
+  padding-top: 16px !important;
+}
+
+.myalert {
+  padding: 10px 2px 2px 2px;
+}
+
+ocsp-param-editor .container-fluid span {
+  word-break: normal;
+  width: auto;
+  display: block;
+  white-space: pre-wrap;
+  word-wrap: break-word;
+  overflow: hidden;
+}

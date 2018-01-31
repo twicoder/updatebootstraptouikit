@@ -1,0 +1,101 @@
+<script type="text/ng-template" id="showAlarmDetail.html">
+  <div class="modal-header">
+      <button type="button" class="close" ng-click="closeModal()"><span aria-hidden="true">&times;</span></button>
+      <h3 class="modal-title">{{'ocsp_web_alarmmanagement_detail' | translate}}</h3>
+  </div>
+  <div class="modal-body">
+      <form name="alarmInfoForm" id="idAlarmInfoForm">
+          <div class="form-group">
+              <div class="">
+                  <table ng-table="alarmContentList" class="table table-condensed table-bordered">
+                      <colgroup>
+                          <col width="30%"/>
+                          <col width="70%"/>
+                      </colgroup>
+                      <tr ng-repeat="onePropertyItem in $data">
+                          <td title="'ocsp_web_common_name' | translate" ng-form="name">
+                              <label>{{onePropertyItem.key}}</label>
+                          </td>
+                          <td title="'ocsp_web_common_value' | translate" ng-form="name">
+                              <label>{{onePropertyItem.value}}</label>
+                          </td>
+                      </tr>
+                      </tbody>
+                  </table>
+              </div>
+          </div>
+
+          <div class="form-group">
+              <button type="button" class="btn oc-button" ng-click="closeModal()">
+                  {{'ocsp_web_common_038' | translate}}
+              </button>
+          </div>
+      </form>
+  </div>
+</script>
+
+
+<div class="row">
+  <ol class="breadcrumb">
+    <li>
+      <a href="#/alarmmanagement/">
+        <label class="glyphicon glyphicon-chevron-left"></label>&nbsp;{{ 'ocsp_web_common_returnback' | translate}}</a>
+    </li>
+    <li class="active">{{'ocsp_web_alarmmanagement_detail' | translate}}</li>
+  </ol>
+</div>
+<div class="row">
+
+  <div class="row">
+    <div class="col-md-12 main">
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <div>
+            {{'ocsp_web_alarmmanagement_detail' | translate}}
+          </div>
+        </div>
+        <div class="panel-body">
+          <div class="form-group">
+            <div class="">
+              <table ng-table="allAlarms" class="table table-condensed table-bordered">
+                <colgroup>
+                  <col width="15%" />
+                  <col width="10%" />
+                  <col width="15%" />
+                  <col width="15%" />
+                  <col width="15%" />
+                  <col width="15%" />
+                  <col width="15%" />
+                </colgroup>
+                <tr ng-repeat="oneAlarm in $data">
+                  <td title="'ocsp_web_alarm_alarmname' | translate " ng-form="alarmlevel">
+                    <a>{{oneAlarm.alarm_name}}</a>
+                  </td>
+                  <td title="'ocsp_web_alarm_alarmstatus' | translate " ng-form="alarmlevel">
+                    <a class="btn btn-warning" ng-if="oneAlarm.alarm_type==='0'">{{{"en":"WARN","zh":"告警"}[lang]}}</a>
+                    <a class="btn btn-success" ng-if="oneAlarm.alarm_type==='1'">{{{"en":"OK","zh":"已恢复"}[lang]}}</a>
+                  </td>
+                  <td title=" 'ocsp_web_streams_manage_052' | translate " ng-form="taskid">
+                    <a>{{oneAlarm.task_name}}</a>
+                  </td>
+                  <td title=" 'ocsp_web_alarm_alarmcomponentname' | translate " ng-form="componentname">
+                    <a>{{oneAlarm.componentNameFromTargetTable}}</a>
+                  </td>
+                  <td title=" 'ocsp_web_alarm_alarmlevel' | translate " ng-form="alarmlevel">
+                    <a>{{oneAlarm.alarm_levelName}}</a>
+                  </td>
+                  <td title="'ocsp_web_common_alarmtime' | translate" ng-form="alarmtime">
+                    <a>{{oneAlarm.alarm_time}}</a>
+                  </td>
+                  <td title="'ocsp_web_streams_manage_023' | translate" ng-form="action">
+                    <a href="" ng-click="showDetail(oneAlarm)" class="btn oc-button">{{'ocsp_web_common_showdetail' | translate}}</a>
+                  </td>
+                </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

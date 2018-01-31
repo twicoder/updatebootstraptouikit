@@ -1,0 +1,70 @@
+<div class="row">
+    <div class="col-xs-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">{{'ocsp_web_dashboard1' | translate}}</div>
+            <div class="panel-body">
+                <canvas class="chart chart-pie" chart-data="status" chart-labels="labels" height="161"
+                        chart-options="{legend:{display:true}}" chart-colors="['#ff704d','#79d2a6','#ff9900']">
+                </canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">{{'ocsp_web_dashboard2' | translate}}</div>
+            <div class="panel-body">
+                <canvas class="chart chart-bar" chart-data="running" chart-labels="names" height="161">
+                </canvas>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">{{'ocsp_web_dashboard5' | translate}}</div>
+            <div class="panel-body">
+                <canvas class="chart chart-bar" chart-data="batchtime" chart-labels="names" height="161"
+                    chart-options="chartCurrentBatchUsedTimeOptions">
+                </canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-xs-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">{{'ocsp_web_dashboard3' | translate}}</div>
+            <div class="panel-body">
+                <canvas class="chart chart-bar" chart-data="records" chart-series="series1" chart-labels="names"
+                        height="161" chart-options="{legend:{display:true}}">
+                </canvas>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-xs-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">{{'ocsp_web_dashboard4' | translate }}</div>
+
+            <div class="panel-body">
+                <canvas class="chart chart-bar" chart-data="count" chart-labels="names" chart-series="series2"
+                        height="161" chart-options="{legend:{display:true}}" chart-colors="['#79d2a6','#ff704d']">
+                </canvas>
+            </div>
+        </div>
+    </div>
+    
+    <div class="col-xs-6">
+        <div class="panel panel-default">
+            <div class="panel-heading">{{'ocsp_web_allstream_statistic' | translate }}</div>
+            <div class="panel-body">
+                <canvas class="chart chart-bar" chart-data="task_records" chart-labels="task_names"
+                        chart-click="clickOnTask" height="161" chart-colors="['#79d2a6','#ff704d']">
+                </canvas>
+            </div>
+
+        </div>
+    </div>
+    
+</div>

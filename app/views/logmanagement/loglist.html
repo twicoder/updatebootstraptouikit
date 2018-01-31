@@ -1,0 +1,29 @@
+<div class="row">
+        <div class="col-md-12 main">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <div>
+                  {{'ocsp_web_logmanagement_name' | translate}}
+              </div>
+            </div>
+            <div class="panel-body">
+              <table class="table">
+                <thead>
+                <tr>
+                  <th>{{'ocsp_web_logmanagement_logfilename' | translate}}</th>
+                  <th>{{'ocsp_web_logmanagement_logfileaction' | translate}}</th>
+                </tr>
+                </thead>
+                <tbody>
+                  <tr ng-repeat="logItem in logfiles">
+                    <td class="col-md-10">{{logItem.logFileDate}}</td>
+                    <td class="col-md-2"><a class="btn oc-button" href="#/logmanagement/{{logItem.oneFileName}}">{{'ocsp_web_logmanagement_checklog' | translate}}</a></td>
+                  </tr>
+                </tbody>
+              </table>
+
+            </div>
+          </div>
+        </div>
+      
+      </div>

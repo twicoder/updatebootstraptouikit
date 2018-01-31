@@ -1,0 +1,60 @@
+{
+    "objects": [
+      {
+        "id": "195cf3ec",
+        "name": "job1_name",
+        "status": "RUNNING",
+        "dataInterface": {
+          "id": 1,
+          "name": "di1_input_kafka_topic_stream1",
+          "type": 0,
+          "filter_expr": "",
+          "description": null,
+          "delim": "\\|",
+          "status": 1,
+          "properties": "{\"props\":[{\"pname\":\"field.numbers\",\"pvalue\":11},{\"pname\":\"uniqKeys\",\"pvalue\":\"id\"}],\"userFields\":[],\"fields\":[{\"pname\":\"id\",\"ptype\":\"String\"},{\"pname\":\"temperature\",\"ptype\":\"String\"},{\"pname\":\"humidity\",\"ptype\":\"String\"},{\"pname\":\"voltage\",\"ptype\":\"String\"},{\"pname\":\"current\",\"ptype\":\"String\"},{\"pname\":\"wheelpressure\",\"ptype\":\"String\"},{\"pname\":\"speed\",\"ptype\":\"String\"},{\"pname\":\"location\",\"ptype\":\"String\"},{\"pname\":\"crashTrend\",\"ptype\":\"String\"},{\"pname\":\"driverName\",\"ptype\":\"String\"},{\"pname\":\"carModel\",\"ptype\":\"String\"}],\"sources\":[{\"pname\":\"andrewxiatestocsp\",\"delim\":\",\",\"topic\":\"general_rspc\",\"userFields\":[],\"fields\":[{\"pname\":\"id\",\"ptype\":\"String\"},{\"pname\":\"temperature\",\"ptype\":\"String\"},{\"pname\":\"humidity\",\"ptype\":\"String\"},{\"pname\":\"voltage\",\"ptype\":\"String\"},{\"pname\":\"current\",\"ptype\":\"String\"},{\"pname\":\"wheelpressure\",\"ptype\":\"String\"},{\"pname\":\"speed\",\"ptype\":\"String\"},{\"pname\":\"location\",\"ptype\":\"String\"},{\"pname\":\"crashTrend\",\"ptype\":\"String\"},{\"pname\":\"driverName\",\"ptype\":\"String\"},{\"pname\":\"carModel\",\"ptype\":\"String\"}]}]}",
+          "dataSource": {
+            "id": 1,
+            "name": "Kafka data source",
+            "type": "kafka",
+            "status": 1,
+            "description": null,
+            "properties": "[{\"pname\":\"zookeeper.connect\",\"pvalue\":\"10.1.241.59:2181\"},{\"pname\":\"metadata.broker.list\",\"pvalue\":\"10.1.241.57:6667\"}]"
+          },
+          "lables": [
+            {
+              "id": 1,
+              "p_label_id": 0,
+              "status": 1,
+              "description": null,
+              "labelDef": {
+                "id": 6,
+                "name": "Example",
+                "class_name": "com.asiainfo.ocsp.label.Example",
+                "properties": "{\"props\":[{\"pname\":\"default_city_name\", \"pvalue\":\"yulin\"}],\"labelItems\":[{\"pname\":\"city_info\", \"pvalue\":\"city_info\"}]}",
+                "owner": "ocspadmin"
+              }
+            }
+          ],
+          "events": [
+            {
+              "id": 1,
+              "name": "andrewsevent",
+              "select_expr": "id,humidity",
+              "filter_expr": "",
+              "p_event_id": 0,
+              "properties": "{\"props\":[{\"pname\":\"userKeyIdx\",\"pvalue\":2}],\"output_dis\":[{\"diid\":2,\"interval\":10,\"delim\":\"|\"}]}",
+              "status": 1,
+              "description": "a",
+              "owner": null
+            }
+          ]
+        },
+        "sysConfigure": {
+          "id": "7c897f50",
+          "configurations": "{\"zkConfig.stormzkpath\":\"/stormzk/rspc_topo\",\"stormDRPCServer\":\"10.1.241.59\",\"topo.ruleBoltConfig.numberTasks\":\"6\",\"topo.spoutConfig.numberTasks\":\"6\",\"zkConfig.zookeeperServers\":\"10.1.241.57,10.1.241.58,10.1.241.59\",\"stormServer\":\"10.1.241.58\",\"topo.topoName\":\"RSPC_STREAM_CORE2\",\"topo.maxSpoutPending\":\"100\",\"topo\":{\"formatBoltConfig\":{\"id\":\"Format\",\"maxTaskParallelism\":1,\"numberTasks\":\"22\"},\"filterBoltConfig\":{\"id\":\"Filter\",\"maxTaskParallelism\":1,\"numberTasks\":2},\"tagBoltConfig\":{\"id\":\"Tag\",\"maxTaskParallelism\":1,\"numberTasks\":2},\"postFilterConfig\":{\"id\":\"PostFilter\",\"maxTaskParallelism\":1,\"numberTasks\":2},\"eventBoltConfig\":{\"id\":\"Event\",\"maxTaskParallelism\":1,\"numberTasks\":2},\"errorBoltConfig\":{\"id\":\"Error\",\"maxTaskParallelism\":1,\"numberTasks\":2},\"droppedBoltConfig\":{\"id\":\"Discard\",\"maxTaskParallelism\":1,\"numberTasks\":2},\"numberOfWorkers\":\"2\",\"spoutConfig\":{\"server\":\"10.1.241.57:6667,10.1.241.58:6667\",\"numberTasks\":\"5\",\"groupid\":\"ocspgroupid\",\"maxTaskParallelism\":\"5\",\"topic\":\"general_rspc\",\"serializer\":\"kafka.serializer.StringEncoder\",\"id\":\"KAFKA\"},\"maxSpoutPending\":\"100\",\"topoName\":\"OCSP_STREAM_CORE\"},\"zkConfig.port\":\"2181\",\"topo.spoutConfig.groupid\":\"rspcgroupid\",\"topo.spoutConfig.maxTaskParallelism\":\"6\",\"topo.spoutConfig.id\":\"KAFKA\",\"stormUiServer\":\"http://10.1.241.59:8744/index.html\",\"zkConfig.brokerPath\":\"/brokers\",\"topo.spoutConfig.serializer\":\"kafka.serializer.StringEncoder\",\"topo.ruleBoltConfig.maxTaskParallelism\":\"6\",\"topo.numberOfWorkers\":\"4\",\"topo.spoutConfig.server\":\"10.1.241.57:6667,10.1.241.58:6667\",\"topo.spoutConfig.topic\":\"general_rspc\",\"topo.ruleBoltConfig.id\":\"RULE\",\"zkConfig\":{\"servers\":\"10.1.241.57:2181:10.1.241.58:2181,10.1.241.59:2181\",\"port\":\"2181\",\"brokerPath\":\"/brokers\",\"stormzkpath\":\"/stormzk/rspc_topo22\",\"zookeeperServers\":\"10.1.241.57,10.1.241.58,10.1.236.59\"},\"zkConfig.servers\":\"10.1.241.57:2181,10.1.241.58:2181,10.1.241.59:2181\"}"
+        },
+        "recoverMode": "from_latest"
+      }
+    ]
+  }

@@ -1,0 +1,63 @@
+{
+  "name": "ocsp",
+  "private": true,
+  "devDependencies": {
+    "babel-preset-es2015": "^6.22.0",
+    "body-parser": "^1.15.2",
+    "bower": "^1.8.0",
+    "connect-livereload": "^0.5.4",
+    "crypto": "0.0.3",
+    "express": "^4.14.0",
+    "gulp": "^3.9.0",
+    "gulp-autoprefixer": "2.3.1",
+    "gulp-babel": "^6.1.2",
+    "gulp-cache": "^0.2.10",
+    "gulp-filter": "^2.0.2",
+    "gulp-imagemin": "^2.3.0",
+    "gulp-jshint": "^1.11.1",
+    "gulp-livereload": "^3.8.1",
+    "gulp-load-plugins": "^0.10.0",
+    "gulp-minify-css": "^1.2.0",
+    "gulp-ng-annotate": "^1.0.0",
+    "gulp-nodemon": "^2.2.1",
+    "gulp-plumber": "^1.0.1",
+    "gulp-rename": "^1.2.2",
+    "gulp-rev": "^5.0.1",
+    "gulp-rev-replace": "^0.4.2",
+    "gulp-rimraf": "^0.2.1",
+    "gulp-sass": "^3.1.0",
+    "gulp-uglify": "^1.2.0",
+    "gulp-useref": "^3.0.0",
+    "gulp-util": "^3.0.6",
+    "gulp-war": "^0.1.4",
+    "gulp-watch": "^4.2.4",
+    "gulp-zip": "^4.0.0",
+    "jshint-stylish": "^1.0.0",
+    "lazypipe": "^0.2.4",
+    "moment": "^2.17.1",
+    "multer": "^1.2.0",
+    "mysql": "^2.12.0",
+    "open": "0.0.5",
+    "q": "^1.4.1",
+    "randomstring": "^1.1.5",
+    "rimraf": "^2.4.0",
+    "run-sequence": "^1.1.1",
+    "sequelize": "^3.24.7",
+    "serve-favicon": "^2.3.2",
+    "unzip2": "^0.2.5",
+    "wiredep": "^1.8.6",
+    "sequelize-auto": "^0.4.21"
+  },
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "scripts": {
+    "start": "nohup node build-server/app.js nohup.out 2>&1 &"
+  },
+  "dependencies": {
+    "lodash": "^4.17.4",
+    "log4js": "^2.3.12",
+    "properties-parser": "^0.3.1",
+    "request": "^2.81.0"
+  }
+}

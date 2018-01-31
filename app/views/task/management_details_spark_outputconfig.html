@@ -1,0 +1,179 @@
+<div class="row">
+    <button ng-if="!cep" type="button" class="btn oc-button" ng-disabled="isAdminUser || !streamEditable" ng-click="addNewEvent(selectedJob.events)">{{'ocsp_web_streams_manage_016' | translate}}
+    </button>
+</div>
+<div class="row">
+    <uib-accordion>
+        <div uib-accordion-group class="panel-default" ng-repeat="item in selectedJob.events" is-open="item.isOpen">
+            <uib-accordion-heading>
+                <i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': item.isOpen, 'glyphicon-chevron-right': !item.isOpen}"></i> &nbsp; {{'ocsp_web_streams_manage_031' | translate}} {{item.name}}
+                <a ng-if="!cep" class="pull-right" ng-hide="isAdminUser || !streamEditable" ng-click="$event.stopPropagation();$event.preventDefault();remove(selectedJob.events, $index)">
+                    <i class="glyphicon glyphicon-remove"></i>
+                </a>
+            </uib-accordion-heading>
+            <div class="container-fluid">
+                <div class="form-group">
+                    <label>{{'ocsp_web_streams_manage_037' | translate}}</label>
+                </div>
+                <div class="form-group">
+                    <toggle-switch ng-model="item.status" ng-disabled="cep || isAdminUser || !streamEditable">
+                        on-label="{{'ocsp_web_common_015' | translate}}" off-label="{{'ocsp_web_common_016' | translate}}">
+                    </toggle-switch>
+                </div>
+                <div class="form-group">
+                    <label>{{'ocsp_web_streams_manage_017' | translate}}*</label>
+                    <input type="text" class="form-control" ng-model="item.name" ng-readonly="isAdminUser || !streamEditable" name="eventsName_{{$index}}"
+                        required ng-disabled="cep">
+                    <span class="redtip" ng-show="mainForm['eventsName_' + $index].$touched && mainForm['eventsName_' + $index].$error.required">{{'ocsp_web_common_027' | translate}}</span>
+                </div>
+                <div class="form-group">
+                    <label>{{'ocsp_web_streams_manage_018' | translate}}*</label>
+                    <tokenfield inputs="{{getAllPossibleFields(selectedJob.input.fields,selectedJob.input.userFields)}}"
+                        labels="{{selectedJob.labels}}" ng-model="item.select_expr" checkinputfield=true name="eventsFields_{{$index}}"
+                        required="true" readonly="{{cep || isAdminUser || !streamEditable}}"></tokenfield>
+                </div>
+                <div class="form-group">
+                    <label>{{'ocsp_web_streams_manage_019' | translate}}*</label>
+                    <input type="text" class="form-control" ng-model="item.delim" ng-readonly="isAdminUser || !streamEditable" name="eventsDelim_{{$index}}"
+                        required ng-disabled="cep">
+                    <span class="redtip" ng-show="mainForm['eventsDelim_' + $index].$touched && mainForm['eventsDelim_' + $index].$error.required">{{'ocsp_web_common_027' | translate}}</span>
+                </div>
+                <div class="form-group">
+                    <label>{{'ocsp_web_streams_manage_013' | translate}}</label>
+                    <input type="text" class="form-control" ng-model="item.filter_expr" ng-readonly="isAdminUser || !streamEditable" ng-disabled="cep">
+                </div>
+                <div class="form-group">
+                    <label>{{'ocsp_web_streams_manage_020' | translate}}({{'ocsp_web_common_023' | translate}})*
+                    </label>
+                    <input type="number" class="form-control" ng-model="item.interval" ng-readonly="isAdminUser || !streamEditable" name="eventsInterval_{{$index}}"
+                        ng-pattern="/^(0|[1-9][0-9]*)$/" required ng-disabled="cep">
+                    <span class="redtip" ng-show="mainForm['eventsInterval_' + $index].$touched && mainForm['eventsInterval_' + $index].$error.required">{{'ocsp_web_common_027' | translate}}</span>
+                    <span class="redtip" ng-show="mainForm['eventsInterval_' + $index].$touched && mainForm['eventsInterval_' + $index].$error.pattern">{{'ocsp_web_common_034' | translate}}</span>
+                </div>
+                <div class="form-group">
+                    <label>{{'ocsp_web_streams_manage_014' | translate}}*</label>
+                    <tokenfield inputs="{{item.select_expr}}"
+                        ng-model="item.output.uniqueKey" name="inputFields_spark_3" checkinputfield=true required="true" readonly="{{cep || isAdminUser || !streamEditable}}"></tokenfield>
+                </div>
+                <div class="form-group">
+                    <label>{{'ocsp_web_streams_cep_auditperiod' | translate}}*</label>
+                </div>
+                <div class="form-group">
+                    <toggle-switch on-label="{{'ocsp_web_common_040' | translate}}" off-label="{{'ocsp_web_common_041' | translate}}" ng-model="item.audit.enableDateForSwitchButton"
+                        ng-change="switchAuditPeriod(item)" ng-disabled="cep || isAdminUser || !streamEditable">
+                    </toggle-switch>
+                </div>
+                <div class="form-group" ng-if="currentStreamType ==='SPARK' && item.audit.enableDateForSwitchButton === true">
+                    <label>{{'ocsp_web_streams_manage_041' | translate}}</label>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <p class="input-group">
+                                <input type="text" class="form-control" datetime-picker="yyyy-MM-dd" readonly="true" close-on-date-selection="false" datepicker-options="{showWeeks: false}"
+                                    required button-bar="false" ng-model="item.audit.startDate" is-open="item.audit.time.t1"
+                                    datepicker-append-to-body="true" name="eventsAuditTimeStartTime" ng-change="updateFormDirtyStatus()">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-disabled="cep || isAdminUser || !streamEditable" ng-click="item.audit.time.t1 = true;">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                    </button>
+                                </span>
+                            </p>
+                        </div>
+                        <div class="col-md-6">
+                            <p class="input-group">
+                                <input type="text" class="form-control" datetime-picker="yyyy-MM-dd" readonly="true" close-on-date-selection="false" datepicker-options="{showWeeks: false}"
+                                    required button-bar="false" ng-model="item.audit.endDate" is-open="item.audit.time.t2" datepicker-append-to-body="true"
+                                    name="eventsAuditTimeStopTime" ng-change="updateFormDirtyStatus()">
+                                <span class="input-group-btn">
+                                    <button type="button" class="btn btn-default" ng-disabled="cep || isAdminUser || !streamEditable" ng-click="item.audit.time.t2 = true;">
+                                        <i class="glyphicon glyphicon-calendar"></i>
+                                    </button>
+                                </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>{{'ocsp_web_streams_manage_040' | translate}}*</label>
+                    <ui-select ng-model="item.audit.type" ng-required="true" ng-disabled="cep || isAdminUser || !streamEditable" name="eventsAudit_{{$index}}"
+                        append-to-body="true" on-select="onSelect(item)">
+                        <ui-select-match>
+                            <span ng-bind="$select.selected.displayName"></span>
+                        </ui-select-match>
+                        <ui-select-choices repeat="type.name as type in (item.auditTypes | filter: $select.search) track by type.name">
+                            <span ng-bind="type.displayName"></span>
+                        </ui-select-choices>
+                    </ui-select>
+                    <span class="redtip" ng-show="mainForm['eventsAudit_' + $index].$touched && mainForm['eventsAudit_' + $index].$error.required">{{'ocsp_web_common_027' | translate}}</span>
+                </div>
+                <div class="form-group" ng-if="item.audit.type && item.audit.type !== 'always'">
+                    <div class="row">
+                        <div class="col-md-10">
+                            <label>{{'ocsp_web_streams_manage_041' | translate}}</label>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-success btn-circle" ng-click="add(item.audit.periods)" ng-disabled="cep || isAdminUser || !streamEditable">
+                                <i class="glyphicon glyphicon-plus"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row" ng-repeat="period in item.audit.periods">
+                        <div class="col-md-5">
+                            <p class="input-group">
+                                <input type="text" class="form-control" ng-model="period.s" required ng-readonly="isAdminUser || !streamEditable" ng-pattern="/^[1-7]$/"
+                                    uib-tooltip="{{'ocsp_web_streams_manage_042' | translate}} 1-7" tooltip-placement="top" ng-disabled="cep"
+                                    tooltip-trigger="'mouseenter'" ng-if="item.audit.type === 'week'">
+                                <input type="text" class="form-control" ng-model="period.s" required ng-readonly="isAdminUser || !streamEditable" uib-tooltip="{{'ocsp_web_streams_manage_042' | translate}} 1-31"
+                                    ng-pattern="/^([1-9]|[1-2]\d|30|31)$/" ng-disabled="cep" tooltip-placement="top" tooltip-trigger="'mouseenter'"
+                                    ng-if="item.audit.type === 'month'">
+                                <ocsp-time-picker ng-model="period.start"></ocsp-time-picker>
+                            </p>
+                        </div>
+                        <div class="col-md-5">
+                            <p class="input-group">
+                                <input type="text" class="form-control" ng-model="period.d" required ng-readonly="isAdminUser || !streamEditable" ng-pattern="/^[1-7]$/"
+                                    uib-tooltip="{{'ocsp_web_streams_manage_042' | translate}} 1-7" tooltip-placement="top" ng-disabled="cep"
+                                    tooltip-trigger="'mouseenter'" ng-if="item.audit.type === 'week'">
+                                <input type="text" class="form-control" ng-model="period.d" required ng-readonly="isAdminUser || !streamEditable" uib-tooltip="{{'ocsp_web_streams_manage_042' | translate}} 1-31"
+                                    ng-pattern="/^([1-9]|[1-2]\d|30|31)$/" tooltip-placement="top" ng-disabled="cep" tooltip-trigger="'mouseenter'"
+                                    ng-if="item.audit.type === 'month'">
+                                <ocsp-time-picker ng-model="period.end"></ocsp-time-picker>
+                            </p>
+                        </div>
+                        <div class="col-md-2">
+                            <button type="button" class="btn btn-danger btn-circle" ng-disabled="cep || isAdminUser || !streamEditable" ng-click="remove(item.audit.periods, $index)">
+                                <i class="glyphicon glyphicon-remove"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <!--For interface-->
+                <div class="form-group">
+                    <label>{{'ocsp_web_streams_manage_021' | translate}}*</label>
+                    <ui-select ng-model="item.output.datasource" ng-required="true" append-to-body="true" ng-disabled="cep || isAdminUser || !streamEditable">
+                        <ui-select-match>
+                            <span ng-bind="$select.selected.name"></span>
+                        </ui-select-match>
+                        <ui-select-choices repeat="datasource in (datasources | filter: $select.search) track by datasource.id">
+                            <span ng-bind="datasource.name"></span>
+                        </ui-select-choices>
+                    </ui-select>
+                    <span class="redtip" ng-if="item.output.datasource === undefined">{{'ocsp_web_common_027' | translate}}</span>
+                </div>
+                <div class="form-group" ng-if="item.output.datasource.type === 'kafka'">
+                    <label>{{'ocsp_web_streams_manage_010' | translate}}*</label>
+                    <input type="text" class="form-control" ng-model="item.output.topic" required ng-disabled="cep || isAdminUser || !streamEditable">
+                    <span class="redtip" ng-if="item.output.topic === undefined">{{'ocsp_web_common_027' | translate}}</span>
+                </div>
+                <div class="form-group" ng-if="item.output.datasource.type === 'codis'">
+                    <label>{{'ocsp_web_streams_manage_022' | translate}}*</label>
+                    <input type="text" class="form-control" ng-model="item.output.codisKeyPrefix" required ng-disabled="cep || isAdminUser || !streamEditable">
+                    <span class="redtip" ng-if="item.output.codisKeyPrefix === undefined">{{'ocsp_web_common_027' | translate}}</span>
+                </div>
+
+                <div class="form-group">
+                    <ocsp-param-editor ng-model="item" disabled="cep || isAdminUser || !streamEditable"></ocsp-param-editor>
+                </div>
+            </div>
+        </div>
+    </uib-accordion>
+</div>

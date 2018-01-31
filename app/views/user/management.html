@@ -1,0 +1,71 @@
+<div class="row" ng-form name="mainForm">
+  <div class="col-md-12 main">
+    <div class="panel panel-default" ng-if="isAdmin()">
+      <div class="panel-heading">
+        {{'ocsp_web_user_manage_000' | translate}}
+      </div>
+      <div class="panel-body">
+        <div class="container-fluid">
+          <div class="row">
+            <a class="btn oc-button" ng-click="add(users)">
+              <i class="glyphicon glyphicon-plus"></i>
+              {{'ocsp_web_user_new_user' | translate}}
+            </a>
+            <a class="btn oc-button" ng-click="saveUsers()">
+              {{'ocsp_web_common_009' | translate}}
+            </a>
+          </div>
+          <div class="row" style="margin-top: 10px;">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th class="col-md-2">{{'ocsp_web_user_name' | translate}}</th>
+                  <th class="col-md-5">{{'ocsp_web_user_desc' | translate}}</th>
+                  <th class="col-md-4">{{'ocsp_web_user_new_password' | translate}}</th>
+                  <th class="col-md-1">{{'ocsp_web_streams_manage_023' | translate}}</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="u in users">
+                  <td><input name="username_{{$index}}" type="text" class="form-control" ng-model="u.name" required="true"></td>
+                  <td><input type="text" class="form-control" ng-model="u.description"></td>
+                  <td><input name="password_{{$index}}" type="password" class="form-control" ng-model="u.password" ng-required="u.status===1"></td>
+                  <td>
+                    <div class="container-fluid">
+                        <a class="oc-link col-centered" ng-click="remove(users, $index)">
+                          {{'ocsp_web_streams_manage_027' | translate}}
+                        </a>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="panel panel-default" ng-if="!isAdmin()">
+      <div class="panel-heading">
+        {{'ocsp_web_user_manage_000' | translate}}
+        <span class="pull-right">
+          <ocsp-switch-btn save-func="save()" edit-func="edit()" cancel-func="cancel()" disabled="user.isDBUser!==true"></ocsp-switch-btn>
+        </span>
+      </div>
+      <div class="panel-body">
+        <div class="form-group">
+          <label>{{'ocsp_web_user_manage_002' | translate}}</label>
+          <input class="form-control" type="password" ng-model="user.oldPassword" required ng-disabled="user.isDBUser!==true || !fieldsEditable">
+        </div>
+        <div class="form-group">
+          <label>{{'ocsp_web_user_manage_003' | translate}}</label>
+          <input class="form-control" type="password" ng-model="user.password" required ng-disabled="user.isDBUser!==true || !fieldsEditable">
+        </div>
+        <div class="form-group">
+          <label>{{'ocsp_web_user_manage_004' | translate}}</label>
+          <input class="form-control" ng-class="styles" type="password" ng-model="user.password2" required ng-blur="checkPassword()" ng-disabled="user.isDBUser!==true || !fieldsEditable">
+          {{message}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

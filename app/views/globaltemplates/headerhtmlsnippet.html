@@ -1,0 +1,51 @@
+<script type="text/ng-template" id="showalarmsummary.html">
+    <div class="modal-header">
+        <button type="button" class="close" ng-click="closeModal()"><span aria-hidden="true">&times;</span></button>
+        <h3 class="modal-title">{{'ocsp_web_alarmmsg' | translate}}</h3>
+    </div>
+    <div class="modal-body">
+        <form name="warningMsgsForm" id="idWarningMsgsForm">
+            <div class="form-group">
+                <div class="">
+                    <table ng-table="allAlarmsToNotify" class="table table-condensed table-bordered">
+                        <colgroup>
+                            <col width="17%" />
+                            <col width="17%" />
+                            <col width="17%" />
+                            <col width="17%" />
+                            <col width="25%" />
+                            <col width="7%" />
+                        </colgroup>
+                        <tr ng-repeat="oneAlarm in $data">
+                            <td title="'ocsp_web_alarm_alarmname' | translate " ng-form="alarmlevel">
+                                <a>{{oneAlarm.alarm_name}}</a>
+                            </td>
+                            <td title=" 'ocsp_web_streams_manage_052' | translate " ng-form="taskid">
+                                <a>{{oneAlarm.name}}</a>
+                            </td>
+                            <td title=" 'ocsp_web_alarm_alarmcomponentname' | translate " ng-form="componentname">
+                                <a>{{oneAlarm.componentNameFromTargetTable}}</a>
+                            </td>
+                            <td title=" 'ocsp_web_alarm_alarmlevel' | translate " ng-form="alarmlevel">
+                                <a>{{oneAlarm.alarm_levelName}}</a>
+                            </td>
+                            <td title=" 'ocsp_web_common_alarmtime' | translate " ng-form="alarmtime">
+                                <a>{{oneAlarm.alarm_time}}</a>
+                            </td>
+                            <td title="'ocsp_web_streams_manage_023' | translate" ng-form="action">
+                                <a href="#/alarmmanagement/{{oneAlarm.stream_alarm_id}}" ng-click="closeModal()" class="btn oc-button">{{'ocsp_web_common_check' | translate}}</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <button type="button" class="btn oc-button" ng-click="closeModal()">
+                    {{'ocsp_web_common_038' | translate}}
+                </button>
+            </div>
+        </form>
+    </div>
+</script>

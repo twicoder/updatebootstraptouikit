@@ -1,0 +1,20 @@
+<div class="row">
+    <isteven-multi-select input-model="inputLabels" is-disabled="isAdminUser || !streamEditable" on-item-click="addNewItemIntoLabelsInCaseIstevenFailedDoIt(data)" output-model="selectedJob.labels" button-label="name"
+        item-label="name" helper-elements="filter" tick-property="tick2" translation="localLang">
+    </isteven-multi-select>
+</div>
+<div class="row">
+    <ul dnd-list="selectedJob.labels">
+        <li ng-repeat="item in selectedJob.labels" dnd-draggable="item" dnd-moved="sortLabels(selectedJob.labels, $index)" dnd-effect-allowed="move"
+            ng-class="{'selected': models.selected === item}">
+            <dnd-nodrag>
+                <div dnd-handle class="handle">
+                    <span class="badge">{{$index+1}}</span>&nbsp;{{item.name}}
+                </div>
+            </dnd-nodrag>
+        </li>
+        <li class="dndPlaceholder">
+            {{'ocsp_web_streams_manage_015' | translate}}
+        </li>
+    </ul>
+</div>

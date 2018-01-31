@@ -1,0 +1,71 @@
+<script type="text/ng-template" id="UserActionDataDetail.html">
+  <div class="modal-header">
+    <button type="button" class="close" ng-click="closeModal()"><span aria-hidden="true">&times;</span></button>
+    <h3 class="modal-title">{{'ocsp_web_logmanagement_userdata' | translate}}</h3>
+  </div>
+  <div class="modal-body">
+    <form name="typeForm" id="searchForm">
+      <div class="form-group">
+        <label>{{'ocsp_web_logmanagement_datadetail' | translate}}</label>
+        <div>
+            <textarea rows="15" cols="120">
+                {{userData}}
+            </textarea>
+        </div>
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn oc-button" ng-click="closeModal()">{{'ocsp_web_common_038' | translate}}</button>
+      </div>
+    </form>
+  </div>
+</script>
+
+<div class="row">
+  <ol class="breadcrumb">
+    <li>
+      <a href="#/logmanagement/">
+        <label class="glyphicon glyphicon-chevron-left"></label>&nbsp;{{'ocsp_web_common_returnback' | translate}}</a>
+    </li>
+    <li class="active">{{'ocsp_web_logmanagement_datadetail' | translate}}</li>
+  </ol>
+</div>
+<div class="row">
+
+  <div class="col-md-12 main">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <div>
+          {{'ocsp_web_logmanagement_name' | translate}}
+        </div>
+      </div>
+      <div class="panel-body">
+        <table class="table">
+          <thead>
+            <tr>
+              <th width="15%">{{'ocsp_web_logmanagement_date' | translate}}</th>
+              <th width="8%">{{'ocsp_web_logmanagement_username' | translate}}</th>
+              <th width="8%">{{'ocsp_web_logmanagement_methodtype' | translate}}</th>
+              <th width="8%">IP</th>
+              <th width="50%">URL</th>
+              <th width="10%">{{'ocsp_web_logmanagement_logfileaction' | translate}}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr ng-repeat="oneRecord in logFileRecords">
+              <td>{{oneRecord.recordDate}}</td>
+              <td>{{oneRecord.userName}}</td>
+              <td>{{oneRecord.MethodName}}</td>
+              <td>{{oneRecord.ipAddress}}</td>
+              <td>{{oneRecord.url}}</td>
+              <td>
+                <a href="" class="btn oc-button" ng-click="checkUserDataDetail(oneRecord.data)">{{'ocsp_web_logmanagement_checkuserdata' | translate}}</a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+      </div>
+    </div>
+  </div>
+
+</div>

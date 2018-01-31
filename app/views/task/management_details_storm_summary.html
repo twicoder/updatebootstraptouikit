@@ -1,0 +1,72 @@
+<div class="container-fluid">
+        <div class="panel panel-default">
+            <div class="panel-heading">{{'ocsp_web_streams_manage_002' | translate}}</div>
+            <div class="panel-body">
+                <div class="alert alert-danger alert-dismissible" role="alert" ng-show="selectedJob.id === undefined">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
+                            aria-hidden="true">&times;</span></button>
+                    <strong><i class="glyphicon glyphicon-info-sign"></i></strong> {{'ocsp_web_streams_manage_004' | translate}}
+                </div>
+                <ul class="list-group" ng-show="selectedJob.id !== undefined">
+                    <li class="list-group-item">
+                        <h4>{{'ocsp_web_streams_manage_028' | translate}}:
+                            <i ng-class="statusName(selectedJob.status)"></i>&nbsp;<ocsp-stream-run-status ng-model="selectedJob"></ocsp-stream-run-status>
+                        </h4>
+                    </li>
+                    <li class="list-group-item">
+                        <h4>{{'ocsp_web_streams_manage_029' | translate}}: {{selectedJob.running_time | cusDate}}</h4>
+                    </li>
+                    <li class="list-group-item" ng-if="isAdmin()">
+                        <h4>{{'ocsp_web_streams_owner' | translate}}: <i class="glyphicon glyphicon-user"></i> {{selectedJob.owner}}</h4>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="panel panel-default" ng-show="selectedJob.id !== undefined">
+            <div class="panel-heading">{{'ocsp_web_streams_chart' | translate}}</div>
+            <div class="panel-body">
+                <ul class="list-group" ng-show="selectedJob.id !== undefined">
+                    <li class="list-group-item">
+                        <h4>{{'ocsp_web_dashboard3' | translate}}</h4>
+                        <canvas class="chart chart-line" chart-data="chartData0" chart-labels="chartRunTimeLabels" chart-series="chartSeries0" chart-options="{legend:{display:true}}"
+                                chart-colors="['#79d2a6']" height="80">
+                        </canvas>
+                        <canvas class="chart chart-line" chart-data="chartData1" chart-labels="chartRunTimeLabels" chart-series="chartSeries1" chart-options="{legend:{display:true}}"
+                                chart-colors="['#ff704d']" height="80">
+                        </canvas>
+                    </li>
+                    <li class="list-group-item">
+                        <h4>{{'ocsp_web_dashboard5' | translate}}</h4>
+                        <canvas class="chart chart-line" chart-data="chartRunTimeData" chart-labels="chartRunTimeLabels" chart-series="chartRunTimeSeries"
+                                chart-options="{legend:{display:false}}" height="80">
+                        </canvas>
+                    </li>
+
+                    <li ng-if="showItem==='onestreamsummary'" class="list-group-item">
+                        <div e-chart e-data="eventStaticOutput" clicked="clickOnEvent" style="width:100%;height:300px;"></div>
+                    </li>
+                    
+                    <li ng-if="showItem==='eventdetails'" class="list-group-item">
+                        <h4>{{ 'ocsp_web_event_oneevent_statistics' | translate }}
+                            <a class="pull-right" ng-click="goto('onestreamsummary')">
+                                <label class="glyphicon glyphicon-chevron-left"></label>&nbsp;{{ 'ocsp_web_common_turnback' | translate }}
+                            </a>
+                        </h4>
+                        <canvas class="chart chart-line" chart-data="event_detail_records" chart-labels="event_detail_times"
+                            chart-options="{legend:{display:false}}" height="80" chart-colors="['#b8eace','#FFFFFF']">
+                        </canvas>
+                    </li>
+
+                    <li class="list-group-item">
+                        <h4>{{'ocsp_web_streams_manage_049' | translate}}</h4>
+                        <div class="row text-center" ng-show="selectedJob.id !== undefined">
+                            <div class="col-md-12">
+                                <div id="mermaid">
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>

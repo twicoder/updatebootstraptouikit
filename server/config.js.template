@@ -1,0 +1,39 @@
+"use strict";
+module.exports = {
+  dev: {
+    mysql: '',
+    dist: 'app',
+    port: 9527
+  },
+  prod: {
+    mysql: 'mysql://@MYSQL_UNAME@:@MYSQL_PWD@@@MYSQL_ADDR@/@MYSQL_DATABASE@',
+    dist: 'dist',
+    port: 9527
+  },
+  express_only: {
+    mysql: '',
+    dist: 'app',
+    port: 9527
+  },
+  quickLinks : [
+    {name: "Spark Streaming", value: "http://@RM_ADDR@"},
+    {name: "Codis Dashboard", value: "http://@CODIS_ADDR@"}
+  ],
+  env: "prod", // By default use prod env
+  trans: "zh",
+  jarPack: "auth-1.0-SNAPSHOT.jar",
+  enableAuth: true,
+  shiroConfig: "shiro.ini",
+  zh: {
+    databaseError: "请检查数据库配置",
+    uploadError: "上传失败, 请手动将jar包放到",
+    authError: "权限不足",
+    labelConflictError: `label与用户owner的标签实现类冲突`
+  },
+  en: {
+    databaseError: "Please check your database configurations",
+    uploadError: "Upload failed, please upload manually jar to",
+    authError: "Authentication failed",
+    labelConflictError: `label conflicts with owner 's Label class`
+  }
+};
