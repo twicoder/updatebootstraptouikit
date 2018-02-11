@@ -22,17 +22,14 @@ angular
     'ngFileUpload',
     "isteven-multi-select",
     "dndLists",
-    'ui.bootstrap',
     'ui-notification',
     'angularSpinner',
     'ngCookies',
     'ui.select',
     'toggle-switch',
     'cfp.hotkeys',
-    'ui.bootstrap.datetimepicker',
     'angularMoment',
     'chart.js',
-    'angularBootstrapNavTree',
     'textAngular',
     'cp.ngConfirm',
     'ngTable',
@@ -203,9 +200,9 @@ angular
     chartRefreshInterval: 20000,
     expires: 3,//Hours
   })
-  .run(['$rootScope', '$filter', '$cookies', '$location', '$http','$interval', '$uibModal', 'CONFIGS', 
+  .run(['$rootScope', '$filter', '$cookies', '$location', '$http','$interval', 'CONFIGS', 
     'moment', 'NgTableParams','globalDataService',
-    ($rootScope, $filter, $cookies, $location, $http, $interval, $uibModal, CONFIGS, 
+    ($rootScope, $filter, $cookies, $location, $http, $interval, CONFIGS, 
       moment, NgTableParams,globalDataService) => {
 
       $rootScope.globalDataService = globalDataService;
@@ -218,23 +215,23 @@ angular
       }
 
       $rootScope.checkAlarms = function(){
-        let modal = $uibModal.open({
-          animation: true,
-          ariaLabelledBy: 'modal-title-bottom',
-          ariaDescribedBy: 'modal-body-bottom',
-          templateUrl: 'showalarmsummary.html',
-          size: 'lg',
-          backdrop: 'static',
-          scope: $rootScope,
-          controller: ['$rootScope', function ($rootScope) {
-            $rootScope.allAlarmsToNotify = new NgTableParams({ 'count': '5' }, { counts: [], paginationMinBlocks: 4, paginationMaxBlocks: 7, dataset: $rootScope.alarms });
+        // let modal = $uibModal.open({
+        //   animation: true,
+        //   ariaLabelledBy: 'modal-title-bottom',
+        //   ariaDescribedBy: 'modal-body-bottom',
+        //   templateUrl: 'showalarmsummary.html',
+        //   size: 'lg',
+        //   backdrop: 'static',
+        //   scope: $rootScope,
+        //   controller: ['$rootScope', function ($rootScope) {
+        //     $rootScope.allAlarmsToNotify = new NgTableParams({ 'count': '5' }, { counts: [], paginationMinBlocks: 4, paginationMaxBlocks: 7, dataset: $rootScope.alarms });
                         
-            $rootScope.closeModal = function () {
-              modal.close();
-            };
+        //     $rootScope.closeModal = function () {
+        //       modal.close();
+        //     };
 
-          }]
-        });
+        //   }]
+        // });
       };
 
       $rootScope.updateGlobalInfoTimer=null;

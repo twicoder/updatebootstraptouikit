@@ -46,7 +46,7 @@
   </script>
 
 
-  <script type="text/ng-template" id="showDefinitionConfigDetails.html">
+<script type="text/ng-template" id="showDefinitionConfigDetails.html">
     <div class="modal-header">
         <button type="button" class="close" ng-click="closeDetailModal()"><span aria-hidden="true">&times;</span>
         </button>
@@ -90,16 +90,25 @@
 
 
 
-<div class="row">
-    <div class="col-md-12 main">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <div>
+<div class="uk-grid uk-form">
+    <div class="uk-width-1-10">
+        <a href="#my-id" data-uk-modal>XXX</a>
+        <div id="my-id" class="uk-modal">
+            <div class="uk-modal-dialog">
+                <a class="uk-modal-close uk-close"></a>
+                <h1>HelloWorld</h1>
+            </div>
+        </div>
+    </div>
+    <div class="uk-width-8-10">
+        <div class="uk-panel uk-panel-box-primary">
+            <div class="uk-panel-header">
+                <div class="uk-panel-title">
                     {{'ocsp_web_alarmmanagement_config' | translate}}
                 </div>
             </div>
-            <div class="panel-body">
-                <table ng-table="allAlarmDefinitions" class="table table-condensed table-bordered">
+            <div class="fieldset">
+                <table ng-table="allAlarmDefinitions" class="uk-table">
                     <colgroup>
                         <col width="35%" />
                         <col width="20%" />
@@ -117,7 +126,8 @@
                             <a>{{oneAlarmDefinition.alarm_component_name}}</a>
                         </td>
                         <td title="'ocsp_web_streams_manage_023' | translate" ng-form="action">
-                            <a ng-click="showConfigPage(oneAlarmDefinition)" class="btn oc-button">{{'ocsp_web_common_check' | translate}}</a>
+                            <!-- <a ng-click="showConfigPage(oneAlarmDefinition)" class="uk-button oc-button">{{'ocsp_web_common_check' | translate}}</a> -->
+                            <button ng-click="showConfigPage(oneAlarmDefinition)" class="uk-button oc-button" data-uk-modal="{target:'#my-id'}">{{'ocsp_web_common_check' | translate}}</button>
                         </td>
                     </tr>
                     </tbody>
@@ -127,16 +137,17 @@
     </div>
 </div>
 
-<div class="row">
-    <div class="col-md-12 main">
-        <div class="panel panel-default">
-            <div class="panel-heading">
-                <div>
+<div class="uk-grid uk-form">
+    <div class="uk-width-1-10"></div>
+    <div class="uk-width-8-10">
+        <div class="uk-panel uk-panel-box-primary">
+            <div class="uk-panel-header">
+                <div class="uk-panel-title">
                     {{'ocsp_web_alarmmanagement' | translate}}
                 </div>
             </div>
-            <div class="panel-body">
-                <table ng-table="allAlarms" class="table table-condensed table-bordered">
+            <div class="fieldset">
+                <table ng-table="allAlarms" class="uk-table">
                     <colgroup>
                         <col width="15%" />
                         <col width="10%" />

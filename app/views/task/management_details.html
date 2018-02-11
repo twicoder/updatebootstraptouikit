@@ -1,15 +1,15 @@
-<div class="container-fluid">
-    <div class="row">
-        <ol class="breadcrumb">
+<div class="uk-container">
+    <div class="uk-grid">
+        <ol class="uk-breadcrumb">
             <li>
-                <a href="#/task_management"><label class="glyphicon glyphicon-chevron-left"></label>&nbsp;{{'ocsp_web_common_turnback' | translate }}</a>
+                <a href="#/task_management"><label class="fa fa-chevron-left"></label>&nbsp;{{'ocsp_web_common_turnback' | translate }}</a>
             </li>
-            <li class="active">{{'ocsp_web_stream_streamdetail' | translate }}</li>
+            <li class="uk-active">{{'ocsp_web_stream_streamdetail' | translate }}</li>
         </ol>
     </div>
 
-    <div class="row">
-        <ul class="nav nav-tabs" role="tablist">
+    <div class="uk-grid">
+        <ul class="uk-nav" role="tablist">
             <li role="presentation" class="active">
                 <a href="" aria-controls="summary" role="tab" data-toggle="tab" ng-click="changeTab('summary')">{{ 'ocsp_web_stream_streamindex' | translate }}</a>
             </li>
@@ -27,7 +27,7 @@
         </ul>
     </div>
 
-    <div class="row">
+    <div class="uk-grid">
         <!-- Tab panes -->
         <div class="tab-content">
             <div role="tabpanel" class="tab-pane" id="summary" ng-class="{'summary' : 'active'}[tab]">

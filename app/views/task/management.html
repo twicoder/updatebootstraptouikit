@@ -31,16 +31,16 @@
   </div>
 </script>
 
-<div class="container-fluid">
+<div class="">
     <ng-include src="'views/task/sidebar.html'"></ng-include>
     <button class="btn-create-stream" ng-class="{false:'oc-button'}[isAdminUser]" href="" ng-disabled="isAdminUser" ng-click="createOneStream()">
-      <span class="glyphicon glyphicon-plus"/> {{'ocsp_web_createstream' | translate }}
+      <span class="fa fa-2x fa-plus"/> {{'ocsp_web_createstream' | translate }}
     </button>
-    <div class="row">
+    <div class="uk-grid">
       <!-- leave for wizard -->
-      <div class="col-md-12">
+      <div class="uk-width-1-1">
 
-        <table ng-table="allJobsListParams" class="table table-condensed table-bordered">
+        <table ng-table="allJobsListParams" class="uk-table uk-table-hover">
           <thead>
             <tr>
               <th>{{'ocsp_web_streams_manage_052' | translate}}</th>
@@ -52,17 +52,17 @@
           </thead>
           <tbody>
             <tr ng-repeat="item in $data">
-              <td class="centertext"><a class="task-name" href="#/task_management/{{item.id}}">{{item.name}}</a></td>
-              <td class="centertext"><ocsp-stream-run-status ng-model="item"></ocsp-stream-run-status></td>
-              <td class="centertext"><font>{{item.running_time || 0 | cusDate}}</font></td>
-              <td ng-show="isAdminUser" class="centertext">{{item.owner}}</a></td>
-              <td>
+              <td class="centertext uk-width-2-10"><a class="task-name" href="#/task_management/{{item.id}}">{{item.name}}</a></td>
+              <td class="centertext uk-width-2-10"><ocsp-stream-run-status ng-model="item"></ocsp-stream-run-status></td>
+              <td class="centertext uk-width-2-10"><font>{{item.running_time || 0 | cusDate}}</font></td>
+              <td ng-show="isAdminUser" class="centertext uk-width-1-10">{{item.owner}}</a></td>
+              <td class="uk-width-2-10">
                 <div class="btn-group">
                   <font>
-                    <button href="" class="oc-button" ng-disabled="item.status !== 0 && item.status !== 'STOPPED' || isAdminUser" ng-click="updateStreamStatus(item,'start')"><i class="glyphicon glyphicon-play success"></i></button>
+                    <button href="" class="uk-button oc-button" ng-disabled="item.status !== 0 && item.status !== 'STOPPED' || isAdminUser" ng-click="updateStreamStatus(item,'start')"><i class="fa fa-lg fa-play-circle"></i></button>
                   </font>
                   <font>
-                    <button href="" class="oc-button" ng-disabled="item.status === 0 || item.status === 'STOPPED' || isAdminUser" ng-click="updateStreamStatus(item,'stop')"><i class="glyphicon glyphicon-stop danger"></i></button>
+                    <button href="" class="uk-button oc-button" ng-disabled="item.status === 0 || item.status === 'STOPPED' || isAdminUser" ng-click="updateStreamStatus(item,'stop')"><i class="fa fa-lg fa-stop-circle"></i></button>
                   </font>
                   <!-- <font>
                     <button href="" class="oc-button" ng-disabled="item.status === 0 || item.status === 'STOPPED' || isAdminUser" ng-click="updateStreamStatus(item,'restart')"><i class="glyphicon glyphicon-refresh danger"></i></button>
@@ -75,10 +75,7 @@
             </tr>
           </tbody>
         </table>
-<!-- 
-        <div>
-          <ocsp-pagination ng-model="allJobsListParams" totalpages=1 class="cuspagination_stream_management"></ocsp-pagination>
-        </div> -->
+
       </div>
     </div>
 </div>

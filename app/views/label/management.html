@@ -117,16 +117,17 @@
 </script>
 
 
-<div class="row">
-  <div class="col-md-12 main">
-    <div class="panel panel-default">
-      <div class="panel-heading">
-        <div>
+<div class="uk-grid uk-form">
+    <div class="uk-width-1-10"></div>
+  <div class="uk-width-8-10">
+    <div class="uk-panel uk-panel-box-primary">
+      <div class="uk-panel-header">
+        <div class="uk-panel-title">
           {{'ocsp_web_label_manage_000' | translate}}
         </div>
       </div>
-      <div class="panel-body">
-        <table class="table">
+      <div class="fieldset">
+        <table class="uk-table uk-table-hover">
           <thead>
             <tr>
               <th>{{'ocsp_web_label_manage_001' | translate}}</th>
@@ -138,19 +139,19 @@
           </thead>
           <tbody>
             <tr ng-repeat="label in page.labels">
-              <td class="col-md-2">{{label.name}}</td>
-              <td class="col-md-2">{{label.owner}}</td>
-              <td class="col-md-2">{{label.class_name}}</td>
-              <td class="col-md-5">
-                <textarea ng-model="label.properties" class="form-control" rows="3" ng-disabled="true" />
+              <td class="uk-width-1-10">{{label.name}}</td>
+              <td class="uk-width-1-10">{{label.owner}}</td>
+              <td class="uk-width-2-10">{{label.class_name}}</td>
+              <td class="uk-width-5-10">
+                <textarea ng-model="label.properties" class="uk-width-1-1" rows="3" ng-disabled="true" />
               </td>
-              <td class="col-md-1">
-                <a href="" class="btn oc-button" ng-click="editLabelProperties(label)" ng-hide="username!== label.owner && !isAdminUser">{{ 'ocsp_web_common_042' | translate }}</a>
+              <td class="uk-width-1-10">
+                <a href="" class="uk-button oc-button" ng-click="editLabelProperties(label)" ng-hide="username!== label.owner && !isAdminUser">{{ 'ocsp_web_common_042' | translate }}</a>
               </td>
             </tr>
           </tbody>
         </table>
-        <div class="col-md-12">
+        <div class="uk-width-1-1">
           <ul class="pull-right" uib-pagination total-items="page.totalitems" max-size="page.maxsize" items-per-page="page.perpage"
             ng-model="page.curpage" first-text="<<" rotate="true" last-text=">>" boundary-links="true" previous-text="<" next-text=">"
             force-ellipses="3" ng-change="choose(page.curpage)">
@@ -158,10 +159,10 @@
         </div>
       </div>
     </div>
-    <div class="well">
+    <div class="">
       <div>
         <div style="float:right;">
-          <button type="button" class="btn oc-button" ng-click="upload()">{{'ocsp_web_common_010' | translate}}</button>
+          <button type="button" class="uk-button oc-button" ng-click="upload()">{{'ocsp_web_common_010' | translate}}</button>
         </div>
         <input ngf-select type="file" ng-model="file">
       </div>
