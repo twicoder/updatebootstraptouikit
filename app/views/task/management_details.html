@@ -1,42 +1,47 @@
-<div class="uk-container">
+<div class="uk-container uk-container-center">
     <div class="uk-grid">
         <ol class="uk-breadcrumb">
             <li>
-                <a href="#/task_management"><label class="fa fa-chevron-left"></label>&nbsp;{{'ocsp_web_common_turnback' | translate }}</a>
+                <a href="#/task_management">
+                    <label class="fa fa-chevron-left"></label>&nbsp;{{'ocsp_web_common_turnback' | translate }}</a>
             </li>
             <li class="uk-active">{{'ocsp_web_stream_streamdetail' | translate }}</li>
         </ol>
     </div>
 
     <div class="uk-grid">
-        <ul class="uk-nav" role="tablist">
-            <li role="presentation" class="active">
+        <ul class="uk-tab" data-uk-tab>
+            <li role="" class="uk-active">
                 <a href="" aria-controls="summary" role="tab" data-toggle="tab" ng-click="changeTab('summary')">{{ 'ocsp_web_stream_streamindex' | translate }}</a>
             </li>
-            <li role="presentation">
+            <li role="">
                 <a href="" aria-controls="config" role="tab" data-toggle="tab" ng-click="changeTab('config')">{{ 'ocsp_web_stream_streamconfig' | translate }}</a>
             </li>
-            <li class="dropdown col-md-offset-2">
-                <a href="" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                    {{'ocsp_web_streams_manage_005' | translate}} <span class="caret"></span>
+            <li data-uk-dropdown="{mode:'click'}">
+                <a href="" class="" role="button" aria-haspopup="true" aria-expanded="false">
+                    {{'ocsp_web_streams_manage_005' | translate}}
+                    <span class="caret"></span>
                 </a>
-                <ul id="quick" class="dropdown-menu">
-                    <li ng-repeat="link in links"><a target="_blank" href="{{link.value}}">{{link.name}}</a></li>
-                </ul>
+                <div class="uk-dropdown uk-dropdown-small">
+                    <ul id="quick" class="uk-nav uk-nav-dropdown">
+                        <li ng-repeat="link in links">
+                            <a target="_blank" href="{{link.value}}">{{link.name}}</a>
+                        </li>
+                    </ul>
+                </div>
             </li>
         </ul>
     </div>
 
     <div class="uk-grid">
-        <!-- Tab panes -->
-        <div class="tab-content">
-            <div role="tabpanel" class="tab-pane" id="summary" ng-class="{'summary' : 'active'}[tab]">
+        <div class="uk-width-1-1">
+            <div role="" ng-show="tab === 'summary' " class="" id="summary" ng-class="{'summary' : 'active'}[tab]">
                 <div class="">
                     <ng-include ng-show="currentStreamType ==='SPARK'" src="'views/task/management_details_spark_summary.html'"></ng-include>
                     <ng-include ng-show="currentStreamType ==='STORM'" src="'views/task/management_details_storm_summary.html'"></ng-include>
                 </div>
             </div>
-            <div role="tabpanel" class="tab-pane panelOfStreamConfigPage" id="config" ng-class="{'config' : 'active'}[tab]">
+            <div role="" ng-show="tab === 'config' " class="panelOfStreamConfigPage" id="config" ng-class="{'config' : 'active'}[tab]">
                 <div class="breadcrumb streamconfigheader">
                     <a href="">{{ 'ocsp_web_stream_configinfo' | translate }}</a>
                     <div style="float:right">
@@ -44,39 +49,41 @@
                     </div>
                 </div>
 
-                <ul class="col-md-3 leftPage">
-                    <li ng-class="{'basicConfig' : 'active'}[currentConfigBlock]" ng-click="switchToBlock('basicConfig')">
-                        <a href="">{{ 'ocsp_web_stream_basicconfig' | translate }}</a>
-                    </li>
-                    <li ng-class="{'inputConfig' : 'active'}[currentConfigBlock]" ng-click="switchToBlock('inputConfig')">
-                        <a href="">{{ 'ocsp_web_stream_configinput' | translate }}</a>
-                    </li>
-                    <li ng-class="{'labelConfig' : 'active'}[currentConfigBlock]" ng-click="switchToBlock('labelConfig')">
-                        <a href="">{{ 'ocsp_web_stream_configlabel' | translate }}</a>
-                    </li>
-                    <li ng-class="{'outputConfig' : 'active'}[currentConfigBlock]" ng-click="switchToBlock('outputConfig')">
-                        <a href="">{{ 'ocsp_web_stream_configoutput' | translate }}</a>
-                    </li>
-                </ul>
+                <div class="uk-grid">
+                    <ul class="uk-width-1-4 leftPage">
+                        <li ng-class="{'basicConfig' : 'active'}[currentConfigBlock]" ng-click="switchToBlock('basicConfig')">
+                            <a href="">{{ 'ocsp_web_stream_basicconfig' | translate }}</a>
+                        </li>
+                        <li ng-class="{'inputConfig' : 'active'}[currentConfigBlock]" ng-click="switchToBlock('inputConfig')">
+                            <a href="">{{ 'ocsp_web_stream_configinput' | translate }}</a>
+                        </li>
+                        <li ng-class="{'labelConfig' : 'active'}[currentConfigBlock]" ng-click="switchToBlock('labelConfig')">
+                            <a href="">{{ 'ocsp_web_stream_configlabel' | translate }}</a>
+                        </li>
+                        <li ng-class="{'outputConfig' : 'active'}[currentConfigBlock]" ng-click="switchToBlock('outputConfig')">
+                            <a href="">{{ 'ocsp_web_stream_configoutput' | translate }}</a>
+                        </li>
+                    </ul>
 
-                <div class="col-md-9 rightPage" ng-form name="streamconfigform">
-                    <div class="row">
-                        <div class="col-md-1"></div>
-                        <div class="col-md-9">
-                            <div ng-if="currentStreamType ==='SPARK'">
-                                <ng-include ng-if="currentConfigBlock==='basicConfig'" src="'views/task/management_details_spark_basicconfig.html'"></ng-include>
-                                <ng-include ng-if="currentConfigBlock==='inputConfig'" src="'views/task/management_details_spark_inputconfig.html'"></ng-include>
-                                <ng-include ng-if="currentConfigBlock==='labelConfig'" src="'views/task/management_details_spark_labelconfig.html'"></ng-include>
-                                <ng-include ng-if="currentConfigBlock==='outputConfig'" src="'views/task/management_details_spark_outputconfig.html'"></ng-include>
+                    <div class="uk-width-3-4 rightPage uk-form" ng-form name="streamconfigform">
+                        <div class="uk-grid">
+                            <div class="uk-width-1-10"></div>
+                            <div class="uk-width-8-10">
+                                <div ng-if="currentStreamType ==='SPARK'">
+                                    <ng-include ng-if="currentConfigBlock==='basicConfig'" src="'views/task/management_details_spark_basicconfig.html'"></ng-include>
+                                    <ng-include ng-if="currentConfigBlock==='inputConfig'" src="'views/task/management_details_spark_inputconfig.html'"></ng-include>
+                                    <ng-include ng-if="currentConfigBlock==='labelConfig'" src="'views/task/management_details_spark_labelconfig.html'"></ng-include>
+                                    <ng-include ng-if="currentConfigBlock==='outputConfig'" src="'views/task/management_details_spark_outputconfig.html'"></ng-include>
+                                </div>
+                                <div ng-if="currentStreamType ==='STORM'">
+                                    <ng-include ng-show="currentConfigBlock==='basicConfig'" src="'views/task/management_details_storm_basicconfig.html'"></ng-include>
+                                    <ng-include ng-show="currentConfigBlock==='inputConfig'" src="'views/task/management_details_storm_inputconfig.html'"></ng-include>
+                                    <ng-include ng-show="currentConfigBlock==='labelConfig'" src="'views/task/management_details_storm_labelconfig.html'"></ng-include>
+                                    <ng-include ng-show="currentConfigBlock==='outputConfig'" src="'views/task/management_details_storm_outputconfig.html'"></ng-include>
+                                </div>
                             </div>
-                            <div ng-if="currentStreamType ==='STORM'">
-                                <ng-include ng-show="currentConfigBlock==='basicConfig'" src="'views/task/management_details_storm_basicconfig.html'"></ng-include>
-                                <ng-include ng-show="currentConfigBlock==='inputConfig'" src="'views/task/management_details_storm_inputconfig.html'"></ng-include>
-                                <ng-include ng-show="currentConfigBlock==='labelConfig'" src="'views/task/management_details_storm_labelconfig.html'"></ng-include>
-                                <ng-include ng-show="currentConfigBlock==='outputConfig'" src="'views/task/management_details_storm_outputconfig.html'"></ng-include>
-                            </div>
+                            <div class="uk-width-1-10"></div>
                         </div>
-                        <div class="col-md-2"></div>
                     </div>
                 </div>
             </div>

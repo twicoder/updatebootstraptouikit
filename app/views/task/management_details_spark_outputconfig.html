@@ -1,8 +1,10 @@
-<div class="row">
-    <button ng-if="!cep" type="button" class="btn oc-button" ng-disabled="isAdminUser || !streamEditable" ng-click="addNewEvent(selectedJob.events)">{{'ocsp_web_streams_manage_016' | translate}}
-    </button>
+<div class="uk-grid">
+    <div ng-class="firstColumnWidthClass">
+        <button ng-if="!cep" type="button" class="btn oc-button" ng-disabled="isAdminUser || !streamEditable" ng-click="addNewEvent(selectedJob.events)">{{'ocsp_web_streams_manage_016' | translate}}
+        </button>
+    </div>
 </div>
-<div class="row">
+<div class="uk-grid">
     <uib-accordion>
         <div uib-accordion-group class="panel-default" ng-repeat="item in selectedJob.events" is-open="item.isOpen">
             <uib-accordion-heading>
@@ -11,60 +13,60 @@
                     <i class="glyphicon glyphicon-remove"></i>
                 </a>
             </uib-accordion-heading>
-            <div class="container-fluid">
-                <div class="form-group">
-                    <label>{{'ocsp_web_streams_manage_037' | translate}}</label>
+            <div class="uk-container">
+                <div class="uk-grid">
+                    <label ng-class="firstColumnWidthClass">{{'ocsp_web_streams_manage_037' | translate}}</label>
                 </div>
-                <div class="form-group">
+                <div class="uk-grid">
                     <toggle-switch ng-model="item.status" ng-disabled="cep || isAdminUser || !streamEditable">
                         on-label="{{'ocsp_web_common_015' | translate}}" off-label="{{'ocsp_web_common_016' | translate}}">
                     </toggle-switch>
                 </div>
-                <div class="form-group">
-                    <label>{{'ocsp_web_streams_manage_017' | translate}}*</label>
-                    <input type="text" class="form-control" ng-model="item.name" ng-readonly="isAdminUser || !streamEditable" name="eventsName_{{$index}}"
+                <div class="uk-grid">
+                    <label ng-class="firstColumnWidthClass">{{'ocsp_web_streams_manage_017' | translate}}*</label>
+                    <input ng-class="secondColumnWidthClass" type="text" ng-model="item.name" ng-readonly="isAdminUser || !streamEditable" name="eventsName_{{$index}}"
                         required ng-disabled="cep">
-                    <span class="redtip" ng-show="mainForm['eventsName_' + $index].$touched && mainForm['eventsName_' + $index].$error.required">{{'ocsp_web_common_027' | translate}}</span>
+                    <span ng-class="thirdColumnWidthClass" class="redtip" ng-show="mainForm['eventsName_' + $index].$touched && mainForm['eventsName_' + $index].$error.required">{{'ocsp_web_common_027' | translate}}</span>
                 </div>
-                <div class="form-group">
-                    <label>{{'ocsp_web_streams_manage_018' | translate}}*</label>
-                    <tokenfield inputs="{{getAllPossibleFields(selectedJob.input.fields,selectedJob.input.userFields)}}"
+                <div class="uk-grid">
+                    <label ng-class="firstColumnWidthClass">{{'ocsp_web_streams_manage_018' | translate}}*</label>
+                    <!-- <tokenfield inputs="{{getAllPossibleFields(selectedJob.input.fields,selectedJob.input.userFields)}}"
                         labels="{{selectedJob.labels}}" ng-model="item.select_expr" checkinputfield=true name="eventsFields_{{$index}}"
-                        required="true" readonly="{{cep || isAdminUser || !streamEditable}}"></tokenfield>
+                        required="true" readonly="{{cep || isAdminUser || !streamEditable}}"></tokenfield> -->
                 </div>
-                <div class="form-group">
-                    <label>{{'ocsp_web_streams_manage_019' | translate}}*</label>
-                    <input type="text" class="form-control" ng-model="item.delim" ng-readonly="isAdminUser || !streamEditable" name="eventsDelim_{{$index}}"
+                <div class="uk-grid">
+                    <label ng-class="firstColumnWidthClass">{{'ocsp_web_streams_manage_019' | translate}}*</label>
+                    <input ng-class="secondColumnWidthClass" type="text" ng-model="item.delim" ng-readonly="isAdminUser || !streamEditable" name="eventsDelim_{{$index}}"
                         required ng-disabled="cep">
-                    <span class="redtip" ng-show="mainForm['eventsDelim_' + $index].$touched && mainForm['eventsDelim_' + $index].$error.required">{{'ocsp_web_common_027' | translate}}</span>
+                    <span ng-class="thirdColumnWidthClass" class="redtip" ng-show="mainForm['eventsDelim_' + $index].$touched && mainForm['eventsDelim_' + $index].$error.required">{{'ocsp_web_common_027' | translate}}</span>
                 </div>
-                <div class="form-group">
-                    <label>{{'ocsp_web_streams_manage_013' | translate}}</label>
-                    <input type="text" class="form-control" ng-model="item.filter_expr" ng-readonly="isAdminUser || !streamEditable" ng-disabled="cep">
+                <div class="uk-grid">
+                    <label ng-class="firstColumnWidthClass">{{'ocsp_web_streams_manage_013' | translate}}</label>
+                    <input ng-class="secondColumnWidthClass" type="text" ng-model="item.filter_expr" ng-readonly="isAdminUser || !streamEditable" ng-disabled="cep">
                 </div>
-                <div class="form-group">
-                    <label>{{'ocsp_web_streams_manage_020' | translate}}({{'ocsp_web_common_023' | translate}})*
+                <div class="uk-grid">
+                    <label ng-class="firstColumnWidthClass">{{'ocsp_web_streams_manage_020' | translate}}({{'ocsp_web_common_023' | translate}})*
                     </label>
-                    <input type="number" class="form-control" ng-model="item.interval" ng-readonly="isAdminUser || !streamEditable" name="eventsInterval_{{$index}}"
+                    <input ng-class="secondColumnWidthClass" type="number" ng-model="item.interval" ng-readonly="isAdminUser || !streamEditable" name="eventsInterval_{{$index}}"
                         ng-pattern="/^(0|[1-9][0-9]*)$/" required ng-disabled="cep">
-                    <span class="redtip" ng-show="mainForm['eventsInterval_' + $index].$touched && mainForm['eventsInterval_' + $index].$error.required">{{'ocsp_web_common_027' | translate}}</span>
-                    <span class="redtip" ng-show="mainForm['eventsInterval_' + $index].$touched && mainForm['eventsInterval_' + $index].$error.pattern">{{'ocsp_web_common_034' | translate}}</span>
+                    <span ng-class="thirdColumnWidthClass" class="redtip" ng-show="mainForm['eventsInterval_' + $index].$touched && mainForm['eventsInterval_' + $index].$error.required">{{'ocsp_web_common_027' | translate}}</span>
+                    <span ng-class="thirdColumnWidthClass" class="redtip" ng-show="mainForm['eventsInterval_' + $index].$touched && mainForm['eventsInterval_' + $index].$error.pattern">{{'ocsp_web_common_034' | translate}}</span>
                 </div>
-                <div class="form-group">
-                    <label>{{'ocsp_web_streams_manage_014' | translate}}*</label>
-                    <tokenfield inputs="{{item.select_expr}}"
-                        ng-model="item.output.uniqueKey" name="inputFields_spark_3" checkinputfield=true required="true" readonly="{{cep || isAdminUser || !streamEditable}}"></tokenfield>
+                <div class="uk-grid">
+                    <label ng-class="firstColumnWidthClass">{{'ocsp_web_streams_manage_014' | translate}}*</label>
+                    <!-- <tokenfield inputs="{{item.select_expr}}"
+                        ng-model="item.output.uniqueKey" name="inputFields_spark_3" checkinputfield=true required="true" readonly="{{cep || isAdminUser || !streamEditable}}"></tokenfield> -->
                 </div>
-                <div class="form-group">
-                    <label>{{'ocsp_web_streams_cep_auditperiod' | translate}}*</label>
+                <div class="uk-grid">
+                    <label ng-class="firstColumnWidthClass">{{'ocsp_web_streams_cep_auditperiod' | translate}}*</label>
                 </div>
-                <div class="form-group">
+                <div class="uk-grid">
                     <toggle-switch on-label="{{'ocsp_web_common_040' | translate}}" off-label="{{'ocsp_web_common_041' | translate}}" ng-model="item.audit.enableDateForSwitchButton"
                         ng-change="switchAuditPeriod(item)" ng-disabled="cep || isAdminUser || !streamEditable">
                     </toggle-switch>
                 </div>
-                <div class="form-group" ng-if="currentStreamType ==='SPARK' && item.audit.enableDateForSwitchButton === true">
-                    <label>{{'ocsp_web_streams_manage_041' | translate}}</label>
+                <div class="uk-grid" ng-if="currentStreamType ==='SPARK' && item.audit.enableDateForSwitchButton === true">
+                    <label ng-class="firstColumnWidthClass">{{'ocsp_web_streams_manage_041' | translate}}</label>
                     <div class="row">
                         <div class="col-md-6">
                             <p class="input-group">
@@ -92,7 +94,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="uk-grid">
                     <label>{{'ocsp_web_streams_manage_040' | translate}}*</label>
                     <ui-select ng-model="item.audit.type" ng-required="true" ng-disabled="cep || isAdminUser || !streamEditable" name="eventsAudit_{{$index}}"
                         append-to-body="true" on-select="onSelect(item)">
@@ -105,7 +107,7 @@
                     </ui-select>
                     <span class="redtip" ng-show="mainForm['eventsAudit_' + $index].$touched && mainForm['eventsAudit_' + $index].$error.required">{{'ocsp_web_common_027' | translate}}</span>
                 </div>
-                <div class="form-group" ng-if="item.audit.type && item.audit.type !== 'always'">
+                <div class="uk-grid" ng-if="item.audit.type && item.audit.type !== 'always'">
                     <div class="row">
                         <div class="col-md-10">
                             <label>{{'ocsp_web_streams_manage_041' | translate}}</label>
@@ -147,7 +149,7 @@
                     </div>
                 </div>
                 <!--For interface-->
-                <div class="form-group">
+                <div class="uk-grid">
                     <label>{{'ocsp_web_streams_manage_021' | translate}}*</label>
                     <ui-select ng-model="item.output.datasource" ng-required="true" append-to-body="true" ng-disabled="cep || isAdminUser || !streamEditable">
                         <ui-select-match>
@@ -159,18 +161,18 @@
                     </ui-select>
                     <span class="redtip" ng-if="item.output.datasource === undefined">{{'ocsp_web_common_027' | translate}}</span>
                 </div>
-                <div class="form-group" ng-if="item.output.datasource.type === 'kafka'">
+                <div class="uk-grid" ng-if="item.output.datasource.type === 'kafka'">
                     <label>{{'ocsp_web_streams_manage_010' | translate}}*</label>
                     <input type="text" class="form-control" ng-model="item.output.topic" required ng-disabled="cep || isAdminUser || !streamEditable">
                     <span class="redtip" ng-if="item.output.topic === undefined">{{'ocsp_web_common_027' | translate}}</span>
                 </div>
-                <div class="form-group" ng-if="item.output.datasource.type === 'codis'">
+                <div class="uk-grid" ng-if="item.output.datasource.type === 'codis'">
                     <label>{{'ocsp_web_streams_manage_022' | translate}}*</label>
                     <input type="text" class="form-control" ng-model="item.output.codisKeyPrefix" required ng-disabled="cep || isAdminUser || !streamEditable">
                     <span class="redtip" ng-if="item.output.codisKeyPrefix === undefined">{{'ocsp_web_common_027' | translate}}</span>
                 </div>
 
-                <div class="form-group">
+                <div class="uk-grid">
                     <ocsp-param-editor ng-model="item" disabled="cep || isAdminUser || !streamEditable"></ocsp-param-editor>
                 </div>
             </div>

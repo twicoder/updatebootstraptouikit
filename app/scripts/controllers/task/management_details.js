@@ -13,6 +13,10 @@ angular.module('ocspApp')
       var currentStreamId = $routeParams.id;
       $scope.currentStreamDetails = {};
 
+      $scope.firstColumnWidthClass = "uk-width-1-5";
+      $scope.secondColumnWidthClass = "uk-width-3-5";
+      $scope.thirdColumnWidthClass = "uk-width-1-5";
+
       //i18n
       $scope.localLang = globalDataService.localLang;
       $scope.isAdminUser = $rootScope.isAdmin();

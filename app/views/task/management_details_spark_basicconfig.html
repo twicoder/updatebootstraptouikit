@@ -1,83 +1,82 @@
 <div>
-    <div class="row">
-        <label>{{'ocsp_web_common_011' | translate}}*</label>
-        <input type="text" name="name" class="form-control" ng-model="selectedJob.name" ng-readonly="isAdminUser || !streamEditable" required>
-        <span class="redtip" ng-show="mainForm.name.$touched && mainForm.name.$error.required">{{'ocsp_web_common_027' | translate}}</span>
+    <div class="uk-grid">
+        <label ng-class="firstColumnWidthClass">{{'ocsp_web_common_011' | translate}}*</label>
+        <input ng-class="secondColumnWidthClass" type="text" name="name" ng-model="selectedJob.name" ng-readonly="isAdminUser || !streamEditable" required>
+        <span ng-class="thirdColumnWidthClass" class="redtip" ng-show="mainForm.name.$touched && mainForm.name.$error.required">{{'ocsp_web_common_027' | translate}}</span>
     </div>
-    <div class="row">
-        <label>{{'ocsp_web_common_012' | translate}}</label>
-        <textarea ng-model="selectedJob.description" class="form-control" rows="3" ng-readonly="isAdminUser || !streamEditable">
-                                                                </textarea>
+    <div class="uk-grid">
+        <label ng-class="firstColumnWidthClass">{{'ocsp_web_common_012' | translate}}</label>
+        <textarea ng-class="secondColumnWidthClass" ng-model="selectedJob.description" rows="3" ng-readonly="isAdminUser || !streamEditable"></textarea>
     </div>
-    <div class="row">
-        <label>{{'ocsp_web_streams_manage_039' | translate}}*</label>
-        <input type="number" class="form-control" ng-model="selectedJob.retry" ng-readonly="isAdminUser || !streamEditable" ng-pattern="/^(0|[1-9][0-9]*)$/"
+    <div class="uk-grid">
+        <label ng-class="firstColumnWidthClass">{{'ocsp_web_streams_manage_039' | translate}}*</label>
+        <input ng-class="secondColumnWidthClass" type="number" ng-model="selectedJob.retry" ng-readonly="isAdminUser || !streamEditable" ng-pattern="/^(0|[1-9][0-9]*)$/"
             name="retry" required popover-trigger="'mouseenter'" popover-placement="right" popover-append-to-body=true uib-popover="{{'ocsp_web_common_property_retry' | translate}}"
             popover-title="{{'ocsp_web_streams_manage_039' | translate}}">
-        <span class="redtip" ng-show="mainForm.retry.$touched && mainForm.retry.$error.required">{{'ocsp_web_common_027' | translate}}</span>
-        <span class="redtip" ng-show="mainForm.retry.$touched && mainForm.retry.$error.pattern">{{'ocsp_web_common_034' | translate}}</span>
+        <span ng-class="thirdColumnWidthClass" class="redtip" ng-show="mainForm.retry.$touched && mainForm.retry.$error.required">{{'ocsp_web_common_027' | translate}}</span>
+        <span ng-class="thirdColumnWidthClass" class="redtip" ng-show="mainForm.retry.$touched && mainForm.retry.$error.pattern">{{'ocsp_web_common_034' | translate}}</span>
     </div>
 
-    <div class="row">
-        <label>Receive interval(s)*</label>
-        <input type="number" class="form-control" ng-model="selectedJob.receive_interval" ng-readonly="isAdminUser || !streamEditable" ng-pattern="/^(0|[1-9][0-9]*)$/"
+    <div class="uk-grid">
+        <label ng-class="firstColumnWidthClass">Receive interval(s)*</label>
+        <input ng-class="secondColumnWidthClass" type="number" ng-model="selectedJob.receive_interval" ng-readonly="isAdminUser || !streamEditable" ng-pattern="/^(0|[1-9][0-9]*)$/"
             name="interval" required popover-trigger="'mouseenter'" popover-placement="right" popover-append-to-body=true uib-popover="{{'ocsp_web_common_property_receiveInterval' | translate}}"
             popover-title="Receive interval(s)">
-        <span class="redtip" ng-show="mainForm.interval.$touched && mainForm.interval.$error.required">{{'ocsp_web_common_027' | translate}}</span>
-        <span class="redtip" ng-show="mainForm.interval.$touched && mainForm.interval.$error.pattern">{{'ocsp_web_common_034' | translate}}</span>
+        <span ng-class="thirdColumnWidthClass" class="redtip" ng-show="mainForm.interval.$touched && mainForm.interval.$error.required">{{'ocsp_web_common_027' | translate}}</span>
+        <span ng-class="thirdColumnWidthClass" class="redtip" ng-show="mainForm.interval.$touched && mainForm.interval.$error.pattern">{{'ocsp_web_common_034' | translate}}</span>
     </div>
 
-    <div class="row">
-        <label>Num executors*</label>
-        <input type="text" class="form-control" ng-model="selectedJob.num_executors" ng-readonly="isAdminUser || !streamEditable" name="executor" required
+    <div class="uk-grid">
+        <label ng-class="firstColumnWidthClass">Num executors*</label>
+        <input ng-class="secondColumnWidthClass" type="text" ng-model="selectedJob.num_executors" ng-readonly="isAdminUser || !streamEditable" name="executor" required
             popover-trigger="'mouseenter'" popover-placement="right" popover-append-to-body=true uib-popover="{{'ocsp_web_common_property_numExecutors' | translate}}"
             popover-title="Num executors">
-        <span class="redtip" ng-show="mainForm.executor.$touched && mainForm.executor.$error.required">{{'ocsp_web_common_027' | translate}}</span>
+        <span ng-class="thirdColumnWidthClass" class="redtip" ng-show="mainForm.executor.$touched && mainForm.executor.$error.required">{{'ocsp_web_common_027' | translate}}</span>
     </div>
 
-    <div class="row">
-        <label>Driver memory*</label>
-        <input type="text" class="form-control" ng-model="selectedJob.driver_memory" ng-readonly="isAdminUser || !streamEditable" name="memory" required
+    <div class="uk-grid">
+        <label ng-class="firstColumnWidthClass">Driver memory*</label>
+        <input ng-class="secondColumnWidthClass" type="text" ng-model="selectedJob.driver_memory" ng-readonly="isAdminUser || !streamEditable" name="memory" required
             popover-trigger="'mouseenter'" popover-placement="right" popover-append-to-body=true uib-popover="{{'ocsp_web_common_property_driverMemory' | translate}}"
             popover-title="Driver memory">
-        <span class="redtip" ng-show="mainForm.memory.$touched && mainForm.memory.$error.required">{{'ocsp_web_common_027' | translate}}</span>
+        <span ng-class="thirdColumnWidthClass" class="redtip" ng-show="mainForm.memory.$touched && mainForm.memory.$error.required">{{'ocsp_web_common_027' | translate}}</span>
     </div>
 
-    <div class="row">
-            <label>Executor memory*</label>
-            <input type="text" class="form-control" ng-model="selectedJob.executor_memory" ng-readonly="isAdminUser || !streamEditable" name="ememory" required
-                popover-trigger="'mouseenter'" popover-placement="right" popover-append-to-body=true uib-popover="{{'ocsp_web_common_property_executorMemory' | translate}}"
-                popover-title="Executor memory">
-            <span class="redtip" ng-show="mainForm.ememory.$touched && mainForm.ememory.$error.required">{{'ocsp_web_common_027' | translate}}</span>
+    <div class="uk-grid">
+        <label ng-class="firstColumnWidthClass">Executor memory*</label>
+        <input ng-class="secondColumnWidthClass" type="text" ng-model="selectedJob.executor_memory" ng-readonly="isAdminUser || !streamEditable" name="ememory" required
+            popover-trigger="'mouseenter'" popover-placement="right" popover-append-to-body=true uib-popover="{{'ocsp_web_common_property_executorMemory' | translate}}"
+            popover-title="Executor memory">
+        <span ng-class="thirdColumnWidthClass" class="redtip" ng-show="mainForm.ememory.$touched && mainForm.ememory.$error.required">{{'ocsp_web_common_027' | translate}}</span>
     </div>
-    <div class="row">
-        <label>Executor cores*</label>
-        <input type="text" class="form-control" ng-model="selectedJob.executor_cores" ng-readonly="isAdminUser || !streamEditable" name="executor_cores"
+    <div class="uk-grid">
+        <label ng-class="firstColumnWidthClass">Executor cores*</label>
+        <input ng-class="secondColumnWidthClass" type="text" ng-model="selectedJob.executor_cores" ng-readonly="isAdminUser || !streamEditable" name="executor_cores"
             required popover-trigger="'mouseenter'" popover-placement="right" popover-append-to-body=true uib-popover="{{'ocsp_web_common_property_executorCores' | translate}}"
             popover-title="Executor cores">
-        <span class="redtip" ng-show="mainForm.executor_cores.$touched && mainForm.executor_cores.$error.required">{{'ocsp_web_common_027' | translate}}</span>
+        <span ng-class="thirdColumnWidthClass" class="redtip" ng-show="mainForm.executor_cores.$touched && mainForm.executor_cores.$error.required">{{'ocsp_web_common_027' | translate}}</span>
     </div>
 
 
-    <div class="row">
-        <label>Queue*</label>
-        <input type="text" class="form-control" ng-model="selectedJob.queue" name="queue" ng-readonly="isAdminUser || !streamEditable" required popover-trigger="'mouseenter'"
+    <div class="uk-grid">
+        <label ng-class="firstColumnWidthClass">Queue*</label>
+        <input ng-class="secondColumnWidthClass" type="text" ng-model="selectedJob.queue" name="queue" ng-readonly="isAdminUser || !streamEditable" required popover-trigger="'mouseenter'"
             popover-placement="right" popover-append-to-body=true uib-popover="{{'ocsp_web_common_property_queue' | translate}}"
             popover-title="Queue">
-        <span class="redtip" ng-show="mainForm.queue.$touched && mainForm.queue.$error.required">{{'ocsp_web_common_027' | translate}}</span>
+        <span ng-class="thirdColumnWidthClass" class="redtip" ng-show="mainForm.queue.$touched && mainForm.queue.$error.required">{{'ocsp_web_common_027' | translate}}</span>
     </div>
 
-    <div class="row">
-        <label>Group ID</label>
-        <input type="text" class="form-control" ng-model="selectedJob.input.groupid" name="groupid" ng-readonly="isAdminUser || !streamEditable" popover-trigger="'mouseenter'"
+    <div class="uk-grid">
+        <label ng-class="firstColumnWidthClass">Group ID</label>
+        <input ng-class="secondColumnWidthClass" type="text" ng-model="selectedJob.input.groupid" name="groupid" ng-readonly="isAdminUser || !streamEditable" popover-trigger="'mouseenter'"
             popover-placement="right" popover-append-to-body=true uib-popover="Kafka Group ID Info"
             popover-title="Group ID">
-        <span class="redtip" ng-show="mainForm.groupid.$touched && mainForm.groupid.$error.required">{{'ocsp_web_common_027' | translate}}</span>
+        <span ng-class="thirdColumnWidthClass" class="redtip" ng-show="mainForm.groupid.$touched && mainForm.groupid.$error.required">{{'ocsp_web_common_027' | translate}}</span>
     </div>
 
-    <div class="row">
-        <div><label>Kafka offset*</label></div>
-        <div class="btn-group" data-toggle="buttons">
+    <div class="uk-grid">
+        <label ng-class="firstColumnWidthClass">Kafka offset*</label>
+        <div ng-class="secondColumnWidthClass" class="btn-group" data-toggle="buttons">
             <label class="btn btn-default" ng-class="{active: selectedJob.recover_mode !== 'from_last_stop'}" ng-disabled="!isPageEditable() && selectedJob.recover_mode === 'from_last_stop'" ng-click="selectedRecoverMode('from_latest')">
                 <input ng-model="selectedJob.recover_mode" type="radio">{{'ocsp_web_streams_from_latest' | translate}}
             </label>
