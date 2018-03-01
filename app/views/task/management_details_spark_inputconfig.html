@@ -2,15 +2,12 @@
     <div class="uk-grid">
         <label ng-class="firstColumnWidthClass">{{'ocsp_web_streams_manage_038' | translate}}*</label>
         <div ng-class="secondColumnClass">
-            <ui-select ng-model="selectedJob.input.datasource" class="border0px" name="datasource" ng-disabled="isAdminUser || !streamEditable"
-                ng-required="true">
-                <ui-select-match>
-                    <span ng-bind="$select.selected.name"></span>
-                </ui-select-match>
-                <ui-select-choices repeat="datasource in (inputDatasources | filter: $select.search) track by datasource.id">
-                    <span ng-bind="datasource.name"></span>
-                </ui-select-choices>
-            </ui-select>
+            <div class="uk-form-select" data-uk-form-select>
+                <span></span>
+                <select ng-model="selectedJob.input.datasource" ng-options="inputDatasource.name for inputDatasource in inputDatasources"
+                    name="datasource" ng-disabled="isAdminUser || !streamEditable" ng-required="true">
+                </select>
+            </div>
         </div>
         <span ng-class="thirdColumnWidthClass" class="redtip" ng-show="mainForm.datasource.$touched && mainForm.datasource.$error.required">{{'ocsp_web_common_027' | translate}}</span>
     </div>
@@ -23,15 +20,15 @@
     </div>
 
     <div class="uk-grid">
-        <uib-accordion>
-            <div uib-accordion-group class="panel-default" ng-repeat="item in selectedJob.input.inputs" is-open="item.isOpen">
-                <uib-accordion-heading>
-                    <i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': item.isOpen, 'glyphicon-chevron-right': !item.isOpen}"></i> &nbsp; {{'ocsp_web_streams_manage_038' | translate}} {{item.name}}
-                    <a class="pull-right" ng-hide="isAdminUser || !streamEditable" ng-click="$event.stopPropagation();$event.preventDefault();remove(selectedJob.input.inputs, $index)">
-                        <i class="glyphicon glyphicon-remove"></i>
-                    </a>
-                </uib-accordion-heading>
-                <div class="uk-container">
+        <div class="uk-accordion uk-width-1-1" data-uk-accordion ng-repeat="item in selectedJob.input.inputs" data="{collapse: false}">
+            <h3 class="uk-accordion-title">
+                <i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': item.isOpen, 'glyphicon-chevron-right': !item.isOpen}"></i> &nbsp; {{'ocsp_web_streams_manage_038' | translate}} {{item.name}}
+                <a class="pull-right" ng-hide="isAdminUser || !streamEditable" ng-click="$event.stopPropagation();$event.preventDefault();remove(selectedJob.input.inputs, $index)">
+                    <i class="glyphicon glyphicon-remove"></i>
+                </a>
+            </h3>
+            <div class="uk-accordion-content">
+                <div class="uk-width-1-1">
                     <div class="uk-grid">
                         <label ng-class="firstColumnWidthClass">{{'ocsp_web_streams_manage_010' | translate}}*</label>
                         <input ng-class="secondColumnWidthClass" type="text" ng-model="item.topic" ng-readonly="isAdminUser || !streamEditable" name="inputTopic_{{$index}}"
@@ -57,7 +54,11 @@
                     </div>
                 </div>
             </div>
-        </uib-accordion>
+
+
+        </div>
+
+
     </div>
 
     <div class="uk-grid">
@@ -68,7 +69,7 @@
     </div>
 
     <div class="uk-grid">
-        <div ng-class="firstColumnWidthClass">
+        <div ng-class="uk-width-1-1">
             <button type="button" class="uk-button oc-button" ng-disabled="isAdminUser || !streamEditable" ng-click="generate(selectedJob.input, selectedJob.input.inputs)">
                 {{'ocsp_web_streams_manage_048' | translate}}
             </button>
@@ -76,36 +77,38 @@
     </div>
 
     <div class="uk-grid">
-        <table class="uk-table">
-            <thead>
-                <tr>
-                    <th class="uk-width-2-10">{{'ocsp_web_streams_case_field_name' | translate}}</th>
-                    <th class="uk-width-7-10">{{'ocsp_web_streams_case_expression' | translate}}</th>
-                    <th class="uk-width-1-10">
-                        <a ng-hide="isAdminUser || !streamEditable" ng-click="addUserField(selectedJob.input)">
-                            <i class="glyphicon glyphicon-plus"></i>
-                        </a>
-                    </th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="userfield in selectedJob.input.userFields">
-                    <td>
-                        <input type="text" class="form-control border0px" ng-readonly="isAdminUser || !streamEditable" ng-model="userfield.pname"
-                            required>
-                    </td>
-                    <td>
-                        <input type="text" class="form-control border0px" ng-readonly="isAdminUser || !streamEditable" ng-model="userfield.pvalue"
-                            required>
-                    </td>
-                    <td>
-                        <a ng-hide="isAdminUser || !streamEditable" ng-click="remove(selectedJob.input.userFields, $index)">
-                            <i class="glyphicon glyphicon-remove"></i>
-                        </a>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <div class="uk-width-1-1">
+            <table class="uk-table">
+                <thead>
+                    <tr>
+                        <th class="uk-width-2-10">{{'ocsp_web_streams_case_field_name' | translate}}</th>
+                        <th class="uk-width-7-10">{{'ocsp_web_streams_case_expression' | translate}}</th>
+                        <th class="uk-width-1-10">
+                            <a ng-hide="isAdminUser || !streamEditable" ng-click="addUserField(selectedJob.input)">
+                                <i class="glyphicon glyphicon-plus"></i>
+                            </a>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="userfield in selectedJob.input.userFields">
+                        <td>
+                            <input type="text" class="form-control border0px" ng-readonly="isAdminUser || !streamEditable" ng-model="userfield.pname"
+                                required>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control border0px" ng-readonly="isAdminUser || !streamEditable" ng-model="userfield.pvalue"
+                                required>
+                        </td>
+                        <td>
+                            <a ng-hide="isAdminUser || !streamEditable" ng-click="remove(selectedJob.input.userFields, $index)">
+                                <i class="glyphicon glyphicon-remove"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
     <div class="uk-grid">
         <label ng-class="firstColumnWidthClass">{{'ocsp_web_streams_manage_013' | translate}}</label>
@@ -120,7 +123,8 @@
     </div>
 
     <div class="uk-grid">
-        <ocsp-param-editor ng-model="selectedJob.input" disabled="isAdminUser || !streamEditable"></ocsp-param-editor>
+        <div class="uk-width-1-1">
+            <ocsp-param-editor ng-model="selectedJob.input" disabled="isAdminUser || !streamEditable"></ocsp-param-editor>
+        </div>
     </div>
-
 </div>

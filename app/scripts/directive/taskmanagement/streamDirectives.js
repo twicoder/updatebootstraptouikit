@@ -804,29 +804,27 @@ angular.module('ocspApp')
                             </div>
                         </div>
                     </script>
-                    <uib-accordion>
-                        <div uib-accordion-group class="panel-default">
-                            <uib-accordion-heading>
+                    <div class="uk-accordion" data-uk-accordion>
+                        <h3 class="uk-accordion-title">
                             <i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': item.isOpen, 'glyphicon-chevron-right': !item.isOpen}"></i> &nbsp;{{ 'ocsp_web_common_customize_property' | translate }}
-                            </uib-accordion-heading>
-                            <div class="container-fluid">
-                                <div class="row" ng-repeat="item in input.customParamsKV">
-                                    <div class="col-md-5">
-                                        <span>{{item.pname}}</span>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <input ng-model="item.pvalue" class="form-control" ng-disabled="disabled">
-                                    </div>
-                                    <div class="col-md-1">
-                                        <a ng-click="removeCustomProperty(input,item)" href="" ng-hide="disabled">
-                                            <i class="glyphicon glyphicon-minus-sign danger"></i>
-                                        </a>
-                                    </div>
+                        </h3>
+                        <div class="uk-accordion-content">
+                            <div class="uk-grid" ng-repeat="item in input.customParamsKV">
+                                <div class="uk-width-4-10">
+                                    <span>{{item.pname}}</span>
                                 </div>
-                                <a ng-hide="disabled" href="" ng-click="addNewProperty(input)">{{ 'ocsp_web_commom_add_customize_property' | translate }}...</a>
+                                <div class="uk-width-5-10">
+                                    <input ng-model="item.pvalue" class="form-control" ng-disabled="disabled">
+                                </div>
+                                <div class="uk-width-1-10">
+                                    <a ng-click="removeCustomProperty(input,item)" href="" ng-hide="disabled">
+                                        <i class="glyphicon glyphicon-minus-sign danger"></i>
+                                    </a>
+                                </div>
                             </div>
+                            <a ng-hide="disabled" href="" ng-click="addNewProperty(input)">{{ 'ocsp_web_commom_add_customize_property' | translate }}...</a>
                         </div>
-                    </uib-accordion>
+                    </div>
                 </div>
                 `
         };

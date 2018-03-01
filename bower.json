@@ -46,6 +46,14 @@
       "main":[
         "web-fonts-with-css/css/fontawesome-all.min.css"
       ]
+    },
+    "uikit": {
+      "main":[
+        "css/uikit.min.css",
+        "css/components/accordion.min.css",
+        "js/uikit.min.js",
+        "js/components/accordion.js"
+      ]
     }
   },
   "resolutions": {
