@@ -32,9 +32,11 @@
                 </div>
                 <div class="uk-grid">
                     <label ng-class="firstColumnWidthClass">{{'ocsp_web_streams_manage_018' | translate}}*</label>
-                    <!-- <tokenfield inputs="{{getAllPossibleFields(selectedJob.input.fields,selectedJob.input.userFields)}}"
-                                            labels="{{selectedJob.labels}}" ng-model="item.select_expr" checkinputfield=true name="eventsFields_{{$index}}"
-                                            required="true" readonly="{{cep || isAdminUser || !streamEditable}}"></tokenfield> -->
+                    <div ng-class="secondColumnWidthClass" style="padding-left: 0px;">
+                        <tokenfield inputs="{{getAllPossibleFields(selectedJob.input.fields,selectedJob.input.userFields)}}"
+                            labels="{{selectedJob.labels}}" ng-model="item.select_expr" checkinputfield=true name="eventsFields_{{$index}}"
+                            required="true" readonly="{{cep || isAdminUser || !streamEditable}}"></tokenfield>
+                    </div>
                 </div>
                 <div class="uk-grid">
                     <label ng-class="firstColumnWidthClass">{{'ocsp_web_streams_manage_019' | translate}}*</label>
@@ -57,8 +59,10 @@
                 </div>
                 <div class="uk-grid">
                     <label ng-class="firstColumnWidthClass">{{'ocsp_web_streams_manage_014' | translate}}*</label>
-                    <!-- <tokenfield inputs="{{item.select_expr}}"
-                                            ng-model="item.output.uniqueKey" name="inputFields_spark_3" checkinputfield=true required="true" readonly="{{cep || isAdminUser || !streamEditable}}"></tokenfield> -->
+                    <div ng-class="secondColumnWidthClass" style="padding-left: 0px;">
+                        <tokenfield inputs="{{item.select_expr}}"
+                            ng-model="item.output.uniqueKey" name="inputFields_spark_3" checkinputfield=true required="true" readonly="{{cep || isAdminUser || !streamEditable}}"></tokenfield>
+                    </div>
                 </div>
                 <div class="uk-grid">
                     <label ng-class="firstColumnWidthClass">{{'ocsp_web_streams_cep_auditperiod' | translate}}*</label>
@@ -167,14 +171,18 @@
                     <span class="redtip" ng-if="item.output.datasource === undefined">{{'ocsp_web_common_027' | translate}}</span>
                 </div>
                 <div class="uk-grid" ng-if="item.output.datasource.type === 'kafka'">
-                    <label>{{'ocsp_web_streams_manage_010' | translate}}*</label>
-                    <input type="text" class="form-control" ng-model="item.output.topic" required ng-disabled="cep || isAdminUser || !streamEditable">
-                    <span class="redtip" ng-if="item.output.topic === undefined">{{'ocsp_web_common_027' | translate}}</span>
+                    <label ng-class="firstColumnWidthClass">{{'ocsp_web_streams_manage_010' | translate}}*</label>
+                    <div ng-class="secondColumnWidthClass">
+                        <input type="text" class="form-control" ng-model="item.output.topic" required ng-disabled="cep || isAdminUser || !streamEditable">
+                    </div>
+                    <span ng-class="thirdColumnWidthClass" class="redtip" ng-if="item.output.topic === undefined">{{'ocsp_web_common_027' | translate}}</span>
                 </div>
                 <div class="uk-grid" ng-if="item.output.datasource.type === 'codis'">
-                    <label>{{'ocsp_web_streams_manage_022' | translate}}*</label>
-                    <input type="text" class="form-control" ng-model="item.output.codisKeyPrefix" required ng-disabled="cep || isAdminUser || !streamEditable">
-                    <span class="redtip" ng-if="item.output.codisKeyPrefix === undefined">{{'ocsp_web_common_027' | translate}}</span>
+                    <label ng-class="firstColumnWidthClass">{{'ocsp_web_streams_manage_022' | translate}}*</label>
+                    <div ng-class="secondColumnWidthClass">
+                        <input type="text" class="form-control" ng-model="item.output.codisKeyPrefix" required ng-disabled="cep || isAdminUser || !streamEditable">
+                    </div>
+                    <span ng-class="thirdColumnWidthClass" class="redtip" ng-if="item.output.codisKeyPrefix === undefined">{{'ocsp_web_common_027' | translate}}</span>
                 </div>
 
                 <div class="uk-grid">

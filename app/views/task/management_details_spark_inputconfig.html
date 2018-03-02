@@ -43,7 +43,9 @@
                     </div>
                     <div class="uk-grid">
                         <label ng-class="firstColumnWidthClass">{{'ocsp_web_streams_manage_011' | translate}}*</label>
-                        <!-- <tokenfield ng-model="item.fields" name="inputFields_{{$index}}" required="true" readonly="{{cep || isAdminUser || !streamEditable}}"></tokenfield> -->
+                        <div ng-class="secondColumnWidthClass" style="padding-left: 0px;">
+                            <tokenfield ng-model="item.fields" name="inputFields_{{$index}}" required="true" readonly="{{cep || isAdminUser || !streamEditable}}"></tokenfield>
+                        </div>
                         <span ng-class="thirdColumnWidthClass" class="redtip" ng-show="mainForm['inputFields_' + $index].$touched && mainForm['inputFields_' + $index].$error.required">{{'ocsp_web_common_027' | translate}}</span>
                     </div>
                     <div class="uk-grid">
@@ -63,8 +65,10 @@
 
     <div class="uk-grid">
         <label ng-class="firstColumnWidthClass">{{'ocsp_web_streams_manage_047' | translate}}*</label>
-        <!-- <tokenfield ng-model="selectedJob.input.fields" name="inputFields_spark_1" disabled="true" readonly="{{isAdminUser || !streamEditable}}"
-            required="true"></tokenfield> -->
+        <div ng-class="secondColumnWidthClass" style="padding-left: 0px;">
+            <tokenfield ng-model="selectedJob.input.fields" name="inputFields_spark_1" disabled="true" readonly="{{isAdminUser || !streamEditable}}"
+                required="true"></tokenfield>
+        </div>
         <span ng-class="thirdColumnWidthClass" class="redtip" ng-show="mainForm.inputFields.$touched && mainForm.inputFields.$error.required">{{'ocsp_web_common_027' | translate}}</span>
     </div>
 
@@ -112,14 +116,17 @@
     </div>
     <div class="uk-grid">
         <label ng-class="firstColumnWidthClass">{{'ocsp_web_streams_manage_013' | translate}}</label>
-        <input type="text" class="form-control" ng-model="selectedJob.input.filter_expr" ng-readonly="isAdminUser || !streamEditable"
-            popover-trigger="'mouseenter'" popover-placement="right" popover-append-to-body=true uib-popover="{{'ocsp_web_common_property_filter' | translate}}"
-            popover-title="{{'ocsp_web_streams_manage_013' | translate}}">
+        <div ng-class="secondColumnWidthClass">
+            <input type="text" class="form-control" ng-model="selectedJob.input.filter_expr" ng-readonly="isAdminUser || !streamEditable"
+                popover-trigger="'mouseenter'" popover-placement="right" popover-append-to-body=true uib-popover="{{'ocsp_web_common_property_filter' | translate}}"
+                popover-title="{{'ocsp_web_streams_manage_013' | translate}}">
+        </div>
     </div>
     <div class="uk-grid">
         <label ng-class="firstColumnWidthClass">{{'ocsp_web_streams_manage_014' | translate}}*</label>
-        <!-- <tokenfield inputs="{{selectedJob.input.fields}}"
-            ng-model="selectedJob.input.uniqueKey" name="inputFields_spark_2" checkinputfield=true required="true" readonly="{{cep || isAdminUser || !streamEditable}}"></tokenfield> -->
+        <div ng-class="secondColumnWidthClass" style="padding-left: 0px;">
+            <tokenfield inputs="{{selectedJob.input.fields}}" ng-model="selectedJob.input.uniqueKey" name="inputFields_spark_2" checkinputfield=true required="true" readonly="{{cep || isAdminUser || !streamEditable}}"></tokenfield>
+        </div>
     </div>
 
     <div class="uk-grid">
