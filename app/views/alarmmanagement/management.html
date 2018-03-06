@@ -1,104 +1,94 @@
-<script type="text/ng-template" id="showDefinitionConfig.html">
-    <div class="modal-header">
-        <button type="button" class="close" ng-click="closeModal()"><span aria-hidden="true">&times;</span></button>
-        <h3 class="modal-title">{{'ocsp_web_alarmmanagement_config' | translate}}</h3>
-    </div>
-    <div class="modal-body">
-        <form name="alarmInfoForm" id="idAlarmInfoForm">
-            <div class="form-group">
-                <div class="">
-                    <table ng-table="allStreams" class="table table-condensed table-bordered">
-                        <thead>
-                          <tr>
-                            <th>{{'ocsp_web_alarm_configuration_name' | translate}}</th>
-                            <th>{{'ocsp_web_alarm_configuration_current' | translate}}</th>
-                            <th>{{'ocsp_web_alarm_configuration_latest' | translate}}</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          <tr ng-repeat="item in $data" ng-click="item.selected = !item.selected">
-                            <td class="centertext">
-                                <input name="{{item.id}}" type="checkbox" ng-click="item.selected = !item.selected" ng-model="item.selected"/>
-                                {{item.name}}
-                            </td>
-                            <td>
-                                <textarea ng-model="item.oldAlarmConfigsString" class="form-control" rows="2" ng-disabled="true" />
-                            </td>
-                            <td>
-                                <textarea ng-model="item.newAlarmConfigsString" class="form-control" rows="2" ng-disabled="true" />
-                            </td>
-                          </tr>
-                        </tbody>
-                      </table>
-                </div>
-            </div>
 
-            <div class="form-group">
-                <button type="button" class="btn oc-button" ng-disabled="!calcSelectedItems(allStreamsData)" ng-click="showDetailConfig(allStreamsData,propertiesToConfig)">
+<a href="#alarmConfigDetailsPopupPageId" data-uk-modal></a>
+<div id="alarmConfigDetailsPopupPageId" class="uk-modal" uk-modal="stack: true">
+    <div class="uk-modal-dialog uk-modal-dialog-large">
+        <a class="uk-modal-close uk-close"></a>
+        <div class="uk-modal-header">
+            <h3 class="">{{'ocsp_web_alarm_configuration_detail' | translate}}</h3>
+        </div>
+
+        <div class="">
+            <h2>{{errorMsg}}</h2>
+        </div>
+        <div class="">
+            <table ng-table="allAlarmPropertiesCanBeConfigured" class="uk-table uk-table-hover uk-table-condensed">
+                <colgroup>
+                    <col width="30%" />
+                    <col width="70%" />
+                </colgroup>
+                <tbody>
+                    <tr ng-repeat="onePropertyItem in $data">
+                        <td title="'ocsp_web_common_name' | translate" ng-form="name">
+                            <input type="text" name="name" readonly="true" ng-model="onePropertyItem.name" class="form-control" required/>
+                        </td>
+                        <td title="'ocsp_web_common_value' | translate" ng-form="name">
+                            <input type="text" name="value" ng-model="onePropertyItem.value" class="form-control" required/>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div class="uk-modal-footer">
+            <button type="button" class="btn oc-button" ng-click="saveAndCloseDetailModal()">
+                {{'ocsp_web_common_038' | translate}}
+            </button>
+        </div>
+    </div>
+</div>
+
+
+<a href="#alarmConfigPopupPageId" data-uk-modal></a>
+<div id="alarmConfigPopupPageId" class="uk-modal" uk-modal="stack: true">
+    <div class="uk-modal-dialog uk-modal-dialog-large">
+        <a class="uk-modal-close uk-close"></a>
+        
+        <div class="uk-modal-header">
+            <h3 class="">{{'ocsp_web_alarmmanagement_config' | translate}}</h3>
+        </div>
+        <div class="uk-overflow-containe">
+            <table ng-table="allStreams" class="uk-table uk-table-hover uk-table-condensed">
+                <thead>
+                    <tr>
+                        <th>{{'ocsp_web_alarm_configuration_name' | translate}}</th>
+                        <th>{{'ocsp_web_alarm_configuration_current' | translate}}</th>
+                        <th>{{'ocsp_web_alarm_configuration_latest' | translate}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in $data" ng-click="item.selected = !item.selected">
+                        <td class="centertext">
+                            <input name="{{item.id}}" type="checkbox" ng-click="item.selected = !item.selected" ng-model="item.selected" /> {{item.name}}
+                        </td>
+                        <td>
+                            <textarea ng-model="item.oldAlarmConfigsString" class="form-control" rows="2" ng-disabled="true" />
+                        </td>
+                        <td>
+                            <textarea ng-model="item.newAlarmConfigsString" class="form-control" rows="2" ng-disabled="true" />
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <br/>
+
+        <div class="uk-modal-footer">
+            <div class="">
+                <button type="button" class="uk-button oc-button" ng-disabled="!calcSelectedItems(allStreamsData)" data-uk-modal="{target:'#alarmConfigDetailsPopupPageId'}">
                     {{ 'ocsp_web_common_configuration' | translate }}
                 </button>
-                <button type="button" class="btn oc-button" ng-click="saveAndCloseModal()">
+                <button type="button" class="uk-button oc-button" ng-click="saveAndCloseModal()">
                     {{'ocsp_web_common_009' | translate}}
                 </button>
             </div>
-        </form>
+        </div>
     </div>
-  </script>
-
-
-<script type="text/ng-template" id="showDefinitionConfigDetails.html">
-    <div class="modal-header">
-        <button type="button" class="close" ng-click="closeDetailModal()"><span aria-hidden="true">&times;</span>
-        </button>
-        <h3 class="modal-title">{{'ocsp_web_alarm_configuration_detail' | translate}}</h3>
-    </div>
-    <div class="modal-body">
-        <form name="alarmInfoForm" id="idAlarmInfoForm">
-            <div class="form-group">
-                <div class="">
-                    <h2>{{errorMsg}}</h2>
-                </div>
-                <div class="">
-                    <table ng-table="allAlarmPropertiesCanBeConfigured" class="table table-condensed table-bordered">
-                        <colgroup>
-                            <col width="30%"/>
-                            <col width="70%"/>
-                        </colgroup>
-                        <tr ng-repeat="onePropertyItem in $data">
-                            <td title="'ocsp_web_common_name' | translate" ng-form="name">
-                                <input type="text" name="name" readonly="true"
-                                       ng-model="onePropertyItem.name" class="form-control" required/>
-                            </td>
-                            <td title="'ocsp_web_common_value' | translate" ng-form="name">
-                                <input type="text" name="value"
-                                       ng-model="onePropertyItem.value" class="form-control" required/>
-                            </td>
-                        </tr>
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <button type="button" class="btn oc-button" ng-click="saveAndCloseDetailModal()">
-                    {{'ocsp_web_common_038' | translate}}
-                </button>
-            </div>
-        </form>
-    </div>
-</script>
-
+</div>
 
 
 <div class="uk-grid uk-form">
     <div class="uk-width-1-10">
-        <a href="#my-id" data-uk-modal></a>
-        <div id="my-id" class="uk-modal">
-            <div class="uk-modal-dialog">
-                <a class="uk-modal-close uk-close"></a>
-                <h1>HelloWorld</h1>
-            </div>
-        </div>
     </div>
     <div class="uk-width-8-10">
         <div class="uk-panel uk-panel-box-primary">
@@ -127,7 +117,8 @@
                         </td>
                         <td title="'ocsp_web_streams_manage_023' | translate" ng-form="action">
                             <!-- <a ng-click="showConfigPage(oneAlarmDefinition)" class="uk-button oc-button">{{'ocsp_web_common_check' | translate}}</a> -->
-                            <button ng-click="showConfigPage(oneAlarmDefinition)" class="uk-button oc-button" data-uk-modal="{target:'#my-id'}">{{'ocsp_web_common_check' | translate}}</button>
+                            <!-- <button ng-click="showConfigPage(oneAlarmDefinition)" class="uk-button oc-button" data-uk-modal="{target:'#my-id'}">{{'ocsp_web_common_check' | translate}}</button> -->
+                            <button ng-click="getConfigPageData(oneAlarmDefinition)" class="uk-button oc-button" data-uk-modal="{target:'#alarmConfigPopupPageId'}">{{'ocsp_web_common_check' | translate}}</button>
                         </td>
                     </tr>
                     </tbody>

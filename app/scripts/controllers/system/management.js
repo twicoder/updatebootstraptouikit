@@ -4,7 +4,8 @@
  * For label management main page controller
  */
 angular.module('ocspApp')
-  .controller('SystemManagementCtrl', ['$scope', '$http', 'Notification', '$q', '$rootScope', '$filter', '$ngConfirm', function ($scope, $http, Notification, $q, $rootScope, $filter, $ngConfirm) {
+  .controller('SystemManagementCtrl', ['$scope', '$http', 'Notification', '$q', '$rootScope', '$filter', '$ngConfirm', '$uibModal',
+    function ($scope, $http, Notification, $q, $rootScope, $filter, $ngConfirm, $uibModal) {
     $rootScope.init('system');
 
     $scope.kerberosConfigureExist = false;
@@ -100,101 +101,101 @@ angular.module('ocspApp')
     };
 
     $scope.openSparkModal = function () {
-      // let modal = $uibModal.open({
-      //   animation: true,
-      //   ariaLabelledBy: 'modal-title-bottom',
-      //   ariaDescribedBy: 'modal-body-bottom',
-      //   templateUrl: 'stackedModal.html',
-      //   size: 'lg',
-      //   backdrop: 'static',
-      //   scope: $scope,
-      //   controller: ['$scope', 'Notification', function ($scope, Notification) {
-      //     $scope.closeModal = function () {
-      //       modal.close();
-      //     };
-      //     $scope.saveDatasource = function () {
-      //       if ($("#mainFrame .ng-invalid").length === 0) {
-      //         $ngConfirm({
-      //           title: $filter('translate')('ocsp_web_common_038'),
-      //           content: $filter('translate')('ocsp_web_common_039'),
-      //           scope: $scope,
-      //           buttons: {
-      //             ok: {
-      //               text: $filter('translate')("ocsp_web_common_021"),
-      //               action: function () {
-      //                 $http.post("/api/datasource", { data: $scope.newDatasource }).success(function () {
-      //                   modal.close();
-      //                   $scope.newDatasource = {};
-      //                   Notification.success($filter('translate')('ocsp_web_common_026'));
-      //                   init();
-      //                 });
-      //               }
-      //             },
-      //             cancel: {
-      //               text: $filter('translate')("ocsp_web_common_020"),
-      //             }
-      //           }
-      //         });
-      //       }
-      //     };
-      //     $scope.isFormValid = function(){
-      //       return $("#mainFrame .ng-invalid").length === 0;
-      //     };
-      //   }]
-      // });
+      let modal = $uibModal.open({
+        animation: true,
+        ariaLabelledBy: 'modal-title-bottom',
+        ariaDescribedBy: 'modal-body-bottom',
+        templateUrl: 'stackedModal.html',
+        size: 'lg',
+        backdrop: 'static',
+        scope: $scope,
+        controller: ['$scope', 'Notification', function ($scope, Notification) {
+          $scope.closeModal = function () {
+            modal.close();
+          };
+          $scope.saveDatasource = function () {
+            if ($("#mainFrame .ng-invalid").length === 0) {
+              $ngConfirm({
+                title: $filter('translate')('ocsp_web_common_038'),
+                content: $filter('translate')('ocsp_web_common_039'),
+                scope: $scope,
+                buttons: {
+                  ok: {
+                    text: $filter('translate')("ocsp_web_common_021"),
+                    action: function () {
+                      $http.post("/api/datasource", { data: $scope.newDatasource }).success(function () {
+                        modal.close();
+                        $scope.newDatasource = {};
+                        Notification.success($filter('translate')('ocsp_web_common_026'));
+                        init();
+                      });
+                    }
+                  },
+                  cancel: {
+                    text: $filter('translate')("ocsp_web_common_020"),
+                  }
+                }
+              });
+            }
+          };
+          $scope.isFormValid = function(){
+            return $("#mainFrame .ng-invalid").length === 0;
+          };
+        }]
+      });
     };
 
     $scope.openPropertyDefineModal = function () {
-      // let modal = $uibModal.open({
-      //   animation: true,
-      //   ariaLabelledBy: 'modal-title-bottom',
-      //   ariaDescribedBy: 'modal-body-bottom',
-      //   templateUrl: 'addSystemPropertyModal.html',
-      //   size: 'lg',
-      //   backdrop: 'static',
-      //   scope: $scope,
-      //   controller: ['$scope', 'Notification', function ($scope, Notification) {
-      //     $scope.newSystemProp = {
-      //       "name": "",
-      //       "value": "",
-      //       "status": 1,
-      //       "description": ""
-      //     };
-      //     $scope.closeModal = function () {
-      //       modal.close();
-      //     };
-      //     $scope.saveNewSystemProp = function () {
-      //       if ($("#idNewSystemProp .ng-invalid").length === 0) {
-      //         $ngConfirm({
-      //           title: $filter('translate')('ocsp_web_common_038'),
-      //           content: $filter('translate')('ocsp_web_common_039'),
-      //           scope: $scope,
-      //           buttons: {
-      //             ok: {
-      //               text: $filter('translate')("ocsp_web_common_021"),
-      //               action: function () {
-      //                 $http.post("/api/prop/", { newproperty: $scope.newSystemProp }).success(function () {
-      //                   modal.close();
-      //                   $scope.newSystemProp = {
-      //                     "name": "",
-      //                     "value": "",
-      //                     "status": 1,
-      //                     "description": ""
-      //                   };
-      //                   Notification.success($filter('translate')('ocsp_web_common_026'));
-      //                   init();
-      //                 });
-      //               }
-      //             },
-      //             cancel: {
-      //               text: $filter('translate')("ocsp_web_common_020"),
-      //             }
-      //           }
-      //         });
-      //       }
-      //     };
-      //   }]
-      // });
+      let modal = $uibModal.open({
+        animation: true,
+        ariaLabelledBy: 'modal-title-bottom',
+        ariaDescribedBy: 'modal-body-bottom',
+        templateUrl: 'addSystemPropertyModal.html',
+        size: 'lg',
+        backdrop: 'static',
+        scope: $scope,
+        controller: ['$scope', 'Notification', function ($scope, Notification) {
+          $scope.newSystemProp = {
+            "name": "",
+            "value": "",
+            "status": 1,
+            "description": ""
+          };
+          $scope.closeModal = function () {
+            modal.close();
+          };
+          $scope.saveNewSystemProp = function () {
+            if ($("#idNewSystemProp .ng-invalid").length === 0) {
+              $ngConfirm({
+                title: $filter('translate')('ocsp_web_common_038'),
+                content: $filter('translate')('ocsp_web_common_039'),
+                scope: $scope,
+                buttons: {
+                  ok: {
+                    text: $filter('translate')("ocsp_web_common_021"),
+                    action: function () {
+                      $http.post("/api/prop/", { newproperty: $scope.newSystemProp }).success(function () {
+                        modal.close();
+                        $scope.newSystemProp = {
+                          "name": "",
+                          "value": "",
+                          "status": 1,
+                          "description": ""
+                        };
+                        Notification.success($filter('translate')('ocsp_web_common_026'));
+                        init();
+                      });
+                    }
+                  },
+                  cancel: {
+                    text: $filter('translate')("ocsp_web_common_020"),
+                  }
+                }
+              });
+            }
+          };
+        }]
+      });
     };
 
     $scope.removeUserDefinedProperty = function (property) {
@@ -291,27 +292,27 @@ angular.module('ocspApp')
 
     $scope.switchKerberosEnableStatus = function (isKerberosEnabled) {
       if (isKerberosEnabled === true) {
-        // let modal = $uibModal.open({
-        //   animation: true,
-        //   ariaLabelledBy: 'modal-title-bottom',
-        //   ariaDescribedBy: 'modal-body-bottom',
-        //   templateUrl: 'kerberosConfigureWarning.html',
-        //   size: 'lg',
-        //   backdrop: 'static',
-        //   scope: $scope,
-        //   controller: ['$scope', function ($scope) {
-        //     $scope.searchItem = {};
-        //     $scope.closeModal = function () {
-        //       var scopeOfIsKerberosEnabled = angular.element("#isIsKerberosEnabled").scope();
-        //       scopeOfIsKerberosEnabled.isKerberosEnabled = !scopeOfIsKerberosEnabled.isKerberosEnabled;
-        //       modal.close();
-        //     };
-        //     $scope.continueConfigKerberos = function () {
-        //       $scope.$parent.isKerberosEnabled = true;
-        //       modal.close();
-        //     };
-        //   }]
-        // });
+        let modal = $uibModal.open({
+          animation: true,
+          ariaLabelledBy: 'modal-title-bottom',
+          ariaDescribedBy: 'modal-body-bottom',
+          templateUrl: 'kerberosConfigureWarning.html',
+          size: 'lg',
+          backdrop: 'static',
+          scope: $scope,
+          controller: ['$scope', function ($scope) {
+            $scope.searchItem = {};
+            $scope.closeModal = function () {
+              var scopeOfIsKerberosEnabled = angular.element("#isIsKerberosEnabled").scope();
+              scopeOfIsKerberosEnabled.isKerberosEnabled = !scopeOfIsKerberosEnabled.isKerberosEnabled;
+              modal.close();
+            };
+            $scope.continueConfigKerberos = function () {
+              $scope.$parent.isKerberosEnabled = true;
+              modal.close();
+            };
+          }]
+        });
       } else {
         $scope.isKerberosEnabled = false;
       }

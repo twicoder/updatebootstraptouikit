@@ -19,7 +19,7 @@ let isPropertyNameEndWithEnable = function(propertyName){
     }
   }
   return nameEndWithEnable;
-}
+};
 
 let changeEventPropertyValueFromtStringIntoBoolean = function (properties) {
   properties.forEach((oneProperty) => {

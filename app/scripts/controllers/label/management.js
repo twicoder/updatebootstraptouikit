@@ -4,8 +4,8 @@
  * For label management main page controller
  */
 angular.module('ocspApp')
-  .controller('LabelManagementCtrl', ['$scope', '$http', 'Upload', 'Notification', '$timeout', '$rootScope', '$filter', 'NgTableParams',
-    function ($scope, $http, Upload, Notification, $timeout, $rootScope, $filter, NgTableParams) {
+  .controller('LabelManagementCtrl', ['$scope', '$http', 'Upload', 'Notification', '$timeout', '$rootScope', '$filter', 'NgTableParams', '$uibModal',
+    function ($scope, $http, Upload, Notification, $timeout, $rootScope, $filter, NgTableParams, $uibModal) {
       $rootScope.init('label');
 
       $scope.canEditLabels = false;
@@ -42,98 +42,98 @@ angular.module('ocspApp')
 
 
       $scope.editLabelProperties = function (label) {
-        // let modal = $uibModal.open({
-        //   animation: true,
-        //   ariaLabelledBy: 'modal-title-bottom',
-        //   ariaDescribedBy: 'modal-body-bottom',
-        //   templateUrl: 'labelPropertiesEditor.html',
-        //   size: 'lg',
-        //   backdrop: 'static',
-        //   scope: $scope,
-        //   controller: ['$scope', function ($scope) {
-        //     $scope.labelName = label.name;
-        //     if (!label.properties || label.properties.replace(/\s*/g, '') === '') {
-        //       label.formatedProperties = JSON.stringify({
-        //         "props": [],
-        //         "labelItems": []
-        //       });
-        //     } else {
-        //       label.formatedProperties = label.properties;
-        //     }
-        //     $scope.jsonProperties = JSON.parse(label.formatedProperties);
-        //     $scope.jsonProperties.props.forEach((item) => { item.isEditing = false; });
-        //     $scope.jsonProperties.labelItems.forEach((item) => { item.isEditing = false; });
+        let modal = $uibModal.open({
+          animation: true,
+          ariaLabelledBy: 'modal-title-bottom',
+          ariaDescribedBy: 'modal-body-bottom',
+          templateUrl: 'labelPropertiesEditor.html',
+          size: 'lg',
+          backdrop: 'static',
+          scope: $scope,
+          controller: ['$scope', function ($scope) {
+            $scope.labelName = label.name;
+            if (!label.properties || label.properties.replace(/\s*/g, '') === '') {
+              label.formatedProperties = JSON.stringify({
+                "props": [],
+                "labelItems": []
+              });
+            } else {
+              label.formatedProperties = label.properties;
+            }
+            $scope.jsonProperties = JSON.parse(label.formatedProperties);
+            $scope.jsonProperties.props.forEach((item) => { item.isEditing = false; });
+            $scope.jsonProperties.labelItems.forEach((item) => { item.isEditing = false; });
 
-        //     $scope.listProperties = new NgTableParams({ 'count': '5' }, { counts: [], paginationMinBlocks: 4, paginationMaxBlocks: 7, dataset: $scope.jsonProperties.props });
-        //     $scope.listLabelItems = new NgTableParams({ 'count': '5' }, { counts: [], paginationMinBlocks: 4, paginationMaxBlocks: 7, dataset: $scope.jsonProperties.labelItems });
+            $scope.listProperties = new NgTableParams({ 'count': '5' }, { counts: [], paginationMinBlocks: 4, paginationMaxBlocks: 7, dataset: $scope.jsonProperties.props });
+            $scope.listLabelItems = new NgTableParams({ 'count': '5' }, { counts: [], paginationMinBlocks: 4, paginationMaxBlocks: 7, dataset: $scope.jsonProperties.labelItems });
 
-        //     $scope.closeModal = function () {
-        //       modal.close();
-        //     };
+            $scope.closeModal = function () {
+              modal.close();
+            };
 
-        //     $scope.deleteProperty = function (propertyToDelete) {
-        //       if ($scope.tab === 'propitems') {
-        //         $scope.jsonProperties.props.splice($scope.jsonProperties.props.indexOf(propertyToDelete), 1);
-        //         $scope.listProperties = new NgTableParams({ 'count': '5' }, { counts: [], paginationMinBlocks: 4, paginationMaxBlocks: 7, dataset: $scope.jsonProperties.props });
-        //       } else {
-        //         $scope.jsonProperties.labelItems.splice($scope.jsonProperties.labelItems.indexOf(propertyToDelete), 1);
-        //         $scope.listLabelItems = new NgTableParams({ 'count': '5' }, { counts: [], paginationMinBlocks: 4, paginationMaxBlocks: 7, dataset: $scope.jsonProperties.labelItems });
-        //       }
+            $scope.deleteProperty = function (propertyToDelete) {
+              if ($scope.tab === 'propitems') {
+                $scope.jsonProperties.props.splice($scope.jsonProperties.props.indexOf(propertyToDelete), 1);
+                $scope.listProperties = new NgTableParams({ 'count': '5' }, { counts: [], paginationMinBlocks: 4, paginationMaxBlocks: 7, dataset: $scope.jsonProperties.props });
+              } else {
+                $scope.jsonProperties.labelItems.splice($scope.jsonProperties.labelItems.indexOf(propertyToDelete), 1);
+                $scope.listLabelItems = new NgTableParams({ 'count': '5' }, { counts: [], paginationMinBlocks: 4, paginationMaxBlocks: 7, dataset: $scope.jsonProperties.labelItems });
+              }
 
-        //     };
-        //     $scope.cancelEdit = function (propertyItem) {
-        //       propertyItem.isEditing = false;
-        //     };
-        //     $scope.saveProperty = function (propertyItem) {
-        //       propertyItem.isEditing = false;
-        //     };
-        //     $scope.addNewJSONProperty = function () {
-        //       if ($scope.tab === 'propitems') {
-        //         $scope.jsonProperties.props.unshift({
-        //           pname: '',
-        //           pvalue: '',
-        //           isEditing: true
-        //         });
-        //         $scope.listProperties = new NgTableParams({ 'count': '5' }, { counts: [], paginationMinBlocks: 4, paginationMaxBlocks: 7, dataset: $scope.jsonProperties.props });
-        //       } else {
-        //         $scope.jsonProperties.labelItems.unshift({
-        //           pname: '',
-        //           pvalue: '',
-        //           isEditing: true
-        //         });
-        //         $scope.listLabelItems = new NgTableParams({ 'count': '5' }, { counts: [], paginationMinBlocks: 4, paginationMaxBlocks: 7, dataset: $scope.jsonProperties.labelItems });
-        //       }
+            };
+            $scope.cancelEdit = function (propertyItem) {
+              propertyItem.isEditing = false;
+            };
+            $scope.saveProperty = function (propertyItem) {
+              propertyItem.isEditing = false;
+            };
+            $scope.addNewJSONProperty = function () {
+              if ($scope.tab === 'propitems') {
+                $scope.jsonProperties.props.unshift({
+                  pname: '',
+                  pvalue: '',
+                  isEditing: true
+                });
+                $scope.listProperties = new NgTableParams({ 'count': '5' }, { counts: [], paginationMinBlocks: 4, paginationMaxBlocks: 7, dataset: $scope.jsonProperties.props });
+              } else {
+                $scope.jsonProperties.labelItems.unshift({
+                  pname: '',
+                  pvalue: '',
+                  isEditing: true
+                });
+                $scope.listLabelItems = new NgTableParams({ 'count': '5' }, { counts: [], paginationMinBlocks: 4, paginationMaxBlocks: 7, dataset: $scope.jsonProperties.labelItems });
+              }
 
-        //     };
+            };
 
-        //     $scope.saveNewLabelProperties = function () {
-        //       let finalJsonProps = [];
-        //       let finalLabelItems = [];
-        //       $scope.jsonProperties.props.forEach((oneProperty) => {
-        //         if (oneProperty.pname.replace(/\s*/g, '') !== '') {
-        //           finalJsonProps.push({
-        //             pname: oneProperty.pname,
-        //             pvalue: oneProperty.pvalue
-        //           });
-        //         }
-        //       });
-        //       $scope.jsonProperties.labelItems.forEach((oneProperty) => {
-        //         if (oneProperty.pname.replace(/\s*/g, '') !== '') {
-        //           finalLabelItems.push({
-        //             pname: oneProperty.pname,
-        //             pvalue: oneProperty.pvalue
-        //           });
-        //         }
-        //       });
-        //       $scope.jsonProperties.props = finalJsonProps;
-        //       $scope.jsonProperties.labelItems = finalLabelItems;
-        //       label.properties = JSON.stringify($scope.jsonProperties);
-        //       $scope.save();
-        //       modal.close();
-        //     };
+            $scope.saveNewLabelProperties = function () {
+              let finalJsonProps = [];
+              let finalLabelItems = [];
+              $scope.jsonProperties.props.forEach((oneProperty) => {
+                if (oneProperty.pname.replace(/\s*/g, '') !== '') {
+                  finalJsonProps.push({
+                    pname: oneProperty.pname,
+                    pvalue: oneProperty.pvalue
+                  });
+                }
+              });
+              $scope.jsonProperties.labelItems.forEach((oneProperty) => {
+                if (oneProperty.pname.replace(/\s*/g, '') !== '') {
+                  finalLabelItems.push({
+                    pname: oneProperty.pname,
+                    pvalue: oneProperty.pvalue
+                  });
+                }
+              });
+              $scope.jsonProperties.props = finalJsonProps;
+              $scope.jsonProperties.labelItems = finalLabelItems;
+              label.properties = JSON.stringify($scope.jsonProperties);
+              $scope.save();
+              modal.close();
+            };
 
-        //   }]
-        // });
+          }]
+        });
 
 
       };

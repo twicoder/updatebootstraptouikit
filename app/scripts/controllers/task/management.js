@@ -4,9 +4,9 @@
  * For job management main page controller
  */
 angular.module('ocspApp')
-  .controller('TaskManagementCtrl', ['$scope', '$http', 'Notification', '$q', '$rootScope', '$ngConfirm',
+  .controller('TaskManagementCtrl', ['$scope', '$http', 'Notification', '$q', '$rootScope', '$ngConfirm','$uibModal', 
     '$interval', '$filter', '$location', 'moment', 'CONFIGS', 'NgTableParams', 'globalDataService',
-    function ($scope, $http, Notification, $q, $rootScope, $ngConfirm,
+    function ($scope, $http, Notification, $q, $rootScope, $ngConfirm, $uibModal, 
       $interval, $filter, moment, CONFIGS, $location, NgTableParams, globalDataService) {
       $rootScope.init('task');
       //i18n
@@ -58,26 +58,26 @@ angular.module('ocspApp')
 
       //Check spark_home properties
       function _openSparkModal() {
-        // let modal = $uibModal.open({
-        //   animation: true,
-        //   ariaLabelledBy: 'modal-title-bottom',
-        //   ariaDescribedBy: 'modal-body-bottom',
-        //   templateUrl: 'stackedModal.html',
-        //   size: 'md',
-        //   scope: $scope,
-        //   backdrop: 'static',
-        //   controller: ['$scope', function ($scope) {
-        //     $scope.closeModal = function () {
-        //       modal.close();
-        //     };
-        //     $scope.inputSpark = function () {
-        //       $http.post("/api/prop/spark", { spark: $scope.spark }).success(function () {
-        //         modal.close();
-        //         $scope._showModal();
-        //       });
-        //     };
-        //   }]
-        // });
+        let modal = $uibModal.open({
+          animation: true,
+          ariaLabelledBy: 'modal-title-bottom',
+          ariaDescribedBy: 'modal-body-bottom',
+          templateUrl: 'stackedModal.html',
+          size: 'md',
+          scope: $scope,
+          backdrop: 'static',
+          controller: ['$scope', function ($scope) {
+            $scope.closeModal = function () {
+              modal.close();
+            };
+            $scope.inputSpark = function () {
+              $http.post("/api/prop/spark", { spark: $scope.spark }).success(function () {
+                modal.close();
+                $scope._showModal();
+              });
+            };
+          }]
+        });
       }
 
       if ($rootScope.isAdmin()) {
@@ -173,21 +173,21 @@ angular.module('ocspApp')
               }
               if (kerberosConfigureEnabled) {
                 if (!globalDataService.isKerberosConfigureCorrect(userInfo)) {
-                  // let modal = $uibModal.open({
-                  //   animation: true,
-                  //   ariaLabelledBy: 'modal-title-bottom',
-                  //   ariaDescribedBy: 'modal-body-bottom',
-                  //   templateUrl: 'kerberosConfigureMissingWarning.html',
-                  //   size: 'lg',
-                  //   backdrop: 'static',
-                  //   scope: $scope,
-                  //   controller: ['$scope', function ($scope) {
-                  //     $scope.searchItem = {};
-                  //     $scope.closeModal = function () {
-                  //       modal.close();
-                  //     };
-                  //   }]
-                  // });
+                  let modal = $uibModal.open({
+                    animation: true,
+                    ariaLabelledBy: 'modal-title-bottom',
+                    ariaDescribedBy: 'modal-body-bottom',
+                    templateUrl: 'kerberosConfigureMissingWarning.html',
+                    size: 'lg',
+                    backdrop: 'static',
+                    scope: $scope,
+                    controller: ['$scope', function ($scope) {
+                      $scope.searchItem = {};
+                      $scope.closeModal = function () {
+                        modal.close();
+                      };
+                    }]
+                  });
                 } else {
                   // Kerberos is configured correct, but need check whether keytab file exists
                   let filesNeedCheck = {
@@ -269,21 +269,21 @@ angular.module('ocspApp')
               }
               if (kerberosConfigureEnabled) {
                 if (!globalDataService.isKerberosConfigureCorrect(userInfo)) {
-                  // let modal = $uibModal.open({
-                  //   animation: true,
-                  //   ariaLabelledBy: 'modal-title-bottom',
-                  //   ariaDescribedBy: 'modal-body-bottom',
-                  //   templateUrl: 'kerberosConfigureMissingWarning.html',
-                  //   size: 'lg',
-                  //   backdrop: 'static',
-                  //   scope: $scope,
-                  //   controller: ['$scope', function ($scope) {
-                  //     $scope.searchItem = {};
-                  //     $scope.closeModal = function () {
-                  //       modal.close();
-                  //     };
-                  //   }]
-                  // });
+                  let modal = $uibModal.open({
+                    animation: true,
+                    ariaLabelledBy: 'modal-title-bottom',
+                    ariaDescribedBy: 'modal-body-bottom',
+                    templateUrl: 'kerberosConfigureMissingWarning.html',
+                    size: 'lg',
+                    backdrop: 'static',
+                    scope: $scope,
+                    controller: ['$scope', function ($scope) {
+                      $scope.searchItem = {};
+                      $scope.closeModal = function () {
+                        modal.close();
+                      };
+                    }]
+                  });
                 } else {
                   // Kerberos is configured correct, but need check whether keytab file exists
                   let filesNeedCheck = {
@@ -551,39 +551,39 @@ angular.module('ocspApp')
       };
 
       $scope.createOneStream = function () {
-        // let modal = $uibModal.open({
-        //   animation: true,
-        //   ariaLabelledBy: 'modal-title-bottom',
-        //   ariaDescribedBy: 'modal-body-bottom',
-        //   templateUrl: 'create_stream.html',
-        //   size: 'lg',
-        //   backdrop: 'static',
-        //   scope: $scope,
-        //   controller: ['$scope', function ($scope) {
-        //     $scope.searchItem = {};
-        //     $scope.closeModal = function () {
-        //       $scope.task = {
-        //         enginetype: 'SPARK',
-        //         input: {
-        //           inputs: []
-        //         },
-        //         events: []
-        //       };
-        //       modal.close();
-        //     };
+        let modal = $uibModal.open({
+          animation: true,
+          ariaLabelledBy: 'modal-title-bottom',
+          ariaDescribedBy: 'modal-body-bottom',
+          templateUrl: 'create_stream.html',
+          size: 'lg',
+          backdrop: 'static',
+          scope: $scope,
+          controller: ['$scope', function ($scope) {
+            $scope.searchItem = {};
+            $scope.closeModal = function () {
+              $scope.task = {
+                enginetype: 'SPARK',
+                input: {
+                  inputs: []
+                },
+                events: []
+              };
+              modal.close();
+            };
 
-        //     $scope.tryToSumit = function () {
-        //       let submitPromise = $scope.submitMethod();
-        //       if (submitPromise) {
-        //         submitPromise.then(function () {
-        //           $scope.closeModal();
-        //         }, function () {
-        //         });
-        //       }
-        //     };
+            $scope.tryToSumit = function () {
+              let submitPromise = $scope.submitMethod();
+              if (submitPromise) {
+                submitPromise.then(function () {
+                  $scope.closeModal();
+                }, function () {
+                });
+              }
+            };
 
-        //   }]
-        // });
+          }]
+        });
       };
 
     }]);
