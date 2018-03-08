@@ -1,6 +1,6 @@
 
 <a href="#alarmConfigPopupPageId" data-uk-modal></a>
-<div id="alarmConfigPopupPageId" class="uk-modal">
+<div id="alarmConfigPopupPageId" class="uk-modal uk-form">
     <div class="uk-modal-dialog uk-modal-dialog-large">
         <a class="uk-modal-close uk-close"></a>
 
@@ -16,24 +16,24 @@
         <ul id="alarmConfigPopupSwitherListId" class="uk-switcher uk-margin">
             <li>
                 <div class="uk-overflow-containe">
-                    <table ng-table="allStreams" class="uk-table uk-table-hover uk-table-condensed">
+                    <table ng-table="allStreams" class="uk-table uk-table-hover">
                         <thead>
                             <tr>
-                                <th>{{'ocsp_web_alarm_configuration_name' | translate}}</th>
-                                <th>{{'ocsp_web_alarm_configuration_current' | translate}}</th>
-                                <th>{{'ocsp_web_alarm_configuration_latest' | translate}}</th>
+                                <th width="20%">{{'ocsp_web_alarm_configuration_name' | translate}}</th>
+                                <th width="40%">{{'ocsp_web_alarm_configuration_current' | translate}}</th>
+                                <th width="40%">{{'ocsp_web_alarm_configuration_latest' | translate}}</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr ng-repeat="item in $data" ng-click="item.selected = !item.selected">
                                 <td class="centertext">
-                                    <input name="{{item.id}}" type="checkbox" ng-click="item.selected = !item.selected" ng-model="item.selected" /> {{item.name}}
+                                    <input class="uk-width-1-10" name="{{item.id}}" type="checkbox" ng-click="item.selected = !item.selected" ng-model="item.selected" /> {{item.name}}
                                 </td>
                                 <td>
-                                    <textarea ng-model="item.oldAlarmConfigsString" class="form-control" rows="2" ng-disabled="true" />
+                                    <textarea class="uk-width-1-1" ng-model="item.oldAlarmConfigsString" class="form-control" rows="2" ng-disabled="true" />
                                 </td>
                                 <td>
-                                    <textarea ng-model="item.newAlarmConfigsString" class="form-control" rows="2" ng-disabled="true" />
+                                    <textarea class="uk-width-1-1" ng-model="item.newAlarmConfigsString" class="form-control" rows="2" ng-disabled="true" />
                                 </td>
                             </tr>
                         </tbody>
@@ -62,10 +62,10 @@
                         <tbody>
                             <tr ng-repeat="onePropertyItem in $data">
                                 <td title="'ocsp_web_common_name' | translate" ng-form="name">
-                                    <input type="text" name="name" readonly="true" ng-model="onePropertyItem.name" class="form-control" required/>
+                                    <input class="uk-width-1-1" type="text" name="name" readonly="true" ng-model="onePropertyItem.name" required/>
                                 </td>
                                 <td title="'ocsp_web_common_value' | translate" ng-form="name">
-                                    <input type="text" name="value" ng-model="onePropertyItem.value" class="form-control" required/>
+                                    <input class="uk-width-1-1" type="text" name="value" ng-model="onePropertyItem.value" required/>
                                 </td>
                             </tr>
                         </tbody>
