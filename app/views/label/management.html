@@ -6,102 +6,100 @@
             <h3 class="">{{labelName}}{{'ocsp_web_label_manage_003' | translate}}</h3>
         </div>
 
-        <form name="labelPropEditorForm" id="idLabelPropEditor">
-            <div class="form-group">
-                <button class="btn oc-button" ng-click="addNewJSONProperty()">
-                    <i class="glyphicon glyphicon-plus"></i>
+        <form name="labelPropEditorForm" id="idLabelPropEditor" class="uk-form">
+            <div class="">
+                <button class="uk-button oc-button" ng-click="addNewJSONProperty()">
+                    <i class="fas fa-plus fa-2x"></i>
                 </button>
             </div>
-            <div class="form-group">
-                <div class="row">
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active">
-                            <a href="" aria-controls="propitems" role="tab" data-toggle="tab" ng-click="tab = 'propitems'">Props</a>
-                        </li>
-                        <li role="presentation">
-                            <a href="" aria-controls="labelitems" role="tab" data-toggle="tab" ng-click="tab = 'labelitems'">Label Items</a>
-                        </li>
-                    </ul>
-                </div>
+            <div class="">
 
-                <div class="row">
-                    <div class="tab-content">
-                        <div role="tabpanel" class="tab-pane" id="propitems" ng-class="{'propitems' : 'active'}[tab]">
-                            <table ng-table="listProperties" class="table table-condensed table-bordered">
-                                <colgroup>
-                                    <col width="42%" />
-                                    <col width="42%" />
-                                    <col width="16%" />
-                                </colgroup>
-                                <tr ng-repeat="onePropertyItem in $data">
-                                    <td title="'Name'" ng-form="name">
-                                        <input type="text" name="name" ng-disabled="!onePropertyItem.isEditing" ng-model="onePropertyItem.pname" class="form-control"
-                                            required/>
-                                    </td>
-                                    <td title="'Value'" ng-form="name">
-                                        <input type="text" name="value" ng-disabled="!onePropertyItem.isEditing" ng-model="onePropertyItem.pvalue" class="form-control"
-                                            required/>
-                                    </td>
-                                    <td>
-                                        <button class="btn oc-button btn-sm" style="margin-top:8px;" ng-click="saveProperty(onePropertyItem)" ng-if="onePropertyItem.isEditing"
-                                            ng-disabled="rowForm.$pristine || rowForm.$invalid">
-                                            <span class="glyphicon glyphicon-ok"></span>
-                                        </button>
-                                        <button class="btn btn-default btn-sm" style="margin-top:8px;" ng-click="cancelEdit(onePropertyItem)" ng-if="onePropertyItem.isEditing">
-                                            <span class="glyphicon glyphicon-remove"></span>
-                                        </button>
-                                        <button class="btn btn-default btn-sm" style="margin-top:8px;" ng-click="onePropertyItem.isEditing = true" ng-if="!onePropertyItem.isEditing">
-                                            <span class="glyphicon glyphicon-pencil"></span>
-                                        </button>
-                                        <button class="btn btn-danger btn-sm" style="margin-top:8px;" ng-click="deleteProperty(onePropertyItem)" ng-if="!onePropertyItem.isEditing">
-                                            <span class="glyphicon glyphicon-trash"></span>
-                                        </button>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                        <div role="tabpanel" class="tab-pane" id="labelitems" ng-class="{'labelitems' : 'active'}[tab]">
-                            <table ng-table="listLabelItems" class="table table-condensed table-bordered">
-                                <colgroup>
-                                    <col width="42%" />
-                                    <col width="42%" />
-                                    <col width="16%" />
-                                </colgroup>
-                                <tr ng-repeat="onePropertyItem in $data">
-                                    <td title="'Name'" ng-form="name">
-                                        <input type="text" name="name" ng-disabled="!onePropertyItem.isEditing" ng-model="onePropertyItem.pname" class="form-control"
-                                            required/>
-                                    </td>
-                                    <td title="'Value'" ng-form="name">
-                                        <input type="text" name="value" ng-disabled="!onePropertyItem.isEditing" ng-model="onePropertyItem.pvalue" class="form-control"
-                                            required/>
-                                    </td>
-                                    <td>
-                                        <button class="btn oc-button btn-sm" style="margin-top:8px;" ng-click="saveProperty(onePropertyItem)" ng-if="onePropertyItem.isEditing"
-                                            ng-disabled="rowForm.$pristine || rowForm.$invalid">
-                                            <span class="glyphicon glyphicon-ok"></span>
-                                        </button>
-                                        <button class="btn btn-default btn-sm" style="margin-top:8px;" ng-click="cancelEdit(onePropertyItem)" ng-if="onePropertyItem.isEditing">
-                                            <span class="glyphicon glyphicon-remove"></span>
-                                        </button>
-                                        <button class="btn btn-default btn-sm" style="margin-top:8px;" ng-click="onePropertyItem.isEditing = true" ng-if="!onePropertyItem.isEditing">
-                                            <span class="glyphicon glyphicon-pencil"></span>
-                                        </button>
-                                        <button class="btn btn-danger btn-sm" style="margin-top:8px;" ng-click="deleteProperty(onePropertyItem)" ng-if="!onePropertyItem.isEditing">
-                                            <span class="glyphicon glyphicon-trash"></span>
-                                        </button>
-                                    </td>
-                                </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
+                <ul class="uk-tab" data-uk-switcher="{connect:'#labelConfigPopupSwitherListId'}">
+                    <li>
+                        <a href="">Props</a>
+                    </li>
+                    <li>
+                        <a href="">Label Items</a>
+                    </li>
+                </ul>
+
+                <ul id="labelConfigPopupSwitherListId" class="uk-switcher uk-margin">
+                    <li>
+                        <table ng-table="listProperties" class="uk-table uk-table-hover uk-table-condensed">
+                            <colgroup>
+                                <col width="42%" />
+                                <col width="42%" />
+                                <col width="16%" />
+                            </colgroup>
+                            <tr ng-repeat="onePropertyItem in $data">
+                                <td title="'Name'" ng-form="name">
+                                    <input type="text" name="name" ng-disabled="!onePropertyItem.isEditing" ng-model="onePropertyItem.pname" class="uk-width-1-1"
+                                        required/>
+                                </td>
+                                <td title="'Value'" ng-form="name">
+                                    <input type="text" name="value" ng-disabled="!onePropertyItem.isEditing" ng-model="onePropertyItem.pvalue" class="uk-width-1-1"
+                                        required/>
+                                </td>
+                                <td>
+                                    <button class="uk-button uk-button-small oc-button" style="margin-top:8px;" ng-click="saveProperty(onePropertyItem)" ng-if="onePropertyItem.isEditing"
+                                        ng-disabled="rowForm.$pristine || rowForm.$invalid">
+                                        <span class="fas fa-check"></span>
+                                    </button>
+                                    <button class="uk-button uk-button-small" style="margin-top:8px;" ng-click="cancelEdit(onePropertyItem)" ng-if="onePropertyItem.isEditing">
+                                        <span class="fas fa-minus-circle"></span>
+                                    </button>
+                                    <button class="uk-button uk-button-small" style="margin-top:8px;" ng-click="onePropertyItem.isEditing = true" ng-if="!onePropertyItem.isEditing">
+                                        <span class="fas fa-pencil-alt"></span>
+                                    </button>
+                                    <button class="uk-button uk-button-small uk-button-danger" style="margin-top:8px;" ng-click="deleteProperty(onePropertyItem)" ng-if="!onePropertyItem.isEditing">
+                                        <span class="fas fa-trash-alt"></span>
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </li>
+
+                    <li>
+                        <table ng-table="listLabelItems" class="uk-table uk-table-hover uk-table-condensed">
+                            <colgroup>
+                                <col width="42%" />
+                                <col width="42%" />
+                                <col width="16%" />
+                            </colgroup>
+                            <tr ng-repeat="onePropertyItem in $data">
+                                <td title="'Name'" ng-form="name">
+                                    <input type="text" name="name" ng-disabled="!onePropertyItem.isEditing" ng-model="onePropertyItem.pname" class="uk-width-1-1"
+                                        required/>
+                                </td>
+                                <td title="'Value'" ng-form="name">
+                                    <input type="text" name="value" ng-disabled="!onePropertyItem.isEditing" ng-model="onePropertyItem.pvalue" class="uk-width-1-1"
+                                        required/>
+                                </td>
+                                <td>
+                                    <button class="uk-button uk-button-small oc-button" style="margin-top:8px;" ng-click="saveProperty(onePropertyItem)" ng-if="onePropertyItem.isEditing"
+                                        ng-disabled="rowForm.$pristine || rowForm.$invalid">
+                                        <span class="fas fa-check"></span>
+                                    </button>
+                                    <button class="uk-button uk-button-small" style="margin-top:8px;" ng-click="cancelEdit(onePropertyItem)" ng-if="onePropertyItem.isEditing">
+                                        <span class="fas fa-minus-circle"></span>
+                                    </button>
+                                    <button class="uk-button uk-button-small" style="margin-top:8px;" ng-click="onePropertyItem.isEditing = true" ng-if="!onePropertyItem.isEditing">
+                                        <span class="fas fa-pencil-alt"></span>
+                                    </button>
+                                    <button class="uk-button uk-button-small uk-button-danger" style="margin-top:8px;" ng-click="deleteProperty(onePropertyItem)" ng-if="!onePropertyItem.isEditing">
+                                        <span class="fas fa-trash-alt"></span>
+                                    </button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </li>
+                </ul>
             </div>
 
-            <div class="form-group">
-                <button type="button" class="btn oc-button" ng-click="saveNewLabelProperties()">
+            <div class="">
+                <button type="button" class="uk-button oc-button" ng-click="saveNewLabelProperties()">
                     {{'ocsp_web_common_009' | translate}}
                 </button>
             </div>
@@ -110,18 +108,16 @@
     </div>
 </div>
 
-
 <div class="uk-grid uk-form">
-    <div class="uk-width-1-10"></div>
-    <div class="uk-width-8-10">
-        <div class="uk-panel uk-panel-box-primary">
+    <div class="uk-width-1-1">
+        <div class="uk-panel">
             <div class="uk-panel-header">
                 <div class="uk-panel-title">
                     {{'ocsp_web_label_manage_000' | translate}}
                 </div>
             </div>
             <div class="fieldset">
-                <table class="uk-table uk-table-hover">
+                <table class="uk-table uk-table-hover uk-table-condensed">
                     <thead>
                         <tr>
                             <th>{{'ocsp_web_label_manage_001' | translate}}</th>
@@ -140,7 +136,8 @@
                                 <textarea ng-model="label.properties" class="uk-width-1-1" rows="3" ng-disabled="true" />
                             </td>
                             <td class="uk-width-1-10">
-                                <a href="" class="uk-button oc-button" ng-click="editLabelProperties(label)" ng-hide="username!== label.owner && !isAdminUser" data-uk-modal="{target:'#labelPropertisEditorId'}">{{ 'ocsp_web_common_042' | translate }}</a>
+                                <a href="" class="uk-button oc-button" ng-click="editLabelProperties(label)" ng-hide="username!== label.owner && !isAdminUser"
+                                    data-uk-modal="{target:'#labelPropertisEditorId'}">{{ 'ocsp_web_common_042' | translate }}</a>
                             </td>
                         </tr>
                     </tbody>
@@ -161,7 +158,7 @@
                 <input ngf-select type="file" ng-model="file">
             </div>
         </div>
-        <div class="alert alert-danger" ng-if="message !== null">
+        <div class="uk-alert uk-alert-danger" ng-if="message !== null">
             {{message}}
         </div>
     </div>

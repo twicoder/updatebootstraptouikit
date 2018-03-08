@@ -46,7 +46,9 @@
     },
     "fontawesome": {
       "main": [
-        "web-fonts-with-css/css/fontawesome-all.min.css"
+        "web-fonts-with-css/css/fontawesome-all.min.css",
+        "svg-with-js/css/fa-svg-with-js.css",
+        "svg-with-js/js/fontawesome.min.js"
       ]
     },
     "uikit": {
