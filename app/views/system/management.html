@@ -1,102 +1,106 @@
-<script type="text/ng-template" id="stackedModal.html">
-  <div class="modal-header">
-    <button type="button" class="close" ng-click="closeModal()"><span aria-hidden="true">&times;</span></button>
-    <h3 class="modal-title">{{'ocsp_web_system_manage_003' | translate}}</h3>
-  </div>
-  <div class="modal-body">
-    <form name="myForm" id="mainFrame">
-      <div class="form-group">
-        <label>{{'ocsp_web_common_011' | translate}}*</label>
-        <input type="text" name="name" class="form-control" ng-model="newDatasource.name" required>
-        <span class="redtip" ng-messages="myForm.name.$error"
-             ng-if="myForm.name.$touched">
-          <div ng-message="required">{{'ocsp_web_common_027' | translate}}</div>
-        </span>
-      </div>
-      <div class="form-group">
-        <label>{{'ocsp_web_common_031' | translate}}*</label>
-        <select class="form-control" ng-disabled="!isAdmin()" ng-model="newDatasource.type" required>
-            <option value="kafka" selected="true">kafka</option>
-        </select>
-        <span class="redtip" ng-messages="myForm.sourceType.$error" ng-if="myForm.sourceType.$touched">
-          <div ng-message="required">{{'ocsp_web_common_027' | translate}}</div>
-        </span>
-      </div>
-      <div class="form-group" ng-if="newDatasource.type === 'kafka'">
-        <label>zookeeper.connect*</label>
-        <input type="text" name="zk" class="form-control" ng-model="newDatasource.zk" required>
-        <span class="redtip" ng-messages="myForm.zk.$error"
-              ng-if="myForm.zk.$touched">
-          <div ng-message="required">{{'ocsp_web_common_027' | translate}}</div>
-        </span>
-      </div>
-      <div class="form-group" ng-if="newDatasource.type === 'kafka'">
-        <label>metadata.broker.list*</label>
-        <input type="text" name="blist" class="form-control" ng-model="newDatasource.blist" required>
-        <span class="redtip" ng-messages="myForm.blist.$error"
-              ng-if="myForm.blist.$touched">
-          <div ng-message="required">{{'ocsp_web_common_027' | translate}}</div>
-        </span>
-      </div>
-      <div class="form-group" ng-if="newDatasource.type === 'codis'">
-        <label>zk*</label>
-        <input type="text" name="zkco" class="form-control" ng-model="newDatasource.zk" required>
-        <span class="redtip" ng-messages="myForm.zkco.$error"
-              ng-if="myForm.zkco.$touched">
-          <div ng-message="required">{{'ocsp_web_common_027' | translate}}</div>
-        </span>
-      </div>
-      <div class="form-group" ng-if="newDatasource.type === 'codis'">
-        <label>zkpath*</label>
-        <input type="text" name="zkpath" class="form-control" ng-model="newDatasource.zkpath" required>
-        <span class="redtip" ng-messages="myForm.zkpath.$error"
-              ng-if="myForm.zkpath.$touched">
-          <div ng-message="required">{{'ocsp_web_common_027' | translate}}</div>
-        </span>
-      </div>
-      <div class="form-group">
-        <label>{{'ocsp_web_common_012' | translate}}</label>
-        <textarea ng-model="newDatasource.description" class="form-control" rows="6"></textarea>
-      </div>
-      <div class="form-group">
-        <button type="button" ng-disabled="!isFormValid()" class="btn oc-button" ng-click="saveDatasource()">{{'ocsp_web_common_009' | translate}}</button>
-      </div>
-    </form>
-  </div>
-</script>
+<a href="#stackedModalPageId" data-uk-modal></a>
+<div id="stackedModalPageId" class="uk-modal">
+    <div class="uk-modal-dialog uk-modal-dialog-large">
+        <a class="uk-modal-close uk-close"></a>
+        <div class="uk-modal-header">
+            <h3>{{'ocsp_web_system_manage_003' | translate}}</h3>
+        </div>
 
-<script type="text/ng-template" id="addSystemPropertyModal.html">
-    <div class="modal-header">
-      <button type="button" class="close" ng-click="closeModal()"><span aria-hidden="true">&times;</span></button>
-      <h3 class="modal-title">{{'ocsp_web_system_manage_007' | translate}}</h3>
+        <form name="myForm" id="mainFrame" class="uk-form">
+            <div class="uk-grid">
+                <label class="uk-width-1-5">{{'ocsp_web_common_011' | translate}}*</label>
+                <input class="uk-width-4-5" type="text" name="name" ng-model="newDatasource.name" required>
+                <span class="redtip" ng-messages="myForm.name.$error" ng-if="myForm.name.$touched">
+                    <div ng-message="required">{{'ocsp_web_common_027' | translate}}</div>
+                </span>
+            </div>
+            <div class="uk-grid">
+                <label class="uk-width-1-5">{{'ocsp_web_common_031' | translate}}*</label>
+                <select class="uk-width-4-5" ng-disabled="!isAdmin()" ng-model="newDatasource.type" required>
+                    <option value="kafka" selected="true">kafka</option>
+                </select>
+                <span class="redtip" ng-messages="myForm.sourceType.$error" ng-if="myForm.sourceType.$touched">
+                    <div ng-message="required">{{'ocsp_web_common_027' | translate}}</div>
+                </span>
+            </div>
+            <div class="uk-grid" ng-if="newDatasource.type === 'kafka'">
+                <label class="uk-width-1-5">zookeeper.connect*</label>
+                <input class="uk-width-4-5" type="text" name="zk" ng-model="newDatasource.zk" required>
+                <span class="redtip" ng-messages="myForm.zk.$error" ng-if="myForm.zk.$touched">
+                    <div ng-message="required">{{'ocsp_web_common_027' | translate}}</div>
+                </span>
+            </div>
+            <div class="uk-grid" ng-if="newDatasource.type === 'kafka'">
+                <label class="uk-width-1-5">metadata.broker.list*</label>
+                <input class="uk-width-4-5" type="text" name="blist" ng-model="newDatasource.blist" required>
+                <span class="redtip" ng-messages="myForm.blist.$error" ng-if="myForm.blist.$touched">
+                    <div ng-message="required">{{'ocsp_web_common_027' | translate}}</div>
+                </span>
+            </div>
+            <div class="uk-grid" ng-if="newDatasource.type === 'codis'">
+                <label class="uk-width-1-5">zk*</label>
+                <input class="uk-width-4-5" type="text" name="zkco" ng-model="newDatasource.zk" required>
+                <span class="redtip" ng-messages="myForm.zkco.$error" ng-if="myForm.zkco.$touched">
+                    <div ng-message="required">{{'ocsp_web_common_027' | translate}}</div>
+                </span>
+            </div>
+            <div class="uk-grid" ng-if="newDatasource.type === 'codis'">
+                <label class="uk-width-1-5">zkpath*</label>
+                <input class="uk-width-4-5" type="text" name="zkpath" ng-model="newDatasource.zkpath" required>
+                <span class="redtip" ng-messages="myForm.zkpath.$error" ng-if="myForm.zkpath.$touched">
+                    <div ng-message="required">{{'ocsp_web_common_027' | translate}}</div>
+                </span>
+            </div>
+            <div class="uk-grid">
+                <label class="uk-width-1-5">{{'ocsp_web_common_012' | translate}}</label>
+                <textarea class="uk-width-4-5" ng-model="newDatasource.description" rows="6"></textarea>
+            </div>
+
+            <div class="uk-grid">
+                <div class="uk-width-2-5"></div>
+                <button class="uk-width-1-5 uk-button oc-button uk-button-large" type="button" ng-disabled="!isFormValid()" ng-click="saveDatasource()">{{'ocsp_web_common_009' | translate}}</button>
+                <div class="uk-width-2-5"></div>
+            </div>
+        </form>
     </div>
-    <div class="modal-body">
-      <form name="systemPropForm" id="idNewSystemProp">
+</div>
 
-        <div class="form-group">
-          <label>{{'ocsp_web_common_propertyname' | translate}}*</label>
-          <input type="text" name="name" class="form-control" ng-model="newSystemProp.name" required>
-          <span class="redtip" ng-messages="systemPropForm.name.$error"
-               ng-if="systemPropForm.name.$touched">
-               <div ng-message="required">{{'ocsp_web_common_027' | translate}}</div>
-          </span>
+<a href="#addSystemPropertyPageId" data-uk-modal></a>
+<div id="addSystemPropertyPageId" class="uk-modal">
+    <div class="uk-modal-dialog uk-modal-dialog-large">
+        <a class="uk-modal-close uk-close"></a>
+        <div class="uk-modal-header">
+            <h3>{{'ocsp_web_system_manage_007' | translate}}</h3>
         </div>
 
-        <div class="form-group">
-            <label>{{'ocsp_web_common_propertyvalue' | translate}}*</label>
-            <input type="text" name="value" class="form-control" ng-model="newSystemProp.value" required>
-            <span class="redtip" ng-messages="systemPropForm.value.$error" 
-                ng-if="systemPropForm.value.$touched">
-                <div ng-message="required">{{'ocsp_web_common_027' | translate}}</div>
-            </span>
-        </div>
+        <form name="systemPropForm" id="idNewSystemProp" class="uk-form">
+            <div class="uk-grid">
+                <label class="uk-width-1-5">{{'ocsp_web_common_propertyname' | translate}}*</label>
+                <input class="uk-form-controls uk-width-4-5" type="text" name="name" ng-model="newSystemProp.name" required>
+                <span class="redtip" ng-messages="systemPropForm.name.$error" ng-if="systemPropForm.name.$touched">
+                    <div ng-message="required">{{'ocsp_web_common_027' | translate}}</div>
+                </span>
+            </div>
 
-        <div class="form-group">
-          <button type="button" class="btn oc-button" ng-click="saveNewSystemProp()">{{'ocsp_web_common_009' | translate}}</button>
-        </div>
-      </form>
+            <div class="uk-grid">
+                <label class="uk-width-1-5">{{'ocsp_web_common_propertyvalue' | translate}}*</label>
+                <input class="uk-form-controls uk-width-4-5" type="text" name="value" ng-model="newSystemProp.value" required>
+                <span class="redtip" ng-messages="systemPropForm.value.$error" ng-if="systemPropForm.value.$touched">
+                    <div ng-message="required">{{'ocsp_web_common_027' | translate}}</div>
+                </span>
+            </div>
+
+            <div class="uk-grid">
+                <div class="uk-width-2-5"></div>
+                <button class="uk-width-1-5 uk-button oc-button uk-button-large" type="button" ng-click="saveNewSystemProp()">{{'ocsp_web_common_009' | translate}}</button>
+                <div class="uk-width-2-5"></div>
+            </div>
+        </form>
+
+
     </div>
-</script>
+</div>
+
 
 <script type="text/ng-template" id="kerberosConfigureWarning.html">
   <div class="modal-header">
@@ -118,34 +122,36 @@
 
 <div class="uk-grid uk-form" ng-cloak>
     <div class="uk-width-1-1">
-        <div class="uk-panel uk-panel-box-primary">
+        <div class="uk-panel">
             <div class="uk-panel-header">
                 <div class="uk-panel-title">
                     {{'ocsp_web_system_manage_001' | translate}}
-                    <button class="wizard-button uk-button oc-button" style="float:right;margin-right:20px;" ng-disabled="!isAdmin()" ng-click="openPropertyDefineModal()">{{'ocsp_web_system_manage_007' | translate}}</button>
+                    <button class="wizard-button uk-button oc-button" style="float:right;margin-right:20px;" ng-disabled="!isAdmin()" data-uk-modal="{target:'#addSystemPropertyPageId'}"
+                        ng-click="openPropertyDefineModal()">{{'ocsp_web_system_manage_007' | translate}}</button>
                 </div>
-                
             </div>
             <div class="fieldset">
                 <div ng-repeat="oneCategory in categorySet">
-                    <uib-accordion ng-if="notEmpty(propertyMap.get(oneCategory))">
-                        <div uib-accordion-group class="" ng-init="isOpen = false" is-open="isOpen">
-                            <uib-accordion-heading>
-                                <i class="glyphicon" ng-class="{'glyphicon-chevron-down': isOpen, 'glyphicon-chevron-right': !isOpen}"></i>
-                                &nbsp;
-                                <label ng-if="oneCategory!=='userdefined' && oneCategory!==otherCategoryName ">{{ oneCategory }}&nbsp;{{ 'ocsp_web_common_configuration' | translate }}</label>
-                                <label ng-if="oneCategory==='userdefined'">{{ 'ocsp_web_common_customize' | translate }}&nbsp;{{ 'ocsp_web_common_configuration' | translate
-                                    }}</label>
-                                <label ng-if="oneCategory=== otherCategoryName ">{{ 'ocsp_web_common_other' | translate }}&nbsp;{{ 'ocsp_web_common_configuration' | translate
-                                    }}</label>
-                            </uib-accordion-heading>
+                    <div class="uk-accordion" ng-if="notEmpty(propertyMap.get(oneCategory))" data-uk-accordion data="{collapse: true}">
+                        <h3 class="uk-accordion-title">
+                            <i class="glyphicon" ng-class="{'glyphicon-chevron-down': isOpen, 'glyphicon-chevron-right': !isOpen}"></i>
+                            &nbsp;
+                            <label ng-if="oneCategory!=='userdefined' && oneCategory!==otherCategoryName ">{{ oneCategory }}&nbsp;{{ 'ocsp_web_common_configuration' | translate }}</label>
+                            <label ng-if="oneCategory==='userdefined'">{{ 'ocsp_web_common_customize' | translate }}&nbsp;{{ 'ocsp_web_common_configuration' | translate
+                                }}
+                            </label>
+                            <label ng-if="oneCategory=== otherCategoryName ">{{ 'ocsp_web_common_other' | translate }}&nbsp;{{ 'ocsp_web_common_configuration' | translate
+                                }}
+                            </label>
+                        </h3>
+                        <div class="uk-accordion-content">
                             <div ng-repeat="property in propertyMap.get(oneCategory)" class="uk-form-row">
                                 <div class="uk-grid" ng-if="isNotSpecialProperties(property) && property.status ===1">
                                     <div class="uk-width-1-10">
                                         <label>{{property.name}}</label>
                                     </div>
-                                    <div class="uk-width-8-10">
-                                        <input ng-model="property.value" class="form-control" popover-trigger="'mouseenter'" popover-placement="right" popover-append-to-body=true
+                                    <div class="uk-width-7-10">
+                                        <input class="uk-width-1-1" ng-model="property.value" popover-trigger="'mouseenter'" popover-placement="right" popover-append-to-body=true
                                             uib-popover="{{property.description}}" popover-title="{{property.name}}" ng-disabled="!isAdmin()">
                                     </div>
                                     <div class="uk-width-1-10" style="margin-top:8px" ng-if="property.STREAM_SYSTEMPROP_CATEGORY && property.STREAM_SYSTEMPROP_CATEGORY.name === 'userdefined'">
@@ -158,8 +164,8 @@
                                     <div class="uk-width-1-10">
                                         <label>Deploy Mode</label>
                                     </div>
-                                    <div class="uk-width-8-10">
-                                        <select class="form-control" ng-model="property.value" ng-disabled="!isAdminUser()">
+                                    <div class="uk-width-7-10">
+                                        <select class="uk-width-1-1" ng-model="property.value" ng-disabled="!isAdminUser()">
                                             <option value="client">client</option>
                                             <option value="cluster">cluster</option>
                                         </select>
@@ -169,7 +175,7 @@
                                     <div class="uk-width-1-10">
                                         <label>{{property.name}}</label>
                                     </div>
-                                    <div class="uk-width-8-10">
+                                    <div class="uk-width-7-10">
                                         <toggle-switch on-label="{{'ocsp_web_common_040' | translate}}" off-label="{{'ocsp_web_common_041' | translate}}" ng-disabled="!isAdminUser()"
                                             ng-model="property.value">
                                         </toggle-switch>
@@ -177,90 +183,98 @@
                                 </div>
                             </div>
                         </div>
-                    </uib-accordion>
+                    </div>
                 </div>
                 <button type="button" class="uk-button oc-button" ng-disabled="!isAdmin()" ng-click="save()">{{'ocsp_web_common_009' | translate}}</button>
             </div>
         </div>
     </div>
+    <br/>
+    <br/>
+    <br/>
     <div class="uk-width-1-1">
-        <div class="uk-panel uk-panel-box-primary">
+        <div class="uk-panel">
             <div class="uk-panel-header">
                 <div class="uk-panel-title">
                     {{'ocsp_web_system_manage_006' | translate}}
-                    <button class="wizard-button uk-button oc-button" style="float:right;margin-right:20px;" ng-disabled="!isAdmin()" ng-click="openSparkModal()">{{'ocsp_web_system_manage_003' | translate}}</button>
+                    <button class="wizard-button uk-button oc-button" style="float:right;margin-right:20px;" ng-disabled="!isAdmin()" data-uk-modal="{target:'#stackedModalPageId'}">{{'ocsp_web_system_manage_003' | translate}}</button>
                 </div>
             </div>
             <div class="fieldset">
-                <uib-accordion ng-repeat="data in datasource">
-                    <div ng-if="data.type === 'kafka'" uib-accordion-group class="panel-default" ng-init="data.isOpen = false" is-open="data.isOpen">
-                        <uib-accordion-heading>
-                            <i class="glyphicon" ng-class="{'glyphicon-chevron-down': data.isOpen, 'glyphicon-chevron-right': !status.isOpen}"></i>
-                            &nbsp;{{data.name}}
-                            <span ng-if="data.type === 'kafka'" class="label label-danger">Kafka</span>
-                            <span ng-if="data.type === 'codis'" class="label label-success">Codis</span>
-                        </uib-accordion-heading>
-                        <div class="uk-form-row">
-                            <div class="uk-grid">
-                                <div class="uk-width-1-10">
-                                    <label>{{'ocsp_web_common_011' | translate}}</label>
+                <div ng-repeat="data in datasource">
+                    <div ng-if="data.type === 'kafka'" class="panel-default">
+                        <div class="uk-accordion" data-uk-accordion="{collapse: true}">
+                            <h3 class="uk-accordion-title">
+                                <i class="glyphicon" ng-class="{'glyphicon-chevron-down': data.isOpen, 'glyphicon-chevron-right': !status.isOpen}"></i>
+                                &nbsp;{{data.name}}
+                                <span ng-if="data.type === 'kafka'" class="label label-danger">Kafka</span>
+                                <span ng-if="data.type === 'codis'" class="label label-success">Codis</span>
+                            </h3>
+                            <div class="uk-accordion-content">
+                                <div class="uk-form-row">
+                                    <div class="uk-grid">
+                                        <div class="uk-width-1-10">
+                                            <label>{{'ocsp_web_common_011' | translate}}</label>
+                                        </div>
+                                        <div class="uk-width-7-10">
+                                            <input class="uk-width-1-1" ng-model="data.name" ng-disabled="!isAdmin()">
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="uk-width-8-10">
-                                    <input class="" ng-model="data.name" ng-disabled="!isAdmin()">
-                                </div>
-                            </div>
-                        </div>
-                        <div class="uk-form-row" ng-repeat="item in data.props track by $index" ng-if="data.type === 'kafka' || item.pname === 'zk' || item.pname === 'zkpath'">
-                            <div class="uk-grid">
-                                <div class="uk-width-1-10">
-                                    <label>{{item.pname}}</label>
-                                </div>
-                                <div class="uk-width-8-10">
-                                    <input class="" ng-model="item.pvalue" popover-append-to-body=true popover-trigger="'mouseenter'" popover-placement="right"
-                                        popover-title="{{item.pname}}" uib-popover="{{'ocsp_web_common_property_' + trans(item.pname) | translate}}"
-                                        ng-disabled="!isAdmin()">
+                                <div class="uk-form-row" ng-repeat="item in data.props track by $index" ng-if="data.type === 'kafka' || item.pname === 'zk' || item.pname === 'zkpath'">
+                                    <div class="uk-grid">
+                                        <div class="uk-width-1-10">
+                                            <label>{{item.pname}}123</label>
+                                        </div>
+                                        <div class="uk-width-7-10">
+                                            <input class="uk-width-1-1" ng-model="item.pvalue" popover-append-to-body=true popover-trigger="'mouseenter'" popover-placement="right"
+                                                popover-title="{{item.pname}}" uib-popover="{{'ocsp_web_common_property_' + trans(item.pname) | translate}}"
+                                                ng-disabled="!isAdmin()">
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
-                </uib-accordion>
+                </div>
+
                 <button type="button" class="uk-button oc-button" ng-disabled="!isAdmin()" ng-click="save()">{{'ocsp_web_common_009' | translate}}</button>
             </div>
         </div>
     </div>
     <div class="uk-width-1-1">
-        <div class="uk-panel uk-panel-box-primary">
+        <div class="uk-panel">
             <div class="uk-panel-header">
                 <div class="uk-panel-title">
                     {{'ocsp_web_systemconfig_cachedatabase' | translate}}&nbsp;{{'ocsp_web_common_configuration' | translate}}
                 </div>
             </div>
             <div class="fieldset">
+
                 <div ng-repeat="oneCategory in categorySet">
-                    <div ng-repeat="property in propertyMap.get(oneCategory)" class="uk-form-row">
-                        <div class="uk-grid" ng-if="property.name === 'ocsp.cache.database.type'">
+                    <div ng-repeat="property in propertyMap.get(oneCategory)">
+                        <div class="uk-grid uk-form-row" ng-if="property.name === 'ocsp.cache.database.type'">
                             <div class="uk-width-1-10">
                                 <label>Cache Database</label>
                             </div>
-                            <div class="uk-width-8-10">
-                                <select class="" ng-disabled="!isAdmin()" ng-model="property.value" ng-change="updateCurrentPageProperties(propertyMap.get(oneCategory))"
+                            <div class="uk-width-7-10">
+                                <select class="uk-width-1-1" ng-disabled="!isAdmin()" ng-model="property.value" ng-change="updateCurrentPageProperties(propertyMap.get(oneCategory))"
                                     ng-options="o as o for o in ['redis_cluster','codis']"></select>
                             </div>
                         </div>
                     </div>
                 </div>
+
                 <div ng-repeat="data in datasource">
                     <div ng-if="data.type === cacheDatabaseType " class="panel-default">
-                        <div class="uk-form-row" ng-repeat="item in data.props track by $index">
-                            <div class="uk-grid">
-                                <div class="uk-width-1-10">
-                                    <label>{{item.pname}}</label>
-                                </div>
-                                <div class="uk-width-8-10">
-                                    <input class="" type="{{getItemType(item.pname)}}" ng-model="item.pvalue" popover-append-to-body=true popover-trigger="'mouseenter'" popover-placement="right"
-                                        popover-title="{{item.pname}}" uib-popover="{{'ocsp_web_common_property_' + trans(item.pname) | translate}}"
-                                        ng-disabled="!isAdmin()">
-                                </div>
+                        <div class="uk-grid uk-form-row" ng-repeat="item in data.props track by $index">
+                            <div class="uk-width-1-10">
+                                <label>{{item.pname}}</label>
+                            </div>
+                            <div class="uk-width-7-10">
+                                <input class="uk-width-1-1" type="{{getItemType(item.pname)}}" ng-model="item.pvalue" popover-append-to-body=true popover-trigger="'mouseenter'"
+                                    popover-placement="right" popover-title="{{item.pname}}" uib-popover="{{'ocsp_web_common_property_' + trans(item.pname) | translate}}"
+                                    ng-disabled="!isAdmin()">
                             </div>
                         </div>
                     </div>

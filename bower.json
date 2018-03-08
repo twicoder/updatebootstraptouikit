@@ -53,6 +53,7 @@
       "main": [
         "css/uikit.min.css",
         "css/components/accordion.min.css",
+        "css/components/form-advanced.min.css",
         "js/uikit.min.js",
         "js/components/accordion.js"
       ]
