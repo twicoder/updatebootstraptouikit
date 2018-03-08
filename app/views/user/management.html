@@ -1,47 +1,48 @@
 <div class="uk-grid uk-form" ng-form name="mainForm">
-  <div class="uk-width-1-10"></div>
-  <div class="uk-width-8-10">
-    <div class="uk-panel uk-panel-box-primary" ng-if="isAdmin()">
+  <div class="uk-width-1-1">
+    <div class="uk-panel" ng-if="isAdmin()">
       <div class="uk-panel-header">
         <div class="uk-panel-title">
           {{'ocsp_web_user_manage_000' | translate}}
         </div>
       </div>
       <div class="fieldset">
-        <div class="container-fluid">
-          <div class="row">
-            <a class="btn oc-button" ng-click="add(users)">
-              <i class="glyphicon glyphicon-plus"></i>
-              {{'ocsp_web_user_new_user' | translate}}
-            </a>
-            <a class="btn oc-button" ng-click="saveUsers()">
-              {{'ocsp_web_common_009' | translate}}
-            </a>
+        <div class="">
+          <div class="uk-gird">
+            <div class="uk-width-1-1">
+              <a class="uk-button oc-button uk-push-9-10" ng-click="add(users)">
+                <i class="fas fa-plus"></i>
+                {{'ocsp_web_user_new_user' | translate}}
+              </a>
+              <a class="uk-button oc-button uk-push-9-10" ng-click="saveUsers()">
+                {{'ocsp_web_common_009' | translate}}
+              </a>
+            </div>
           </div>
-          <div class="row" style="margin-top: 10px;">
-            <table class="table">
+          <div class="" style="margin-top: 10px;">
+            <table class="table" class="uk-table uk-table-hover">
               <thead>
                 <tr>
-                  <th class="col-md-2">{{'ocsp_web_user_name' | translate}}</th>
-                  <th class="col-md-5">{{'ocsp_web_user_desc' | translate}}</th>
-                  <th class="col-md-4">{{'ocsp_web_user_new_password' | translate}}</th>
-                  <th class="col-md-1">{{'ocsp_web_streams_manage_023' | translate}}</th>
+                  <th width="10%">{{'ocsp_web_user_name' | translate}}</th>
+                  <th width="40%">{{'ocsp_web_user_desc' | translate}}</th>
+                  <th width="40%">{{'ocsp_web_user_new_password' | translate}}</th>
+                  <th width="10%">{{'ocsp_web_streams_manage_023' | translate}}</th>
                 </tr>
               </thead>
               <tbody>
                 <tr ng-repeat="u in users">
                   <td>
-                    <input name="username_{{$index}}" type="text" class="form-control" ng-model="u.name" required="true">
+                    <input name="username_{{$index}}" type="text" class="uk-width-1-1" ng-model="u.name" required="true">
                   </td>
                   <td>
-                    <input type="text" class="form-control" ng-model="u.description">
+                    <input type="text" class="uk-width-1-1" ng-model="u.description">
                   </td>
                   <td>
-                    <input name="password_{{$index}}" type="password" class="form-control" ng-model="u.password" ng-required="u.status===1">
+                    <input name="password_{{$index}}" type="password" class="uk-width-1-1" ng-model="u.password" ng-required="u.status===1">
                   </td>
                   <td>
-                    <div class="container-fluid">
-                      <a class="oc-link col-centered" ng-click="remove(users, $index)">
+                    <div class="">
+                      <a class="uk-button uk-button-danger oc-link" ng-click="remove(users, $index)">
                         {{'ocsp_web_streams_manage_027' | translate}}
                       </a>
                     </div>
@@ -53,7 +54,7 @@
         </div>
       </div>
     </div>
-    <div class="uk-panel uk-panel-box-primary" ng-if="!isAdmin()">
+    <div class="uk-panel" ng-if="!isAdmin()">
       <div class="uk-panel-header">
         <div class="uk-panel-title">
           {{'ocsp_web_user_manage_000' | translate}}
@@ -65,7 +66,6 @@
 
       </div>
       <div class="fieldset">
-
         <div class="uk-form-row">
           <div class="uk-grid">
             <div class="uk-width-1-10">
