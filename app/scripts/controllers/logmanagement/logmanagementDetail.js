@@ -22,21 +22,7 @@ angular.module('ocspApp')
         init();
 
         $scope.checkUserDataDetail = (data) => {
-            let modal = $uibModal.open({
-                animation: true,
-                ariaLabelledBy: 'modal-title-bottom',
-                ariaDescribedBy: 'modal-body-bottom',
-                templateUrl: 'UserActionDataDetail.html',
-                size: 'lg',
-                backdrop: 'static',
-                scope: $scope,
-                controller: ['$scope', function ($scope) {
-                    $scope.userData = JSON.parse(data);
-                    $scope.closeModal = function () {
-                        modal.close();
-                    };
-                }]
-            });
+            $scope.userData = JSON.parse(data);
         };
 
     }]);
