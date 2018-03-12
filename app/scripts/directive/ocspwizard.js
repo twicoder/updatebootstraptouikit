@@ -142,19 +142,23 @@ angular.module('ocspcomponents')
             template:
             `
             <div>
-                <ul class="steps-indicator steps-{{getEnabledSteps().length}}">
-                    <li ng-class="{default: !step.completed && !step.selected, current: step.selected && !step.completed, done: step.completed && !step.selected, editing: step.selected && step.completed}" ng-repeat="step in getEnabledSteps()">
-                        <!--<a></a>-->
-                        <span ng-if="currentStepNumber()<=$index">
-                                            <div style="display:block;background-color:#FFF;height:56px;line-height:47px;text-align:center;border: 5px solid #eee;border-radius:50%">{{$index+1}}</div>
-                                        </span>
-                        <span ng-if="currentStepNumber()>$index">
-                                            <div style="display:block;background-color:#f39c12;height:56px;line-height:47px;text-align:center;border: 5px solid #f39c12;border-radius:50%;font-size:30px;color:#FFFFFF"><div class="glyphicon glyphicon-ok"></div></div>
-                                        </span>
-                        <div style="margin-top: 25px;">{{step.title || step.wzTitle}}</div>
-                    </li>
-                </ul>
-                <div class="steps" ng-transclude></div>
+                <div>
+                    <ul class="steps-indicator steps-{{getEnabledSteps().length}}">
+                        <li ng-class="{default: !step.completed && !step.selected, current: step.selected && !step.completed, done: step.completed && !step.selected, editing: step.selected && step.completed}" ng-repeat="step in getEnabledSteps()">
+                            <!--<a></a>-->
+                            <span ng-if="currentStepNumber()<=$index">
+                                                <div style="display:block;background-color:#FFF;height:56px;line-height:47px;text-align:center;border: 5px solid #eee;border-radius:50%">{{$index+1}}</div>
+                                            </span>
+                            <span ng-if="currentStepNumber()>$index">
+                                                <div style="display:block;background-color:#f39c12;height:56px;line-height:47px;text-align:center;border: 5px solid #f39c12;border-radius:50%;font-size:30px;color:#FFFFFF"><div class="glyphicon glyphicon-ok"></div></div>
+                                            </span>
+                            <div style="margin-top: 25px;">{{step.title || step.wzTitle}}</div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="uk-overflow-container">
+                    <div class="steps" ng-transclude></div>
+                </div>
                 <div class="myline">
                     <option-text submit-method="submitMethod()" reset-method="resetData()" isfirst="{{currentStepNumber() == 1}}" islast="{{selectedStep === steps[steps.length -1 ]}}" prestepname="{{prestepname}}" nextstepname="{{nextstepname}}" laststepname="{{submitname}}">!</option-text>
                 </div>

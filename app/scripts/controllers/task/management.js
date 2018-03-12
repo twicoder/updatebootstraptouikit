@@ -4,9 +4,9 @@
  * For job management main page controller
  */
 angular.module('ocspApp')
-  .controller('TaskManagementCtrl', ['$scope', '$http', 'Notification', '$q', '$rootScope', '$ngConfirm','$uibModal', 
+  .controller('TaskManagementCtrl', ['$scope', '$http', 'Notification', '$q', '$rootScope', '$ngConfirm', '$uibModal',
     '$interval', '$filter', '$location', 'moment', 'CONFIGS', 'NgTableParams', 'globalDataService',
-    function ($scope, $http, Notification, $q, $rootScope, $ngConfirm, $uibModal, 
+    function ($scope, $http, Notification, $q, $rootScope, $ngConfirm, $uibModal,
       $interval, $filter, moment, CONFIGS, $location, NgTableParams, globalDataService) {
       $rootScope.init('task');
       //i18n
@@ -380,6 +380,7 @@ angular.module('ocspApp')
       };
 
       $scope.addNewEvent = function (array) {
+        console.log('addNewEvent called');
         if (array !== undefined) {
           array.push({
             status: 1,
@@ -399,6 +400,7 @@ angular.module('ocspApp')
             ]
           });
         }
+        console.log(array);
       };
 
       $scope.split = function (str) {
@@ -496,28 +498,6 @@ angular.module('ocspApp')
         }
       };
 
-      $scope.addNewEvent = function (array) {
-        if (array !== undefined) {
-          array.push({
-            status: 1,
-            output: {},
-            userFields: [],
-            interval: 0,
-            audit: {
-              enableDate: "none",
-              type: "always",
-            },
-            auditTypes: [
-              { name: 'none', displayName: $filter('translate')('ocsp_web_streams_subscribe_type_none') },
-              { name: 'always', displayName: $filter('translate')('ocsp_web_streams_subscribe_type_always') },
-              { name: 'day', displayName: $filter('translate')('ocsp_web_streams_subscribe_type_day') },
-              { name: 'week', displayName: $filter('translate')('ocsp_web_streams_subscribe_type_week') },
-              { name: 'month', displayName: $filter('translate')('ocsp_web_streams_subscribe_type_month') }
-            ]
-          });
-        }
-      };
-
       $scope.add = function (array) {
         if (array !== undefined) {
           array.push({
@@ -550,40 +530,32 @@ angular.module('ocspApp')
         return str.replace(/(^\s*)|(\s*$)/g, '');
       };
 
+      $scope.echoClick = function(){
+        console.log("echo the click!");
+      };
+
       $scope.createOneStream = function () {
-        let modal = $uibModal.open({
-          animation: true,
-          ariaLabelledBy: 'modal-title-bottom',
-          ariaDescribedBy: 'modal-body-bottom',
-          templateUrl: 'create_stream.html',
-          size: 'lg',
-          backdrop: 'static',
-          scope: $scope,
-          controller: ['$scope', function ($scope) {
-            $scope.searchItem = {};
-            $scope.closeModal = function () {
-              $scope.task = {
-                enginetype: 'SPARK',
-                input: {
-                  inputs: []
-                },
-                events: []
-              };
-              modal.close();
-            };
+        $scope.searchItem = {};
+        $scope.closeModal = function () {
+          $scope.task = {
+            enginetype: 'SPARK',
+            input: {
+              inputs: []
+            },
+            events: []
+          };
+          modal.close();
+        };
 
-            $scope.tryToSumit = function () {
-              let submitPromise = $scope.submitMethod();
-              if (submitPromise) {
-                submitPromise.then(function () {
-                  $scope.closeModal();
-                }, function () {
-                });
-              }
-            };
-
-          }]
-        });
+        $scope.tryToSumit = function () {
+          let submitPromise = $scope.submitMethod();
+          if (submitPromise) {
+            submitPromise.then(function () {
+              $scope.closeModal();
+            }, function () {
+            });
+          }
+        };
       };
 
     }]);

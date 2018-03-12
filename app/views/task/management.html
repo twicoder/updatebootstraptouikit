@@ -31,51 +31,378 @@
   </div>
 </script>
 
+<a href="#createStreamPopupPageId" data-uk-modal></a>
+<div id="createStreamPopupPageId" class="uk-modal uk-form">
+    <div class="uk-modal-dialog uk-modal-dialog-large">
+        <a class="uk-modal-close uk-close" ng-click="echoClick()"></a>
+        <div class="uk-modal-header">
+            <h3 class="uk-modal-title">{{'ocsp_web_createstream' | translate }}</h3>
+        </div>
+
+        <div class="">
+            <ocspwizard title="{{'ocsp_web_streams_manage_001' | translate}}" name="ocsp_web_streams_manage_001" submit-method="tryToSumit()"
+                task="task">
+                <wz-step wz-title="{{'ocsp_web_stream_basicconfig' | translate }}">
+                    <div class="uk-grid">
+                        <label class="uk-width-1-5">Stream Engine Type*</label>
+                        <div ng-show="stormenabled" class="uk-width-4-5">
+                            <select class="uk-width-3-4" ng-model="task.enginetype" required>
+                                <option value="SPARK" selected="true">SPARK</option>
+                                <option value="STORM">STORM</option>
+                            </select>
+                        </div>
+                        <div ng-show="!stormenabled" class="uk-width-4-5">
+                            <select class="uk-width-3-4" ng-model="task.enginetype" required>
+                                <option value="SPARK" selected="true">SPARK</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="uk-grid">
+                        <label class="uk-width-1-5">{{'ocsp_web_common_011' | translate}}*</label>
+                        <div class="uk-width-4-5">
+                            <input type="text" name="name" class="uk-width-3-4" ng-model="task.name" required>
+                        </div>
+                    </div>
+                    <div class="uk-grid" ng-show="task.enginetype === 'SPARK'">
+                        <label class="uk-width-1-5">{{'ocsp_web_common_012' | translate}}</label>
+                        <div class="uk-width-4-5">
+                            <textarea ng-model="task.description" class="uk-width-3-4" rows="6"></textarea>
+                        </div>
+                    </div>
+                </wz-step>
+                <wz-step wz-title="{{'ocsp_web_stream_configinput' | translate }}">
+                    <div class="uk-grid">
+                        <label class="uk-width-1-5">{{'ocsp_web_streams_manage_038' | translate}}*</label>
+                        <div class="uk-width-4-5">
+                            <select class="uk-width-3-4" ng-model="task.input.datasource" ng-options="inputDatasource.name for inputDatasource in inputDatasources"
+                                ng-required="true">
+                            </select>
+                        </div>
+                    </div>
+                    <div class="">
+                        <button type="button" class="uk-button oc-button" ng-click="addInputSource(task.input.inputs)">{{'ocsp_web_streams_manage_045' | translate}}</button>
+                        <div class="uk-width-1-5">
+                        </div>
+                        <div class="uk-width-4-5">
+                            <div class="uk-width-3-4 uk-push-1-4">
+                                <div class="uk-accordion" data-uk-accordion data="{collapse: true}" ng-repeat="item in task.input.inputs">
+                                    <h3 class="uk-accordion-title">
+                                        <i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': item.isOpen, 'glyphicon-chevron-right': !item.isOpen}"></i> &nbsp; {{'ocsp_web_streams_manage_038' | translate}} {{item.name}}
+                                        <a class="pull-right" ng-click="$event.stopPropagation();$event.preventDefault();remove(task.input.inputs, $index)">
+                                            <i class="glyphicon glyphicon-remove"></i>
+                                        </a>
+                                    </h3>
+                                    <div class="uk-accordion-content">
+                                        <div class="uk-grid">
+                                            <label class="uk-width-1-5">{{'ocsp_web_streams_manage_010' | translate}}*</label>
+                                            <div class="uk-width-4-5">
+                                                <input type="text" class="uk-width-3-4" ng-model="item.topic" required>
+                                            </div>
+                                        </div>
+                                        <div class="uk-grid">
+                                            <label class="uk-width-1-5">{{'ocsp_web_common_011' | translate}}*</label>
+                                            <div class="uk-width-4-5">
+                                                <input type="text" class="uk-width-3-4" ng-model="item.name" required>
+                                            </div>
+                                        </div>
+                                        <div class="uk-grid">
+                                            <label class="uk-width-1-5">{{'ocsp_web_streams_manage_011' | translate}}*</label>
+                                            <div class="uk-width-4-5">
+                                                <tokenfield class="uk-width-3-4" ng-model="item.fields" required="true"></tokenfield>
+                                            </div>
+                                        </div>
+                                        <div class="uk-grid">
+                                            <label class="uk-width-1-5">{{'ocsp_web_streams_manage_012' | translate}}*</label>
+                                            <div class="uk-width-4-5">
+                                                <input type="text" class="uk-width-3-4" ng-model="item.delim" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-grid">
+                        <label class="uk-width-1-5">{{'ocsp_web_streams_manage_047' | translate}}*</label>
+                        <div class="uk-width-4-5">
+                            <tokenfield class="uk-width-3-4" ng-model="task.input.fields" disabled="true" required="true"></tokenfield>
+                        </div>
+                    </div>
+                    <div class="uk-grid">
+                        <div class="uk-width-1-5">
+                        </div>
+                        <div class="uk-width-4-5">
+                            <button type="button" class="uk-button oc-button" ng-click="generate(task.input, task.input.inputs)">{{'ocsp_web_streams_manage_048' | translate}}</button>
+                        </div>
+
+                    </div>
+                    <div class="uk-grid">
+                        <label class="uk-width-1-5"></label>
+                        <div class="uk-width-4-5">
+                            <div class="uk-width-3-4">
+                                <table class="uk-table uk-table-hover uk-table-condensed">
+                                    <thead>
+                                        <tr>
+                                            <th width="30%">{{'ocsp_web_streams_case_field_name' | translate}}</th>
+                                            <th width="60">{{'ocsp_web_streams_case_expression' | translate}}</th>
+                                            <th width="10%">
+                                                <a ng-click="addUserField(task.input)">
+                                                    <i class="fa fa-plus"></i>
+                                                </a>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="userfield in task.input.userFields">
+                                            <td>
+                                                <input type="text" class="uk-width-1-1" ng-model="userfield.pname" required>
+                                            </td>
+                                            <td>
+                                                <input type="text" class="uk-width-1-1" ng-model="userfield.pvalue" required>
+                                            </td>
+                                            <td>
+                                                <a ng-click="remove(task.input.userFields, $index)">
+                                                    <i class="fas fa-minus-circle"></i>
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="uk-grid">
+                        <label class="uk-width-1-5">{{'ocsp_web_streams_manage_013' | translate}}</label>
+                        <div class="uk-width-4-5">
+                            <input type="text" class="uk-width-3-4" ng-model="task.input.filter_expr">
+                        </div>
+                    </div>
+                    <div class="uk-grid">
+                        <label class="uk-width-1-5">{{'ocsp_web_streams_manage_014' | translate}}*</label>
+                        <div class="uk-width-4-5">
+                            <input type="text" class="uk-width-3-4" ng-model="task.input.uniqueKey" required>
+                        </div>
+
+                    </div>
+
+                </wz-step>
+                <wz-step wz-title="{{'ocsp_web_stream_configlabel' | translate }}">
+                    <div class="uk-grid">
+                        <div class="">
+                        </div>
+                        <div class="uk-width-1-1">
+                            <isteven-multi-select input-model="inputLabels" output-model="task.outputLabels" button-label="name" item-label="name" tick-property="tick1"
+                                helper-elements="filter" translation="localLang" required>
+                            </isteven-multi-select>
+                        </div>
+                    </div>
+                    <div class="uk-grid">
+                        <div class=""></div>
+                        <div class="uk-width-1-1">
+                            <div class="uk-width-3-4">
+                                <ul dnd-list="task.outputLabels">
+                                    <li ng-repeat="item in task.outputLabels" dnd-draggable="item" dnd-moved="sortLabels(task.outputLabels, $index)" dnd-effect-allowed="move"
+                                        dnd-selected="models.selected = item" ng-class="{'selected': models.selected === item}">
+                                        <dnd-nodrag>
+                                            <div dnd-handle class="handle">
+                                                <span class="badge">{{$index+1}}</span>&nbsp;{{item.name}}</div>
+                                        </dnd-nodrag>
+                                    </li>
+                                    <li class="dndPlaceholder">
+                                        {{'ocsp_web_streams_manage_015' | translate}}
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </wz-step>
+                <wz-step wz-title="{{'ocsp_web_stream_configoutput' | translate }}">
+                    <div class="uk-grid" ng-if="cep">
+                        <div class="alert alert-danger alert-dismissible text-center" role="alert">
+                            {{'ocsp_web_streams_cep1' | translate}} {{'ocsp_web_common_037' | translate}} {{'ocsp_web_streams_cep2' | translate}}
+                        </div>
+                    </div>
+                    <div class="uk-grid" ng-if="!cep">
+                        <div class=""></div>
+                        <div class="uk-width-1-1">
+                            <button ng-click="echoClick()">Test</button>
+                            <button ng-click="addNewEvent(task.events)">EchoAddEvent!</button>
+                            <button type="button" class="uk-button oc-button" ng-click="addNewEvent(task.events)">{{'ocsp_web_streams_manage_016' | translate}}
+                            </button>
+                            <div class="uk-accordion" data-uk-accordion data="{collapse: false}" ng-repeat="item in task.events">
+                                <h3 class="uk-accordion-title">
+                                    <i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': item.isOpen, 'glyphicon-chevron-right': !item.isOpen}"></i> &nbsp; {{'ocsp_web_streams_manage_031' | translate}} {{item.name}}
+                                    <a class="pull-right" ng-click="$event.stopPropagation();$event.preventDefault();remove(task.events, $index)">
+                                        <i class="glyphicon glyphicon-remove"></i>
+                                    </a>
+                                </h3>
+                                <div class="uk-accordion-content">
+                                    <div class="uk-grid">
+                                        <label class="uk-width-1-5">{{'ocsp_web_streams_manage_017' | translate}}*</label>
+                                        <div class="uk-width-4-5">
+                                            <input class="uk-width-3-4" type="text" ng-model="item.name" required>
+                                        </div>
+                                    </div>
+                                    <div class="uk-grid">
+                                        <label class="uk-width-1-5">{{'ocsp_web_streams_manage_018' | translate}}*</label>
+                                        <div class="uk-width-4-5">
+                                            <tokenfield class="uk-width-3-4" inputs="{{getAllPossibleFields(task.input.fields,task.input.userFields)}}" labels="{{task.outputLabels}}"
+                                                ng-model="item.select_expr" checkinputfield=true required="true"></tokenfield>
+                                        </div>
+                                        <span id="idWarningMessageOfTokenField" class="redtip" ng-show="outputFieldsInvalid">{{outputFieldsInvalidMessage}}</span>
+                                    </div>
+                                    <div class="uk-grid">
+                                        <label class="uk-width-1-5">{{'ocsp_web_streams_manage_019' | translate}}*</label>
+                                        <div class="uk-width-4-5">
+                                            <input class="uk-width-3-4" type="text" ng-model="item.delim" required>
+                                        </div>
+                                    </div>
+                                    <div class="uk-grid">
+                                        <label class="uk-width-1-5">{{'ocsp_web_streams_manage_013' | translate}}</label>
+                                        <div class="uk-width-4-5">
+                                            <input class="uk-width-3-4" type="text" ng-model="item.filter_expr">
+                                        </div>
+                                    </div>
+                                    <div class="uk-grid">
+                                        <label class="uk-width-1-5">{{'ocsp_web_streams_manage_020' | translate}}({{'ocsp_web_common_023' | translate}})*</label>
+                                        <div class="uk-width-4-5">
+                                            <input class="uk-width-3-4" type="number" ng-model="item.interval" ng-pattern="/^(0|[1-9][0-9]*)$/" required>
+                                        </div>
+
+                                    </div>
+                                    <div class="uk-grid">
+                                        <label class="uk-width-1-5">{{'ocsp_web_streams_manage_014' | translate}}*</label>
+                                        <div class="uk-width-4-5">
+                                            <input class="uk-width-3-4" type="text" ng-model="item.output.uniqueKey" required>
+                                        </div>
+
+                                    </div>
+                                    <div class="uk-grid">
+                                        <label class="uk-width-1-5">{{'ocsp_web_streams_manage_021' | translate}}*</label>
+                                        <div class="uk-width-4-5">
+                                            <select class="uk-width-3-4" ng-model="item.output.datasource" ng-options="datasource.name for datasource in datasources"
+                                                ng-required="true">
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="uk-grid" ng-if="item.output.datasource.type == 'kafka'">
+                                        <label class="uk-width-1-5">{{'ocsp_web_streams_manage_010' | translate}}*</label>
+                                        <div class="uk-width-4-5">
+                                            <input class="uk-width-3-4" type="text" ng-model="item.output.topic" required>
+                                        </div>
+                                    </div>
+                                    <div class="uk-grid" ng-if="item.output.datasource.type == 'codis'">
+                                        <label class="uk-width-1-5">{{'ocsp_web_streams_manage_022' | translate}}*</label>
+                                        <div class="uk-width-4-5">
+                                            <input class="uk-width-3-4" type="text" ng-model="item.output.codisKeyPrefix" required>
+                                        </div>
+                                    </div>
+                                    <div class="uk-grid">
+                                        <br ng-repeat="val in datasources">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </wz-step>
+                <wz-step wz-title="{{'ocsp_web_stream_checkandsubmit' | translate }}">
+                    <h1 class="page-header">
+                        {{task.name}}
+                    </h1>
+                    <div class="uk-grid" ng-show="task.input.inputs !== undefined && task.input.inputs.length > 0">
+                        <label class="uk-width-1-5">{{'ocsp_web_streams_manage_038' | translate}}:</label>
+                        <div class="uk-width-4-5">
+                            <ul class="uk-list">
+                                <li ng-repeat="item in task.input.inputs" class="uk-width-3-4">
+                                    <strong>{{item.name}}</strong>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <div ng-show="task.outputLabels !== undefined && task.outputLabels.length > 0" class="uk-grid">
+                        <label class="uk-width-1-5">{{'ocsp_web_common_024' | translate}}:</label>
+                        <div class="uk-width-4-5">
+                            <ul class="uk-list">
+                                <li ng-repeat="item in task.outputLabels" class="uk-width-3-4">
+                                    <span class="badge">{{$index+1}}</span>&nbsp;{{item.name}}</li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <div ng-show="task.events !== undefined && task.events.length > 0" class="uk-grid">
+                        <label class="uk-width-1-5">{{'ocsp_web_common_025' | translate}}:</label>
+                        <div class="uk-width-4-5">
+                            <ul class="uk-list">
+                                <li ng-repeat="item in task.events" class="uk-width-3-4">
+                                    <strong>{{item.name}}</strong>({{item.output.datasource.type}})</li>
+                            </ul>
+                        </div>
+                    </div>
+                </wz-step>
+            </ocspwizard>
+        </div>
+    </div>
+</div>
+
+
 <div class="">
     <ng-include src="'views/task/sidebar.html'"></ng-include>
-    <button class="btn-create-stream" ng-class="{false:'oc-button'}[isAdminUser]" href="" ng-disabled="isAdminUser" ng-click="createOneStream()">
-      <span class="fa fa-2x fa-plus"/> {{'ocsp_web_createstream' | translate }}
+    <button class="btn-create-stream" ng-class="{false:'oc-button'}[isAdminUser]" href="" ng-disabled="isAdminUser" ng-click="createOneStream()"
+        data-uk-modal="{target:'#createStreamPopupPageId'}">
+        <span class="fa fa-2x fa-plus" /> {{'ocsp_web_createstream' | translate }}
     </button>
     <div class="uk-grid">
-      <!-- leave for wizard -->
-      <div class="uk-width-1-1">
+        <!-- leave for wizard -->
+        <div class="uk-width-1-1">
 
-        <table ng-table="allJobsListParams" class="uk-table uk-table-hover">
-          <thead>
-            <tr>
-              <th>{{'ocsp_web_streams_manage_052' | translate}}</th>
-              <th>{{'ocsp_web_streams_manage_053' | translate}}</th>
-              <th>{{'ocsp_web_streams_manage_054' | translate}}</th>
-              <th ng-show="isAdminUser">Owner</th>
-              <th>{{'ocsp_web_streams_manage_023' | translate}}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr ng-repeat="item in $data">
-              <td class="centertext uk-width-2-10"><a class="task-name" href="#/task_management/{{item.id}}">{{item.name}}</a></td>
-              <td class="centertext uk-width-2-10"><ocsp-stream-run-status ng-model="item"></ocsp-stream-run-status></td>
-              <td class="centertext uk-width-2-10"><font>{{item.running_time || 0 | cusDate}}</font></td>
-              <td ng-show="isAdminUser" class="centertext uk-width-1-10">{{item.owner}}</a></td>
-              <td class="uk-width-2-10">
-                <div class="btn-group">
-                  <font>
-                    <button href="" class="uk-button oc-button" ng-disabled="item.status !== 0 && item.status !== 'STOPPED' || isAdminUser" ng-click="updateStreamStatus(item,'start')"><i class="fa fa-lg fa-play-circle"></i></button>
-                  </font>
-                  <font>
-                    <button href="" class="uk-button oc-button" ng-disabled="item.status === 0 || item.status === 'STOPPED' || isAdminUser" ng-click="updateStreamStatus(item,'stop')"><i class="fa fa-lg fa-stop-circle"></i></button>
-                  </font>
-                  <!-- <font>
+            <table ng-table="allJobsListParams" class="uk-table uk-table-hover">
+                <thead>
+                    <tr>
+                        <th>{{'ocsp_web_streams_manage_052' | translate}}</th>
+                        <th>{{'ocsp_web_streams_manage_053' | translate}}</th>
+                        <th>{{'ocsp_web_streams_manage_054' | translate}}</th>
+                        <th ng-show="isAdminUser">Owner</th>
+                        <th>{{'ocsp_web_streams_manage_023' | translate}}</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in $data">
+                        <td class="centertext uk-width-2-10">
+                            <a class="task-name" href="#/task_management/{{item.id}}">{{item.name}}</a>
+                        </td>
+                        <td class="centertext uk-width-2-10">
+                            <ocsp-stream-run-status ng-model="item"></ocsp-stream-run-status>
+                        </td>
+                        <td class="centertext uk-width-2-10">
+                            <font>{{item.running_time || 0 | cusDate}}</font>
+                        </td>
+                        <td ng-show="isAdminUser" class="centertext uk-width-1-10">{{item.owner}}</a>
+                        </td>
+                        <td class="uk-width-2-10">
+                            <div class="btn-group">
+                                <font>
+                                    <button href="" class="uk-button oc-button" ng-disabled="item.status !== 0 && item.status !== 'STOPPED' || isAdminUser" ng-click="updateStreamStatus(item,'start')">
+                                        <i class="fa fa-lg fa-play-circle"></i>
+                                    </button>
+                                </font>
+                                <font>
+                                    <button href="" class="uk-button oc-button" ng-disabled="item.status === 0 || item.status === 'STOPPED' || isAdminUser" ng-click="updateStreamStatus(item,'stop')">
+                                        <i class="fa fa-lg fa-stop-circle"></i>
+                                    </button>
+                                </font>
+                                <!-- <font>
                     <button href="" class="oc-button" ng-disabled="item.status === 0 || item.status === 'STOPPED' || isAdminUser" ng-click="updateStreamStatus(item,'restart')"><i class="glyphicon glyphicon-refresh danger"></i></button>
                   </font> -->
-                  <!-- <font>
+                                <!-- <font>
                     <button href="" ng-disabled="false" ng-click="updateStreamStatus(item,'remove')"><i class="glyphicon glyphicon-remove-sign warning"></i></button>
                   </font> -->
-                </div>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
 
-      </div>
+        </div>
     </div>
 </div>
