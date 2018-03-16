@@ -21,20 +21,23 @@
   </div>
 </div>
 
-<div class="">
-  <ul class="uk-breadcrumb">
-    <li>
-      <a href="#/logmanagement/">
-        <label class="fas fa-angle-left"></label>&nbsp;{{'ocsp_web_common_returnback' | translate}}</a>
-    </li>
-    <li class="uk-active">{{'ocsp_web_logmanagement_datadetail' | translate}}</li>
-  </ul>
-</div>
-<div class="">
+<div class="uk-grid" ng-cloak>
+  <div class="uk-width-1-10"></div>
+  <div class="uk-width-8-10">
+    <div class="uk-panel-header">
+      <div class="uk-panel-title">
+        <ul class="uk-breadcrumb">
+          <li>
+            <a href="#/logmanagement/">
+              <label class="fas fa-angle-left"></label>&nbsp;{{'ocsp_web_common_returnback' | translate}}</a>
+          </li>
+          <li class="uk-active">{{'ocsp_web_logmanagement_datadetail' | translate}}</li>
+        </ul>
+      </div>
+    </div>
 
-  <div class="">
     <div class="uk-panel">
-      <div class="uk-overflow-container">
+      <div class="uk-overflow-container uk-panel-body uk-form uk-form-horizontal">
         <table class="uk-table uk-table-hover uk-table-striped uk-table-condensed">
           <thead>
             <tr>
@@ -63,5 +66,5 @@
       </div>
     </div>
   </div>
-
+  <div class="uk-width-1-10"></div>
 </div>

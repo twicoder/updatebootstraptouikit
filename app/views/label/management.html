@@ -51,7 +51,8 @@
                                     <button class="uk-button uk-button-small" style="margin-top:8px;" ng-click="onePropertyItem.isEditing = true" ng-if="!onePropertyItem.isEditing">
                                         <span class="fas fa-pencil-alt"></span>
                                     </button>
-                                    <button class="uk-button uk-button-small uk-button-danger" style="margin-top:8px;" ng-click="deleteProperty(onePropertyItem)" ng-if="!onePropertyItem.isEditing">
+                                    <button class="uk-button uk-button-small uk-button-danger" style="margin-top:8px;" ng-click="deleteProperty(onePropertyItem)"
+                                        ng-if="!onePropertyItem.isEditing">
                                         <span class="fas fa-trash-alt"></span>
                                     </button>
                                 </td>
@@ -87,7 +88,8 @@
                                     <button class="uk-button uk-button-small" style="margin-top:8px;" ng-click="onePropertyItem.isEditing = true" ng-if="!onePropertyItem.isEditing">
                                         <span class="fas fa-pencil-alt"></span>
                                     </button>
-                                    <button class="uk-button uk-button-small uk-button-danger" style="margin-top:8px;" ng-click="deleteProperty(onePropertyItem)" ng-if="!onePropertyItem.isEditing">
+                                    <button class="uk-button uk-button-small uk-button-danger" style="margin-top:8px;" ng-click="deleteProperty(onePropertyItem)"
+                                        ng-if="!onePropertyItem.isEditing">
                                         <span class="fas fa-trash-alt"></span>
                                     </button>
                                 </td>
@@ -108,15 +110,16 @@
     </div>
 </div>
 
-<div class="uk-grid uk-form">
-    <div class="uk-width-1-1">
+<div class="uk-grid" ng-cloak>
+    <div class="uk-width-1-10"></div>
+    <div class="uk-width-8-10">
         <div class="uk-panel">
             <div class="uk-panel-header">
                 <div class="uk-panel-title">
                     {{'ocsp_web_label_manage_000' | translate}}
                 </div>
             </div>
-            <div class="fieldset">
+            <div class="uk-panel-body uk-form uk-form-horizontal">
                 <table class="uk-table uk-table-hover uk-table-condensed">
                     <thead>
                         <tr>
@@ -142,25 +145,35 @@
                         </tr>
                     </tbody>
                 </table>
-                <div class="uk-width-1-1">
+                <div class="uk-form-row">
                     <ul class="pull-right" uib-pagination total-items="page.totalitems" max-size="page.maxsize" items-per-page="page.perpage"
                         ng-model="page.curpage" first-text="<<" rotate="true" last-text=">>" boundary-links="true" previous-text="<"
                         next-text=">" force-ellipses="3" ng-change="choose(page.curpage)">
                     </ul>
                 </div>
-            </div>
-        </div>
-        <div class="">
-            <div>
-                <div style="float:right;">
-                    <button type="button" class="uk-button oc-button" ng-click="upload()">{{'ocsp_web_common_010' | translate}}</button>
+
+                <div class="uk-form-row">
+                    <button type="button" class="uk-button oc-button pull-right" ng-click="upload()">{{'ocsp_web_common_010' | translate}}</button>
+                    <input ngf-select type="file" ng-model="file">
+                    <div id="upload-drop" class="uk-placeholder uk-text-center">
+                        <i class="uk-icon-cloud-upload uk-icon-medium uk-text-muted uk-margin-small-right"></i> 将文件拖拽至此 或
+                        <a class="uk-form-file">选择一个文件
+                            <input id="upload-select" type="file">
+                        </a>.
+                    </div>
+
+                    <div id="progressbar" class="uk-progress uk-hidden">
+                        <div class="uk-progress-bar" style="width: 0%;">...</div>
+                    </div>
                 </div>
-                <input ngf-select type="file" ng-model="file">
+
+                <div class="uk-form-row">
+                    <div class="uk-alert uk-alert-danger" ng-if="message !== null">
+                        {{message}}
+                    </div>
+                </div>
             </div>
-        </div>
-        <div class="uk-alert uk-alert-danger" ng-if="message !== null">
-            {{message}}
         </div>
     </div>
-
+    <div class="uk-width-1-10"></div>
 </div>

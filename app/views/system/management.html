@@ -101,7 +101,6 @@
     </div>
 </div>
 
-
 <script type="text/ng-template" id="kerberosConfigureWarning.html">
   <div class="modal-header">
     <button type="button" class="close" ng-click="closeModal()"><span aria-hidden="true">&times;</span></button>
@@ -120,90 +119,99 @@
   </div>
 </script>
 
-<div class="uk-grid uk-form" ng-cloak>
-    <div class="uk-width-1-1">
+<div class="uk-grid" ng-cloak>
+    <div class="uk-width-1-10"></div>
+    <div class="uk-width-8-10">
         <div class="uk-panel">
             <div class="uk-panel-header">
                 <div class="uk-panel-title">
                     {{'ocsp_web_system_manage_001' | translate}}
-                    <button class="wizard-button uk-button oc-button" style="float:right;margin-right:20px;" ng-disabled="!isAdmin()" data-uk-modal="{target:'#addSystemPropertyPageId'}"
+                    <button class="wizard-button uk-button oc-button pull-right" ng-disabled="!isAdmin()" data-uk-modal="{target:'#addSystemPropertyPageId'}"
                         ng-click="openPropertyDefineModal()">{{'ocsp_web_system_manage_007' | translate}}</button>
                 </div>
             </div>
-            <div class="fieldset">
-                <div ng-repeat="oneCategory in categorySet">
-                    <div class="uk-accordion" ng-if="notEmpty(propertyMap.get(oneCategory))" data-uk-accordion data="{collapse: true}">
-                        <h3 class="uk-accordion-title">
-                            <i class="glyphicon" ng-class="{'glyphicon-chevron-down': isOpen, 'glyphicon-chevron-right': !isOpen}"></i>
-                            &nbsp;
-                            <label ng-if="oneCategory!=='userdefined' && oneCategory!==otherCategoryName ">{{ oneCategory }}&nbsp;{{ 'ocsp_web_common_configuration' | translate }}</label>
-                            <label ng-if="oneCategory==='userdefined'">{{ 'ocsp_web_common_customize' | translate }}&nbsp;{{ 'ocsp_web_common_configuration' | translate
-                                }}
-                            </label>
-                            <label ng-if="oneCategory=== otherCategoryName ">{{ 'ocsp_web_common_other' | translate }}&nbsp;{{ 'ocsp_web_common_configuration' | translate
-                                }}
-                            </label>
-                        </h3>
-                        <div class="uk-accordion-content">
-                            <div ng-repeat="property in propertyMap.get(oneCategory)" class="uk-form-row">
-                                <div class="uk-grid" ng-if="isNotSpecialProperties(property) && property.status ===1">
-                                    <div class="uk-width-1-10">
-                                        <label>{{property.name}}</label>
-                                    </div>
-                                    <div class="uk-width-7-10">
-                                        <input class="uk-width-1-1" ng-model="property.value" popover-trigger="'mouseenter'" popover-placement="right" popover-append-to-body=true
-                                            uib-popover="{{property.description}}" popover-title="{{property.name}}" ng-disabled="!isAdmin()">
-                                    </div>
-                                    <div class="uk-width-1-10" style="margin-top:8px" ng-if="property.STREAM_SYSTEMPROP_CATEGORY && property.STREAM_SYSTEMPROP_CATEGORY.name === 'userdefined'">
-                                        <a ng-click="removeUserDefinedProperty(property)" ng-hide="!isAdmin()">
-                                            <i class="glyphicon glyphicon-minus-sign danger"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                                <div class="uk-grid" ng-if="property.name === 'spark.submit.deployMode'">
-                                    <div class="uk-width-1-10">
-                                        <label>Deploy Mode</label>
-                                    </div>
-                                    <div class="uk-width-7-10">
-                                        <select class="uk-width-1-1" ng-model="property.value" ng-disabled="!isAdminUser()">
-                                            <option value="client">client</option>
-                                            <option value="cluster">cluster</option>
-                                        </select>
-                                    </div>
-                                </div>
-                                <div class="uk-grid" ng-if="isPropertyNameContainsEnable(property.name)">
-                                    <div class="uk-width-1-10">
-                                        <label>{{property.name}}</label>
-                                    </div>
-                                    <div class="uk-width-7-10">
-                                        <toggle-switch on-label="{{'ocsp_web_common_040' | translate}}" off-label="{{'ocsp_web_common_041' | translate}}" ng-disabled="!isAdminUser()"
-                                            ng-model="property.value">
-                                        </toggle-switch>
+            <div class="uk-panel-body">
+                <div class="uk-form uk-form-horizontal">
+                    <div class="uk-accordion" data-uk-accordion>
+                        <div ng-repeat="oneCategory in categorySet">
+                            <div ng-if="notEmpty(propertyMap.get(oneCategory))">
+                                <h3 class="uk-accordion-title">
+                                    <i class="glyphicon" ng-class="{'glyphicon-chevron-down': isOpen, 'glyphicon-chevron-right': !isOpen}"></i>
+                                    &nbsp;
+                                    <label ng-if="oneCategory!=='userdefined' && oneCategory!==otherCategoryName ">{{ oneCategory }}&nbsp;{{ 'ocsp_web_common_configuration' | translate }}</label>
+                                    <label ng-if="oneCategory==='userdefined'">{{ 'ocsp_web_common_customize' | translate }}&nbsp;{{ 'ocsp_web_common_configuration'
+                                        | translate }}
+                                    </label>
+                                    <label ng-if="oneCategory=== otherCategoryName ">{{ 'ocsp_web_common_other' | translate }}&nbsp;{{ 'ocsp_web_common_configuration' | translate
+                                        }}
+                                    </label>
+                                </h3>
+                                <div class="uk-accordion-content">
+                                    <div ng-repeat="property in propertyMap.get(oneCategory)" class="uk-form-row">
+                                        <div class="uk-grid" ng-if="isNotSpecialProperties(property) && property.status ===1">
+                                            <div class="uk-width-2-10">
+                                                <label>{{property.name}}</label>
+                                            </div>
+                                            <div class="uk-width-7-10">
+                                                <input class="uk-width-1-1" ng-model="property.value" popover-trigger="'mouseenter'" popover-placement="right" popover-append-to-body=true
+                                                    uib-popover="{{property.description}}" popover-title="{{property.name}}"
+                                                    ng-disabled="!isAdmin()">
+                                            </div>
+                                            <div class="uk-width-1-10" style="margin-top:8px" ng-if="property.STREAM_SYSTEMPROP_CATEGORY && property.STREAM_SYSTEMPROP_CATEGORY.name === 'userdefined'">
+                                                <a ng-click="removeUserDefinedProperty(property)" ng-hide="!isAdmin()">
+                                                    <i class="glyphicon glyphicon-minus-sign danger"></i>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <div class="uk-grid" ng-if="property.name === 'spark.submit.deployMode'">
+                                            <div class="uk-width-2-10">
+                                                <label>Deploy Mode</label>
+                                            </div>
+                                            <div class="uk-width-7-10">
+                                                <select class="uk-width-1-1" ng-model="property.value" ng-disabled="!isAdminUser()">
+                                                    <option value="client">client</option>
+                                                    <option value="cluster">cluster</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="uk-grid" ng-if="isPropertyNameContainsEnable(property.name)">
+                                            <div class="uk-width-2-10">
+                                                <label>{{property.name}}</label>
+                                            </div>
+                                            <div class="uk-width-7-10">
+                                                <toggle-switch on-label="{{'ocsp_web_common_040' | translate}}" off-label="{{'ocsp_web_common_041' | translate}}" ng-disabled="!isAdminUser()"
+                                                    ng-model="property.value">
+                                                </toggle-switch>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <div class="uk-form-row">
+                        <button type="button" class="uk-button oc-button pull-right" ng-disabled="!isAdmin()" ng-click="save()">{{'ocsp_web_common_009' | translate}}</button>
+                    </div>
                 </div>
-                <button type="button" class="uk-button oc-button" ng-disabled="!isAdmin()" ng-click="save()">{{'ocsp_web_common_009' | translate}}</button>
+
             </div>
         </div>
-    </div>
-    <br/>
-    <br/>
-    <br/>
-    <div class="uk-width-1-1">
+
         <div class="uk-panel">
             <div class="uk-panel-header">
                 <div class="uk-panel-title">
                     {{'ocsp_web_system_manage_006' | translate}}
-                    <button class="wizard-button uk-button oc-button" style="float:right;margin-right:20px;" ng-disabled="!isAdmin()" data-uk-modal="{target:'#stackedModalPageId'}">{{'ocsp_web_system_manage_003' | translate}}</button>
+                    <button class="wizard-button uk-button oc-button" style="float:right;margin-right:20px;" ng-disabled="!isAdmin()" data-uk-modal="{target:'#stackedModalPageId'}">
+                        {{'ocsp_web_system_manage_003' | translate}}
+                    </button>
                 </div>
             </div>
-            <div class="fieldset">
-                <div ng-repeat="data in datasource">
-                    <div ng-if="data.type === 'kafka'" class="panel-default">
-                        <div class="uk-accordion" data-uk-accordion="{collapse: true}">
+            <div class="uk-panel-body uk-form uk-form-horizontal">
+                <div class="uk-accordion" data-uk-accordion="{collapse: true}">
+                    <div ng-repeat="data in datasource">
+                        <div ng-if="data.type === 'kafka'" class="panel-default">
+
                             <h3 class="uk-accordion-title">
                                 <i class="glyphicon" ng-class="{'glyphicon-chevron-down': data.isOpen, 'glyphicon-chevron-right': !status.isOpen}"></i>
                                 &nbsp;{{data.name}}
@@ -213,7 +221,7 @@
                             <div class="uk-accordion-content">
                                 <div class="uk-form-row">
                                     <div class="uk-grid">
-                                        <div class="uk-width-1-10">
+                                        <div class="uk-width-2-10">
                                             <label>{{'ocsp_web_common_011' | translate}}</label>
                                         </div>
                                         <div class="uk-width-7-10">
@@ -223,8 +231,8 @@
                                 </div>
                                 <div class="uk-form-row" ng-repeat="item in data.props track by $index" ng-if="data.type === 'kafka' || item.pname === 'zk' || item.pname === 'zkpath'">
                                     <div class="uk-grid">
-                                        <div class="uk-width-1-10">
-                                            <label>{{item.pname}}123</label>
+                                        <div class="uk-width-2-10">
+                                            <label>{{item.pname}}</label>
                                         </div>
                                         <div class="uk-width-7-10">
                                             <input class="uk-width-1-1" ng-model="item.pvalue" popover-append-to-body=true popover-trigger="'mouseenter'" popover-placement="right"
@@ -234,27 +242,30 @@
                                     </div>
                                 </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
 
-                <button type="button" class="uk-button oc-button" ng-disabled="!isAdmin()" ng-click="save()">{{'ocsp_web_common_009' | translate}}</button>
+                <div class="uk-form-row">
+                    <button type="button" class="uk-button oc-button pull-right" ng-disabled="!isAdmin()" ng-click="save()">
+                        {{'ocsp_web_common_009' | translate}}
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="uk-width-1-1">
+
         <div class="uk-panel">
             <div class="uk-panel-header">
                 <div class="uk-panel-title">
                     {{'ocsp_web_systemconfig_cachedatabase' | translate}}&nbsp;{{'ocsp_web_common_configuration' | translate}}
                 </div>
             </div>
-            <div class="fieldset">
-
+            <div class="uk-panel-body uk-form uk-form-horizontal">
                 <div ng-repeat="oneCategory in categorySet">
                     <div ng-repeat="property in propertyMap.get(oneCategory)">
                         <div class="uk-grid uk-form-row" ng-if="property.name === 'ocsp.cache.database.type'">
-                            <div class="uk-width-1-10">
+                            <div class="uk-width-2-10">
                                 <label>Cache Database</label>
                             </div>
                             <div class="uk-width-7-10">
@@ -265,10 +276,12 @@
                     </div>
                 </div>
 
+                <br/>
+
                 <div ng-repeat="data in datasource">
-                    <div ng-if="data.type === cacheDatabaseType " class="panel-default">
+                    <div ng-if="data.type === cacheDatabaseType ">
                         <div class="uk-grid uk-form-row" ng-repeat="item in data.props track by $index">
-                            <div class="uk-width-1-10">
+                            <div class="uk-width-2-10">
                                 <label>{{item.pname}}</label>
                             </div>
                             <div class="uk-width-7-10">
@@ -279,8 +292,14 @@
                         </div>
                     </div>
                 </div>
-                <button type="button" class="uk-button oc-button" ng-disabled="!isAdmin()" ng-click="save()">{{'ocsp_web_common_009' | translate}}</button>
+                <div class="uk-form-row">
+                    <button type="button" class="uk-button oc-button pull-right" ng-disabled="!isAdmin()" ng-click="save()">
+                        {{'ocsp_web_common_009' | translate}}
+                    </button>
+                </div>
             </div>
         </div>
+
     </div>
+    <div class="uk-width-1-10"></div>
 </div>

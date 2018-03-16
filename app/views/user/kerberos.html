@@ -1,98 +1,59 @@
-<div class="uk-grid uk-form" ng-form name="KerberosConfigForm">
+<div class="uk-grid" ng-form name="KerberosConfigForm">
   <div class="uk-width-1-10"></div>
   <div class="uk-width-8-10">
-    <div class="uk-panel uk-panel-box-primary" ng-if="!isAdmi() && shouldShowKerberosConfigure">
+    <div class="uk-panel" ng-if="!isAdmi() && shouldShowKerberosConfigure">
       <div class="uk-panel-header">
         <div class="uk-panel-title">
-          Kerberos Configure
+          Kerberos {{'ocsp_web_common_configuration' | translate}}
+          <span class="pull-right">
+            <ocsp-switch-btn save-func="saveKerberosConfigure()" edit-func="editKerberosConfigure()" cancel-func="cancel()" disabled="message_kafak_spark_samekeytab!=null"></ocsp-switch-btn>
+          </span>
         </div>
       </div>
+      <div class="uk-panel-body">
+        <div class="uk-form uk-form-horizontal">
 
+          <div class="uk-alert uk-alert-warning" ng-if="message_kafak_spark_samekeytab!=null"> {{message_kafak_spark_samekeytab}}</div>
 
-      <div class="fieldset">
-        <div class="uk-form-row">
-          <div class="uk-grid">
-            <div class="uk-width-1-10">
-              <label>Spark Principal</label>
+          <div class="uk-form-row">
+            <label class="uk-form-label" for="spark_principal_id">Spark Principal</label>
+            <div class="uk-form-controls">
+              <input id="spark_principal_id" ng-disabled="!kerberosFieldsEditable" class="uk-form-width-large" type="text" ng-model="user.spark_principal" required>
             </div>
-            <div class="uk-width-9-10">
-              <input class="" type="text" ng-model="user.spark_principal" required>
+          </div>
+
+          <div class="uk-form-row">
+            <label class="uk-form-label" for="spark_keytab_id">Spark Keytab</label>
+            <div class="uk-form-controls">
+              <input id="spark_keytab_id" ng-disabled="!kerberosFieldsEditable" class="uk-form-width-large" ng-blur="isKerberosConfigCorrect()" ng-keypress="checkKeytabInput($event)"
+                name="spark_keytab" type="text" ng-model="user.spark_keytab" required>
+            </div>
+          </div>
+
+          <div class="uk-form-row">
+            <label class="uk-form-label" for="kafka_principal_id">Kafka Principal</label>
+            <div class="uk-form-controls">
+              <input id="kafka_principal_id" ng-disabled="!kerberosFieldsEditable" class="uk-form-width-large" type="text" ng-model="user.kafka_principal" required>
+            </div>
+          </div>
+
+          <div class="uk-form-row">
+            <label class="uk-form-label" for="kafka_keytab_id">Kafka Keytab</label>
+            <div class="uk-form-controls">
+              <input id="kafka_keytab_id" ng-disabled="!kerberosFieldsEditable" class="uk-form-width-large" type="text" ng-keypress="checkKeytabInput($event)" ng-blur="isKerberosConfigCorrect()"
+                ng-model="user.kafka_keytab" required>
+            </div>
+          </div>
+
+          <div class="uk-form-row">
+            <label class="uk-form-label" for="kafka_jaasconfig_id">Kafka Jaas Config</label>
+            <div class="uk-form-controls">
+              <input id="kafka_jaasconfig_id" ng-disabled="!kerberosFieldsEditable" class="uk-form-width-large" type="text" ng-model="user.kafka_jaas" required>
             </div>
           </div>
         </div>
-
-        <div class="uk-form-row">
-          <div class="uk-grid">
-            <div class="uk-width-1-10">
-              <label>Spark Keytab</label>
-            </div>
-            <div class="uk-width-9-10">
-              <input class="f" ng-blur="isKerberosConfigCorrect()" ng-keypress="checkKeytabInput($event)" type="text" name="spark_keytab"
-                ng-model="user.spark_keytab" required>
-            </div>
-          </div>
-        </div>
-
-        <div class="uk-form-row" style="color:red">
-          <div class="uk-grid">
-            <div class="uk-width-9-10">
-              {{message_kafak_spark_samekeytab}}
-            </div>
-          </div>
-        </div>
-
-        <div class="uk-form-row">
-          <div class="uk-grid">
-            <div class="uk-width-1-10">
-              <label>Kafka Principal</label>
-            </div>
-            <div class="uk-width-9-10">
-              <input class="" type="text" ng-model="user.kafka_principal" required>
-            </div>
-          </div>
-        </div>
-
-        <div class="uk-form-row">
-          <div class="uk-grid">
-            <div class="uk-width-1-10">
-              <label>Kafka Keytab</label>
-            </div>
-            <div class="uk-width-9-10">
-              <input class="form-control" ng-class="teststyles" ng-keypress="checkKeytabInput($event)" ng-blur="isKerberosConfigCorrect()"
-                type="text" ng-model="user.kafka_keytab" required>
-            </div>
-          </div>
-        </div>
-
-        <div class="uk-form-row">
-          <div class="uk-grid">
-            <div class="uk-width-9-10">
-              {{message_kafak_spark_samekeytab}}
-            </div>
-          </div>
-        </div>
-
-        <div class="uk-form-row">
-          <div class="uk-grid">
-            <div class="uk-width-1-10">
-              <label>Kafka Jaas Config</label>
-            </div>
-            <div class="uk-width-9-10">
-              <input class="form-control" ng-class="teststyles" type="text" ng-model="user.kafka_jaas" required>
-            </div>
-          </div>
-        </div>
-
-        <div class="uk-form-row">
-          <div class="uk-grid">
-            <div class="uk-width-1-10 uk-container-center">
-              <button class="uk-button oc-button uk-width-1-1" ng-click="saveKerberosConfigure()">{{'ocsp_web_common_009' | translate}}</button>
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
   </div>
-</div>
+  <div class="uk-width-1-10"></div>
 </div>

@@ -7,6 +7,7 @@ angular.module('ocspApp')
   .controller('UserManagementCtrl', ['$scope', '$http', '$rootScope', '$filter', 'Notification', 'hotkeys', function ($scope, $http, $rootScope, $filter, Notification, hotkeys) {
     $rootScope.init('user');
     function init() {
+      $scope.kerberosFieldsEditable = false;
       $http.get('/api/user').success(function (data) {
         $scope.users = data;
       });
@@ -26,6 +27,14 @@ angular.module('ocspApp')
 
     $scope.cancel = function () {
       $scope.fieldsEditable = false;
+    };
+
+    $scope.editKerberosConfigure = function(){
+      $scope.kerberosFieldsEditable = true;
+    };
+
+    $scope.cancelEditKerberosConfigure = function () {
+      $scope.kerberosFieldsEditable = false;
     };
 
     $scope.user = {
@@ -98,6 +107,7 @@ angular.module('ocspApp')
     };
 
     $scope.saveKerberosConfigure = function () {
+      $scope.kerberosFieldsEditable = false;
       if (!$scope.isKerberosConfigCorrect()) {
         return;
       }
@@ -170,6 +180,8 @@ angular.module('ocspApp')
     };
 
     $scope.saveUsers = () => {
+      console.log("$scope.mainForm:");
+      console.log($scope.mainForm);
       if ($scope.mainForm.$invalid) {
         angular.forEach($scope.mainForm.$error, function (field) {
           angular.forEach(field, function (errorField) {

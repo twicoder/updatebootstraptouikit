@@ -367,7 +367,7 @@
                 <tbody>
                     <tr ng-repeat="item in $data">
                         <td class="centertext uk-width-2-10">
-                            <a class="task-name" href="#/task_management/{{item.id}}">{{item.name}}</a>
+                            <a href="#/task_management/{{item.id}}">{{item.name}}</a>
                         </td>
                         <td class="centertext uk-width-2-10">
                             <ocsp-stream-run-status ng-model="item"></ocsp-stream-run-status>
@@ -389,12 +389,6 @@
                                         <i class="fa fa-lg fa-stop-circle"></i>
                                     </button>
                                 </font>
-                                <!-- <font>
-                    <button href="" class="oc-button" ng-disabled="item.status === 0 || item.status === 'STOPPED' || isAdminUser" ng-click="updateStreamStatus(item,'restart')"><i class="glyphicon glyphicon-refresh danger"></i></button>
-                  </font> -->
-                                <!-- <font>
-                    <button href="" ng-disabled="false" ng-click="updateStreamStatus(item,'remove')"><i class="glyphicon glyphicon-remove-sign warning"></i></button>
-                  </font> -->
                             </div>
                         </td>
                     </tr>
