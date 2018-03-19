@@ -1,162 +1,131 @@
 <div>
 
-    <div class="row">
-        <label>{{'ocsp_web_common_011' | translate}}*</label>
-        <input type="text" class="form-control" ng-model="selectedJob.name" ng-disabled="isAdminUser || !streamEditable" required>
-    </div>
-
-    <div class="row">
-        <label>numberOfWorkers</label>
-        <input type="text" class="form-control" ng-model="selectedJob.sysConfigureProps.topo.numberOfWorkers" ng-disabled="isAdminUser || !streamEditable"
+    <div class="uk-grid">
+        <label ng-class="firstColumnWidthClass">{{'ocsp_web_common_011' | translate}}*</label>
+        <input ng-class="secondColumnWidthClass" type="text" ng-model="selectedJob.name" ng-disabled="isAdminUser || !streamEditable"
             required>
     </div>
 
-    <!-- <div class="row">
-        <label>maxSpoutPending</label>
-        <input type="text" class="form-control" ng-model="selectedJob.sysConfigureProps.topo.maxSpoutPending" ng-disabled="isAdminUser || !streamEditable"
-            required>
-    </div> -->
-
-    <!-- <div class="row">
-        <label>numberOfAckers</label>
-        <input type="text" class="form-control" ng-model="selectedJob.sysConfigureProps.topo.numberOfAckers" ng-disabled="isAdminUser || !streamEditable"
-            required>
-    </div> -->
-
-    <!-- <div class="row">
-        <label>SpoutConfig Groupid</label>
-        <input type="text" class="form-control" ng-model="selectedJob.sysConfigureProps.topo.spoutConfig.groupid" ng-disabled="isAdminUser || !streamEditable"
-            required>
-    </div> -->
-
-    <!-- <div class="row">
-        <label>SpoutConfig Serializer</label>
-        <input type="text" class="form-control" ng-model="selectedJob.sysConfigureProps.topo.spoutConfig.serializer" ng-disabled="isAdminUser || !streamEditable"
-            required>
-    </div> -->
-
-    <!-- <div class="row">
-        <label>SpoutConfig Id</label>
-        <input type="text" class="form-control" ng-model="selectedJob.sysConfigureProps.topo.spoutConfig.id" ng-disabled="isAdminUser || !streamEditable"
-            required>
-    </div> -->
-
-    <div class="row">
-        <label>SpoutConfig Executors</label>
-        <input type="text" class="form-control" ng-model="selectedJob.sysConfigureProps.topo.spoutConfig.executors" ng-disabled="isAdminUser || !streamEditable"
+    <div class="uk-grid">
+        <label ng-class="firstColumnWidthClass">numberOfWorkers</label>
+        <input ng-class="secondColumnWidthClass" type="text" ng-model="selectedJob.sysConfigureProps.topo.numberOfWorkers" ng-disabled="isAdminUser || !streamEditable"
             required>
     </div>
 
-    <!-- <div class="row">
-        <label>SpoutConfig MaxTaskParallelism</label>
-        <input type="text" class="form-control" ng-model="selectedJob.sysConfigureProps.topo.spoutConfig.maxTaskParallelism" ng-disabled="isAdminUser || !streamEditable"
-            required>
-    </div> -->
-
-    <div class="row">
-        <label>SpoutConfig NumberTasks</label>
-        <input type="text" class="form-control" ng-model="selectedJob.sysConfigureProps.topo.spoutConfig.numberTasks" ng-disabled="isAdminUser || !streamEditable"
-            required>
+    <div class="uk-grid">
+        <label ng-class="firstColumnWidthClass">SpoutConfig Executors</label>
+        <input ng-class="secondColumnWidthClass" type="text" ng-model="selectedJob.sysConfigureProps.topo.spoutConfig.executors"
+            ng-disabled="isAdminUser || !streamEditable" required>
     </div>
 
-    <div class="row">
-        <label>Group ID</label>
-        <input type="text" class="form-control" ng-model="selectedJob.input.groupid" name="groupid" ng-readonly="isAdminUser || !streamEditable" popover-trigger="'mouseenter'"
-            popover-placement="right" popover-append-to-body=true uib-popover="Kafka Group ID Info"
+    <div class="uk-grid">
+        <label ng-class="firstColumnWidthClass">SpoutConfig NumberTasks</label>
+        <input ng-class="secondColumnWidthClass" type="text" ng-model="selectedJob.sysConfigureProps.topo.spoutConfig.numberTasks"
+            ng-disabled="isAdminUser || !streamEditable" required>
+    </div>
+
+    <div class="uk-grid">
+        <label ng-class="firstColumnWidthClass">Group ID</label>
+        <input ng-class="secondColumnWidthClass" type="text" ng-model="selectedJob.input.groupid" name="groupid" ng-readonly="isAdminUser || !streamEditable"
+            popover-trigger="'mouseenter'" popover-placement="right" popover-append-to-body=true uib-popover="Kafka Group ID Info"
             popover-title="Group ID">
         <span class="redtip" ng-show="mainForm.groupid.$touched && mainForm.groupid.$error.required">{{'ocsp_web_common_027' | translate}}</span>
     </div>
 
-    <div class="row">
-        <div><label>Kafka offset*</label></div>
-        <div class="btn-group" data-toggle="buttons">
-            <label class="btn btn-default" ng-class="{active: selectedJob.recover_mode !== 'from_last_stop'}" ng-disabled="!isPageEditable() && selectedJob.recover_mode === 'from_last_stop'" ng-click="selectedRecoverMode('from_latest')">
+    <div class="uk-grid">
+        <label ng-class="firstColumnWidthClass">Kafka offset*</label>
+        <div ng-class="secondColumnWidthClass" data-toggle="buttons">
+            <label class="uk-button" ng-class="{active: selectedJob.recover_mode !== 'from_last_stop'}" ng-disabled="!isPageEditable() && selectedJob.recover_mode === 'from_last_stop'"
+                ng-click="selectedRecoverMode('from_latest')">
                 <input ng-model="selectedJob.recover_mode" type="radio">{{'ocsp_web_streams_from_latest' | translate}}
             </label>
-            <label class="btn btn-default" ng-class="{active: selectedJob.recover_mode === 'from_last_stop'}" ng-disabled="!isPageEditable() && selectedJob.recover_mode !== 'from_last_stop'" ng-click="selectedRecoverMode('from_last_stop')">
+            <label class="uk-button" ng-class="{active: selectedJob.recover_mode === 'from_last_stop'}" ng-disabled="!isPageEditable() && selectedJob.recover_mode !== 'from_last_stop'"
+                ng-click="selectedRecoverMode('from_last_stop')">
                 <input ng-model="selectedJob.recover_mode" type="radio">{{'ocsp_web_streams_from_last_stop' | translate}}
             </label>
         </div>
     </div>
 
-</div>
-<div class="row">
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <td>Item Name</td>
-                <!-- <td>ID</td> -->
-                <td>Executors</td>
-                <!-- <td>MaxTaskParallelism</td> -->
-                <td>numberTasks</td>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td>Filter Bolt Config</td>
-                <!-- <td>{{selectedJob.sysConfigureProps.topo.filterBoltConfig.id}}</td> -->
-                <td>
-                    <input ng-disabled="isAdminUser || !streamEditable" ng-model="selectedJob.sysConfigureProps.topo.filterBoltConfig.executors"></input>
-                </td>
-                <!-- <td>
-                    <input ng-disabled="isAdminUser || !streamEditable" ng-model="selectedJob.sysConfigureProps.topo.filterBoltConfig.maxTaskParallelism"></input>
-                </td> -->
-                <td>
-                    <input ng-disabled="isAdminUser || !streamEditable" ng-model="selectedJob.sysConfigureProps.topo.filterBoltConfig.numberTasks"></input>
-                </td>
-            </tr>
-            <tr>
-                <td>Tag Bolt Config</td>
-                <!-- <td>{{selectedJob.sysConfigureProps.topo.tagBoltConfig.id}}</td> -->
-                <td>
-                    <input ng-disabled="isAdminUser || !streamEditable" ng-model="selectedJob.sysConfigureProps.topo.tagBoltConfig.executors"></input>
-                </td>
-                <!-- <td>
-                    <input ng-disabled="isAdminUser || !streamEditable" ng-model="selectedJob.sysConfigureProps.topo.tagBoltConfig.maxTaskParallelism"></input>
-                </td> -->
-                <td>
-                    <input ng-disabled="isAdminUser || !streamEditable" ng-model="selectedJob.sysConfigureProps.topo.tagBoltConfig.numberTasks"></input>
-                </td>
-            </tr>
-            <tr>
-                <td>Event Bolt Config</td>
-                <!-- <td>{{selectedJob.sysConfigureProps.topo.eventBoltConfig.id}}</td> -->
-                <td>
-                    <input ng-disabled="isAdminUser || !streamEditable" ng-model="selectedJob.sysConfigureProps.topo.eventBoltConfig.executors"></input>
-                </td>
-                <!-- <td>
-                    <input ng-disabled="isAdminUser || !streamEditable" ng-model="selectedJob.sysConfigureProps.topo.eventBoltConfig.maxTaskParallelism"></input>
-                </td> -->
-                <td>
-                    <input ng-disabled="isAdminUser || !streamEditable" ng-model="selectedJob.sysConfigureProps.topo.eventBoltConfig.numberTasks"></input>
-                </td>
-            </tr>
-            <tr>
-                <td>Error Bolt Config</td>
-                <!-- <td>{{selectedJob.sysConfigureProps.topo.errorBoltConfig.id}}</td> -->
-                <td>
-                    <input ng-disabled="isAdminUser || !streamEditable" ng-model="selectedJob.sysConfigureProps.topo.errorBoltConfig.executors"></input>
-                </td>
-                <!-- <td>
-                    <input ng-disabled="isAdminUser || !streamEditable" ng-model="selectedJob.sysConfigureProps.topo.errorBoltConfig.maxTaskParallelism"></input>
-                </td> -->
-                <td>
-                    <input ng-disabled="isAdminUser || !streamEditable" ng-model="selectedJob.sysConfigureProps.topo.errorBoltConfig.numberTasks"></input>
-                </td>
-            </tr>
-            <tr>
-                <td>Dropped Bolt Config</td>
-                <!-- <td>{{selectedJob.sysConfigureProps.topo.droppedBoltConfig.id}}</td> -->
-                <td>
-                    <input ng-disabled="isAdminUser || !streamEditable" ng-model="selectedJob.sysConfigureProps.topo.droppedBoltConfig.executors"></input>
-                </td>
-                <!-- <td>
-                    <input ng-disabled="isAdminUser || !streamEditable" ng-model="selectedJob.sysConfigureProps.topo.droppedBoltConfig.maxTaskParallelism"></input>
-                </td> -->
-                <td>
-                    <input ng-disabled="isAdminUser || !streamEditable" ng-model="selectedJob.sysConfigureProps.topo.droppedBoltConfig.numberTasks"></input>
-                </td>
-            </tr>
-        </tbody>
-    </table>
+    <div class="uk-grid">
+        <div class="uk-width-1-1">
+                <table class="uk-table uk-table-hover">
+                        <thead>
+                            <tr>
+                                <td>Item Name</td>
+                                <!-- <td>ID</td> -->
+                                <td>Executors</td>
+                                <!-- <td>MaxTaskParallelism</td> -->
+                                <td>numberTasks</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Filter Bolt Config</td>
+                                <!-- <td>{{selectedJob.sysConfigureProps.topo.filterBoltConfig.id}}</td> -->
+                                <td>
+                                    <input ng-disabled="isAdminUser || !streamEditable" ng-model="selectedJob.sysConfigureProps.topo.filterBoltConfig.executors"></input>
+                                </td>
+                                <!-- <td>
+                                        <input ng-disabled="isAdminUser || !streamEditable" ng-model="selectedJob.sysConfigureProps.topo.filterBoltConfig.maxTaskParallelism"></input>
+                                    </td> -->
+                                <td>
+                                    <input ng-disabled="isAdminUser || !streamEditable" ng-model="selectedJob.sysConfigureProps.topo.filterBoltConfig.numberTasks"></input>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Tag Bolt Config</td>
+                                <!-- <td>{{selectedJob.sysConfigureProps.topo.tagBoltConfig.id}}</td> -->
+                                <td>
+                                    <input ng-disabled="isAdminUser || !streamEditable" ng-model="selectedJob.sysConfigureProps.topo.tagBoltConfig.executors"></input>
+                                </td>
+                                <!-- <td>
+                                        <input ng-disabled="isAdminUser || !streamEditable" ng-model="selectedJob.sysConfigureProps.topo.tagBoltConfig.maxTaskParallelism"></input>
+                                    </td> -->
+                                <td>
+                                    <input ng-disabled="isAdminUser || !streamEditable" ng-model="selectedJob.sysConfigureProps.topo.tagBoltConfig.numberTasks"></input>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Event Bolt Config</td>
+                                <!-- <td>{{selectedJob.sysConfigureProps.topo.eventBoltConfig.id}}</td> -->
+                                <td>
+                                    <input ng-disabled="isAdminUser || !streamEditable" ng-model="selectedJob.sysConfigureProps.topo.eventBoltConfig.executors"></input>
+                                </td>
+                                <!-- <td>
+                                        <input ng-disabled="isAdminUser || !streamEditable" ng-model="selectedJob.sysConfigureProps.topo.eventBoltConfig.maxTaskParallelism"></input>
+                                    </td> -->
+                                <td>
+                                    <input ng-disabled="isAdminUser || !streamEditable" ng-model="selectedJob.sysConfigureProps.topo.eventBoltConfig.numberTasks"></input>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Error Bolt Config</td>
+                                <!-- <td>{{selectedJob.sysConfigureProps.topo.errorBoltConfig.id}}</td> -->
+                                <td>
+                                    <input ng-disabled="isAdminUser || !streamEditable" ng-model="selectedJob.sysConfigureProps.topo.errorBoltConfig.executors"></input>
+                                </td>
+                                <!-- <td>
+                                        <input ng-disabled="isAdminUser || !streamEditable" ng-model="selectedJob.sysConfigureProps.topo.errorBoltConfig.maxTaskParallelism"></input>
+                                    </td> -->
+                                <td>
+                                    <input ng-disabled="isAdminUser || !streamEditable" ng-model="selectedJob.sysConfigureProps.topo.errorBoltConfig.numberTasks"></input>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Dropped Bolt Config</td>
+                                <!-- <td>{{selectedJob.sysConfigureProps.topo.droppedBoltConfig.id}}</td> -->
+                                <td>
+                                    <input ng-disabled="isAdminUser || !streamEditable" ng-model="selectedJob.sysConfigureProps.topo.droppedBoltConfig.executors"></input>
+                                </td>
+                                <!-- <td>
+                                        <input ng-disabled="isAdminUser || !streamEditable" ng-model="selectedJob.sysConfigureProps.topo.droppedBoltConfig.maxTaskParallelism"></input>
+                                    </td> -->
+                                <td>
+                                    <input ng-disabled="isAdminUser || !streamEditable" ng-model="selectedJob.sysConfigureProps.topo.droppedBoltConfig.numberTasks"></input>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+        </div>
+    </div>
 </div>

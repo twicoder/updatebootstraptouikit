@@ -1,117 +1,138 @@
-<div class="row">
-    <label>{{'ocsp_web_streams_manage_038' | translate}}*</label>
-    <ui-select ng-model="selectedJob.input.datasource" name="datasource" ng-disabled="isAdminUser || !streamEditable" ng-required="true">
-        <ui-select-match>
-            <span ng-bind="$select.selected.name"></span>
-        </ui-select-match>
-        <ui-select-choices repeat="datasource in (inputDatasources | filter: $select.search) track by datasource.id">
-            <span ng-bind="datasource.name"></span>
-        </ui-select-choices>
-    </ui-select>
-    <span class="redtip" ng-show="mainStormForm.datasource.$touched && mainStormForm.datasource.$error.required">{{'ocsp_web_common_027' | translate}}</span>
-</div>
-<div class="row">
-    <button type="button" class="btn oc-button" ng-disabled="isAdminUser || !streamEditable" ng-click="addInputSource(selectedJob.input.inputs)">{{'ocsp_web_streams_manage_045' | translate}}
-    </button>
-</div>
+<div>
+    <div class="uk-grid">
+        <label ng-class="firstColumnWidthClass">{{'ocsp_web_streams_manage_038' | translate}}*</label>
+        <div ng-class="secondColumnClass">
+            <div class="uk-form-select" data-uk-form-select>
+                <span></span>
+                <select ng-model="selectedJob.input.datasource" ng-options="inputDatasource.name for inputDatasource in inputDatasources"
+                    name="datasource" ng-disabled="isAdminUser || !streamEditable" ng-required="true">
+                </select>
+            </div>
+        </div>
+        <span ng-class="thirdColumnWidthClass" class="redtip" ng-show="mainStormForm.datasource.$touched && mainStormForm.datasource.$error.required">{{'ocsp_web_common_027' | translate}}</span>
+    </div>
+    <div class="uk-grid">
+        <div ng-class="firstColumnWidthClass">
+            <button type="button" class="uk-button oc-button" ng-disabled="isAdminUser || !streamEditable" ng-click="addInputSource(selectedJob.input.inputs)">{{'ocsp_web_streams_manage_045' | translate}}
+            </button>
+        </div>
 
-<div class="row">
-    <uib-accordion>
-        <div uib-accordion-group class="panel-default" ng-repeat="item in selectedJob.input.inputs" is-open="item.isOpen">
-            <uib-accordion-heading>
-                <i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': item.isOpen, 'glyphicon-chevron-right': !item.isOpen}"></i>
-                &nbsp; {{'ocsp_web_streams_manage_038' | translate}} {{item.name}}
+    </div>
+
+    <div class="uk-grid">
+        <div class="uk-accordion uk-width-1-1" data-uk-accordion ng-repeat="item in selectedJob.input.inputs" data="{collapse: false}">
+            <h3 class="uk-accordion-title">
+                <i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': item.isOpen, 'glyphicon-chevron-right': !item.isOpen}"></i> &nbsp; {{'ocsp_web_streams_manage_038' | translate}} {{item.name}}
                 <a class="pull-right" ng-hide="isAdminUser || !streamEditable" ng-click="$event.stopPropagation();$event.preventDefault();remove(selectedJob.input.inputs, $index)">
                     <i class="glyphicon glyphicon-remove"></i>
                 </a>
-            </uib-accordion-heading>
-            <div class="container-fluid">
-                <div class="form-group">
-                    <label>{{'ocsp_web_streams_manage_010' | translate}}*</label>
-                    <input type="text" class="form-control" ng-model="item.topic" ng-disabled="isAdminUser || !streamEditable" name="inputTopic_{{$index}}"
-                        required>
-                    <span class="redtip" ng-show="mainStormForm['inputTopic_' + $index].$touched && mainStormForm['inputTopic_' + $index].$error.required">{{'ocsp_web_common_027' | translate}}</span>
-                </div>
-                <div class="form-group">
-                    <label>{{'ocsp_web_common_011' | translate}}*</label>
-                    <input type="text" class="form-control" ng-model="item.name" ng-disabled="isAdminUser || !streamEditable" name="inputName_{{$index}}"
-                        required>
-                    <span class="redtip" ng-show="mainStormForm['inputName_' + $index].$touched && mainStormForm['inputName_' + $index].$error.required">{{'ocsp_web_common_027' | translate}}</span>
-                </div>
-                <div class="form-group">
-                    <label>{{'ocsp_web_streams_manage_011' | translate}}*</label>
-                    <tokenfield ng-model="item.fields" name="inputFields_{{$index}}" readonly="{{isAdminUser || !streamEditable}}" required="true"></tokenfield>
-                    <span class="redtip" ng-show="mainStormForm['inputFields_' + $index].$touched && mainStormForm['inputFields_' + $index].$error.required">{{'ocsp_web_common_027' | translate}}</span>
-                </div>
-                <div class="form-group">
-                    <label>{{'ocsp_web_streams_manage_012' | translate}}*</label>
-                    <input type="text" class="form-control" ng-model="item.delim" ng-disabled="isAdminUser || !streamEditable" name="inputDelim_{{$index}}"
-                        required>
-                    <span class="redtip" ng-show="mainStormForm['inputDelim_' + $index].$touched && mainStormForm['inputDelim_' + $index].$error.required">{{'ocsp_web_common_027' | translate}}</span>
+            </h3>
+            <div class="uk-accordion-content">
+                <div class="uk-width-1-1">
+                    <div class="uk-grid">
+                        <label ng-class="firstColumnWidthClass">{{'ocsp_web_streams_manage_010' | translate}}*</label>
+                        <input ng-class="secondColumnWidthClass" type="text" ng-model="item.topic" ng-readonly="isAdminUser || !streamEditable" name="inputTopic_{{$index}}"
+                            required>
+                        <span ng-class="thirdColumnWidthClass" class="redtip" ng-show="mainForm['inputTopic_' + $index].$touched && mainForm['inputTopic_' + $index].$error.required">{{'ocsp_web_common_027' | translate}}</span>
+                    </div>
+                    <div class="uk-grid">
+                        <label ng-class="firstColumnWidthClass">{{'ocsp_web_common_011' | translate}}*</label>
+                        <input ng-class="secondColumnWidthClass" type="text" ng-model="item.name" ng-readonly="isAdminUser || !streamEditable" name="inputName_{{$index}}"
+                            required>
+                        <span ng-class="thirdColumnWidthClass" class="redtip" ng-show="mainForm['inputName_' + $index].$touched && mainForm['inputName_' + $index].$error.required">{{'ocsp_web_common_027' | translate}}</span>
+                    </div>
+                    <div class="uk-grid">
+                        <label ng-class="firstColumnWidthClass">{{'ocsp_web_streams_manage_011' | translate}}*</label>
+                        <div ng-class="secondColumnWidthClass" style="padding-left: 0px;">
+                            <tokenfield ng-model="item.fields" name="inputFields_{{$index}}" required="true" readonly="{{cep || isAdminUser || !streamEditable}}"></tokenfield>
+                        </div>
+                        <span ng-class="thirdColumnWidthClass" class="redtip" ng-show="mainForm['inputFields_' + $index].$touched && mainForm['inputFields_' + $index].$error.required">{{'ocsp_web_common_027' | translate}}</span>
+                    </div>
+                    <div class="uk-grid">
+                        <label ng-class="firstColumnWidthClass">{{'ocsp_web_streams_manage_012' | translate}}*</label>
+                        <input ng-class="secondColumnWidthClass" type="text" ng-model="item.delim" ng-readonly="isAdminUser || !streamEditable" name="inputDelim_{{$index}}"
+                            required>
+                        <span ng-class="thirdColumnWidthClass" class="redtip" ng-show="mainForm['inputDelim_' + $index].$touched && mainForm['inputDelim_' + $index].$error.required">{{'ocsp_web_common_027' | translate}}</span>
+                    </div>
                 </div>
             </div>
+
+
         </div>
-    </uib-accordion>
+    </div>
 
-</div>
+    <div class="uk-grid">
+        <label ng-class="firstColumnWidthClass">{{'ocsp_web_streams_manage_047' | translate}}*</label>
+        <div ng-class="secondColumnWidthClass" style="padding-left: 0px;">
+            <tokenfield ng-model="selectedJob.input.fields" name="inputFields_storm_1" disabled="true" readonly="{{isAdminUser || !streamEditable}}"
+                required="true"></tokenfield>
+        </div>
+        <span ng-class="thirdColumnWidthClass" class="redtip" ng-show="mainStormForm.inputFields.$touched && mainStormForm.inputFields.$error.required">{{'ocsp_web_common_027' | translate}}</span>
+    </div>
 
-<div class="row">
-    <label>{{'ocsp_web_streams_manage_047' | translate}}*</label>
-    <tokenfield ng-model="selectedJob.input.fields" name="inputFields" disabled="true" readonly="{{isAdminUser || !streamEditable}}"
-        required="true"></tokenfield>
-    <span class="redtip" ng-show="mainStormForm.inputFields.$touched && mainStormForm.inputFields.$error.required">{{'ocsp_web_common_027' | translate}}</span>
-</div>
+    <div class="uk-grid">
+        <div ng-class="uk-width-1-1">
+            <button type="button" class="btn oc-button" ng-disabled="isAdminUser || !streamEditable" ng-click="generate(selectedJob.input, selectedJob.input.inputs)">
+                {{'ocsp_web_streams_manage_048' | translate}}
+            </button>
+        </div>
+    </div>
 
-<div class="row">
-    <button type="button" class="btn oc-button" ng-disabled="isAdminUser || !streamEditable" ng-click="generate(selectedJob.input, selectedJob.input.inputs)">
-        {{'ocsp_web_streams_manage_048' | translate}}
-    </button>
-</div>
+    <div class="uk-grid">
+        <div class="uk-width-1-1">
+            <table class="uk-table">
+                <thead>
+                    <tr>
+                        <th class="uk-width-2-10">{{'ocsp_web_streams_case_field_name' | translate}}</th>
+                        <th class="uk-width-7-10">{{'ocsp_web_streams_case_expression' | translate}}</th>
+                        <th class="uk-width-1-10">
+                            <a ng-hide="isAdminUser || !streamEditable" ng-click="addUserField(selectedJob.input)">
+                                <i class="glyphicon glyphicon-plus"></i>
+                            </a>
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="userfield in selectedJob.input.userFields">
+                        <td>
+                            <input type="text" class="form-control border0px" ng-readonly="isAdminUser || !streamEditable" ng-model="userfield.pname"
+                                required>
+                        </td>
+                        <td>
+                            <input type="text" class="form-control border0px" ng-readonly="isAdminUser || !streamEditable" ng-model="userfield.pvalue"
+                                required>
+                        </td>
+                        <td>
+                            <a ng-hide="isAdminUser || !streamEditable" ng-click="remove(selectedJob.input.userFields, $index)">
+                                <i class="glyphicon glyphicon-remove"></i>
+                            </a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 
-<div class="row">
-    <table class="table table-hover">
-        <thead>
-            <tr>
-                <th class="col-md-3">{{'ocsp_web_streams_case_field_name' | translate}}</th>
-                <th class="col-md-8">{{'ocsp_web_streams_case_expression' | translate}}</th>
-                <th class="col-md-1">
-                    <a ng-hide="isAdminUser || !streamEditable" ng-click="addUserField(selectedJob.input)">
-                        <i class="glyphicon glyphicon-plus"></i>
-                    </a>
-                </th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr ng-repeat="userfield in selectedJob.input.userFields">
-                <td>
-                    <input type="text" class="form-control" ng-model="userfield.pname" ng-disabled="isAdminUser || !streamEditable" required>
-                </td>
-                <td>
-                    <input type="text" class="form-control" ng-model="userfield.pvalue" ng-disabled="isAdminUser || !streamEditable" required>
-                </td>
-                <td>
-                    <a ng-hide="isAdminUser || !streamEditable" ng-click="remove(selectedJob.input.userFields, $index)">
-                        <i class="glyphicon glyphicon-remove"></i>
-                    </a>
-                </td>
-            </tr>
-        </tbody>
-    </table>
-</div>
+    <div class="uk-grid">
+        <label ng-class="firstColumnWidthClass">{{'ocsp_web_streams_manage_013' | translate}}</label>
+        <div ng-class="secondColumnWidthClass">
+            <input type="text" ng-model="selectedJob.input.filter_expr" ng-readonly="isAdminUser || !streamEditable" popover-trigger="'mouseenter'"
+                popover-placement="right" popover-append-to-body=true uib-popover="{{'ocsp_web_common_property_filter' | translate}}"
+                popover-title="{{'ocsp_web_streams_manage_013' | translate}}">
+        </div>
+    </div>
 
-<div class="row">
-    <label>{{'ocsp_web_streams_manage_013' | translate}}</label>
-    <input type="text" class="form-control" ng-model="selectedJob.input.filter_expr" ng-disabled="isAdminUser || !streamEditable"
-        popover-trigger="'mouseenter'" popover-placement="right" popover-append-to-body=true uib-popover="{{'ocsp_web_common_property_filter' | translate}}"
-        popover-title="{{'ocsp_web_streams_manage_013' | translate}}">
-</div>
+    <div class="uk-grid">
+        <label ng-class="firstColumnWidthClass">{{'ocsp_web_streams_manage_014' | translate}}*</label>
+        <div ng-class="secondColumnWidthClass" style="padding-left: 0px;">
+            <tokenfield inputs="{{selectedJob.input.fields}}" ng-model="selectedJob.input.uniqueKey" name="inputFields_spark_2" checkinputfield=true
+                required="true" readonly="{{cep || isAdminUser || !streamEditable}}"></tokenfield>
+        </div>
+    </div>
 
-<div class="row">
-    <label>{{'ocsp_web_streams_manage_014' | translate}}*</label>
-    <tokenfield inputs="{{selectedJob.input.fields}}"
-            ng-model="selectedJob.input.uniqueKey" checkinputfield=true required="true" readonly="{{cep || isAdminUser || !streamEditable}}"></tokenfield>
-</div>
-
-<div class="row">
-    <ocsp-param-editor ng-model="selectedJob.input" disabled="isAdminUser || !streamEditable"></ocsp-param-editor>
+    <div class="uk-grid">
+        <div class="uk-width-1-1">
+            <ocsp-param-editor ng-model="selectedJob.input" disabled="isAdminUser || !streamEditable"></ocsp-param-editor>
+        </div>
+    </div>
 </div>
