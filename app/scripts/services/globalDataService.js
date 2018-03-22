@@ -46,6 +46,8 @@ angular.module('ocspApp')
                 }).catch(function (err) {
                     if (urlSourceMapping[url]) {
                         that.publishGlobalWarningMessage(urlSourceMapping[url].key, urlSourceMapping[url].value);
+                    } else {
+                        that.publishGlobalWarningMessage('无法链接数据库', '请检查数据库状态');
                     }
                     reject(err);
                 });
@@ -62,6 +64,7 @@ angular.module('ocspApp')
         this.getProps = function () { return this.getAPromiseForFetchData('/api/prop'); };
         this.getCepEnableStatus = function () { return this.getAPromiseForFetchData('/api/config/cepEnable'); };
         this.getStormEnableStatus = function () { return this.getAPromiseForFetchData('/api/config/stormenabled'); };
+        this.getIsAlarmEnabledStatus = function () { return this.getAPromiseForFetchData('/api/prop/isalarmenabled'); };
 
         this.isKerberosConfigureCorrect = function (userInfo) {
             if (!userInfo.spark_keytab || !userInfo.spark_principal || !userInfo.kafka_keytab || !userInfo.kafka_principal) {

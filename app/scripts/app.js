@@ -37,30 +37,15 @@ angular
     'ocspcomponents'
   ])
   .config(function ($routeProvider) {
-    const updateGlobalInfoTimerStatusFunc = function ($http,$rootScope,$location,$interval,moment) {
+    const updateGlobalInfoTimerStatusFunc = function ($http, $rootScope, $location, $interval, moment) {
       $rootScope.lang = window.navigator.userLanguage || window.navigator.language;
-      if ($rootScope.lang ) {
+      if ($rootScope.lang) {
         $rootScope.lang = $rootScope.lang.substr(0, 2);
       } else {
         $rootScope.lang = 'zh';
       }
-
-      $rootScope.updateAlarmInfo = function(){
-        $http.get("/api/prop/isalarmenabled").success((alarmEnableStatus) => {
-          if(alarmEnableStatus.enabled === "true"){
-            $http.get("/api/alarm/").success((data) => {
-              $rootScope.alarms = data;
-              $rootScope.alarms.forEach((item)=>{
-                item.alarm_time = moment(item.alarm_time).format("YYYY-MM-DD HH:mm:ss");
-                item.alarm_name = $rootScope.lang === 'zh' ? item.alarm_ChName : item.alarm_EnName;
-                item.alarm_levelName = $rootScope.lang === 'zh' ? item.alarm_level.zh : item.alarm_level.en;
-              });
-            });
-          }
-        });
-      };
-      if(!$rootScope.updateGlobalInfoTimer){
-        $rootScope.updateGlobalInfoTimer = $interval($rootScope.updateAlarmInfo,10*1000);
+      if (!$rootScope.updateGlobalInfoTimer) {
+        $rootScope.updateGlobalInfoTimer = $interval($rootScope.updateAlarmInfo, 10 * 1000);
       }
 
     };
@@ -154,10 +139,10 @@ angular
         templateUrl: 'views/events/center.html',
         controller: 'EventsCenterCtrl',
         resolve: {
-          cepConfig: function ($http,$rootScope,$location) {
+          cepConfig: function ($http, $rootScope, $location) {
             $http.get("/api/config/cepEnable").success((data) => {
               $rootScope.cep = JSON.parse(data);
-              if(!$rootScope.cep){
+              if (!$rootScope.cep) {
                 $location.path('/');
               }
             });
@@ -174,21 +159,21 @@ angular
   })
   .config(['NotificationProvider', 'usSpinnerConfigProvider', '$httpProvider', 'ChartJsProvider',
     function (NotificationProvider, usSpinnerConfigProvider, $httpProvider, ChartJsProvider) {
-    NotificationProvider.setOptions({
-      delay: 10000,
-      startTop: 20,
-      startRight: 10,
-      verticalSpacing: 20,
-      horizontalSpacing: 20,
-      positionX: 'right',
-      positionY: 'bottom'
-    });
-    usSpinnerConfigProvider.setDefaults({ color: 'orange', radius: 20 });
-    $httpProvider.interceptors.push('AuthInterceptor', 'UsInterceptor');
-    ChartJsProvider.setOptions({
-      chartColors: ['#4da9ff', '#79d2a6', '#ff9900', '#ff704d', '#669999', '#4d0000']
-    });
-  }])
+      NotificationProvider.setOptions({
+        delay: 10000,
+        startTop: 20,
+        startRight: 10,
+        verticalSpacing: 20,
+        horizontalSpacing: 20,
+        positionX: 'right',
+        positionY: 'bottom'
+      });
+      usSpinnerConfigProvider.setDefaults({ color: 'orange', radius: 20 });
+      $httpProvider.interceptors.push('AuthInterceptor', 'UsInterceptor');
+      ChartJsProvider.setOptions({
+        chartColors: ['#4da9ff', '#79d2a6', '#ff9900', '#ff704d', '#669999', '#4d0000']
+      });
+    }])
   .config(['$translateProvider', '$windowProvider', function ($translateProvider, $windowProvider) {
     let window = $windowProvider.$get();
     let lang = window.navigator.userLanguage || window.navigator.language;
@@ -202,21 +187,21 @@ angular
     chartRefreshInterval: 20000,
     expires: 3,//Hours
   })
-  .run(['$rootScope', '$filter', '$cookies', '$location', '$http','$interval', 'CONFIGS', '$uibModal', 
-    'moment', 'NgTableParams','globalDataService',
-    ($rootScope, $filter, $cookies, $location, $http, $interval, CONFIGS, $uibModal, 
-      moment, NgTableParams,globalDataService) => {
+  .run(['$rootScope', '$filter', '$cookies', '$location', '$http', '$interval', 'CONFIGS', '$uibModal',
+    'moment', 'NgTableParams', 'globalDataService',
+    ($rootScope, $filter, $cookies, $location, $http, $interval, CONFIGS, $uibModal,
+      moment, NgTableParams, globalDataService) => {
 
       $rootScope.globalDataService = globalDataService;
 
       $rootScope.lang = window.navigator.userLanguage || window.navigator.language;
-      if ($rootScope.lang ) {
+      if ($rootScope.lang) {
         $rootScope.lang = $rootScope.lang.substr(0, 2);
       } else {
         $rootScope.lang = 'zh';
       }
 
-      $rootScope.checkAlarms = function(){
+      $rootScope.checkAlarms = function () {
         let modal = $uibModal.open({
           animation: true,
           ariaLabelledBy: 'modal-title-bottom',
@@ -227,7 +212,7 @@ angular
           scope: $rootScope,
           controller: ['$rootScope', function ($rootScope) {
             $rootScope.allAlarmsToNotify = new NgTableParams({ 'count': '5' }, { counts: [], paginationMinBlocks: 4, paginationMaxBlocks: 7, dataset: $rootScope.alarms });
-                        
+
             $rootScope.closeModal = function () {
               modal.close();
             };
@@ -236,23 +221,25 @@ angular
         });
       };
 
-      $rootScope.updateGlobalInfoTimer=null;
+      $rootScope.updateGlobalInfoTimer = null;
 
       $rootScope.title = $filter('translate')('ocsp_web_common_000');
       $rootScope.username = null;
       $rootScope.tab = null;
       $rootScope.message = null;
       $rootScope.styles = null;
-      globalDataService.getCepEnableStatus().then(data => $rootScope.cep = JSON.parse(data));
+      globalDataService.getCepEnableStatus().then((data) => {
+        $rootScope.cep = JSON.parse(data);
+      }).catch(err => {});
       globalDataService.getStormEnableStatus().then(data => $rootScope.stormenabled = data.stormenabled);
-      globalDataService.getProps().then((props) =>{
-        for(var index in props){
-          if(props[index].name === 'ocsp.kerberos.enable'){
+      globalDataService.getProps().then((props) => {
+        for (var index in props) {
+          if (props[index].name === 'ocsp.kerberos.enable') {
             $rootScope.shouldShowKerberosConfigure = props[index].value;
           }
         }
       });
-      
+
       $rootScope.changeTab = (tab) => {
         $rootScope.tab = tab;
       };
@@ -267,7 +254,7 @@ angular
       };
       let _getCookie = (name) => {
         let value = $cookies.get(name);
-        $cookies.put(name, value, {'expires': moment().add(CONFIGS.expires, 'h').toDate()});
+        $cookies.put(name, value, { 'expires': moment().add(CONFIGS.expires, 'h').toDate() });
         return value;
       };
       $rootScope.isAdmin = () => {
@@ -289,12 +276,12 @@ angular
             $rootScope.message = null;
             $rootScope.changeTab('task');
 
-            $rootScope.updateAlarmInfo = function(){
-              $http.get("/api/prop/isalarmenabled").success((alarmEnableStatus) => {
-                if(alarmEnableStatus.enabled === "true"){
+            $rootScope.updateAlarmInfo = function () {
+              globalDataService.getIsAlarmEnabledStatus().then((alarmEnableStatus) => {
+                if (alarmEnableStatus.enabled === "true") {
                   $http.get("/api/alarm/").success((data) => {
                     $rootScope.alarms = data;
-                    $rootScope.alarms.forEach((item)=>{
+                    $rootScope.alarms.forEach((item) => {
                       item.alarm_time = moment(item.alarm_time).format("YYYY-MM-DD HH:mm:ss");
                       item.alarm_name = $rootScope.lang === 'zh' ? item.alarm_ChName : item.alarm_EnName;
                       item.alarm_levelName = $rootScope.lang === 'zh' ? item.alarm_level.zh : item.alarm_level.en;
@@ -303,10 +290,10 @@ angular
                 }
               });
             };
-            if(!$rootScope.updateGlobalInfoTimer){
-              $rootScope.updateGlobalInfoTimer = $interval($rootScope.updateAlarmInfo,10*1000);
+            if (!$rootScope.updateGlobalInfoTimer) {
+              $rootScope.updateGlobalInfoTimer = $interval($rootScope.updateAlarmInfo, 10 * 1000);
             }
-            
+
           } else {
             $rootScope.message = $filter('translate')('ocsp_web_user_manage_005');
             $rootScope.styles = "redBlock";

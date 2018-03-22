@@ -1,7 +1,21 @@
 'use strict';
-angular.module('ocspApp').factory('UsInterceptor', ['$q', 'usSpinnerService', '$injector' ,($q, usSpinnerService, $injector)=>{
+angular.module('ocspApp').factory('UsInterceptor', ['$q', 'usSpinnerService', '$injector', ($q, usSpinnerService, $injector)=>{
   function htmlRequest(url){
     return !!(url.endsWith(".html") || url.endsWith(".htm"));
+  }
+  function isRequestAlreadyCovered(url){
+    var coveredUrls = [
+      '/api/prop/isalarmenabled',
+      '/api/config/cepEnable',
+      '/api/prop'
+    ];
+    var urlExists = false;
+    for(var index in coveredUrls){
+      if(url.startsWith(coveredUrls[index])){
+        urlExists = true;
+      }
+    }
+    return urlExists;
   }
   return {
     'request': (config) => {
@@ -26,7 +40,7 @@ angular.module('ocspApp').factory('UsInterceptor', ['$q', 'usSpinnerService', '$
           usSpinnerService.stop('spinner');
         }
         let Notification = $injector.get('Notification');
-        if (reason.data && reason.data !== "") {
+        if (reason.data && reason.data !== "" && !isRequestAlreadyCovered(url)) {
           Notification.error(reason.data);
         }
       }

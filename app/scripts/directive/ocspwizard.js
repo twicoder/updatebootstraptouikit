@@ -150,7 +150,7 @@ angular.module('ocspcomponents')
                                                 <div style="display:block;background-color:#FFF;height:56px;line-height:47px;text-align:center;border: 5px solid #eee;border-radius:50%">{{$index+1}}</div>
                                             </span>
                             <span ng-if="currentStepNumber()>$index">
-                                                <div style="display:block;background-color:#f39c12;height:56px;line-height:47px;text-align:center;border: 5px solid #f39c12;border-radius:50%;font-size:30px;color:#FFFFFF"><div class="glyphicon glyphicon-ok"></div></div>
+                                                <div style="display:block;background-color:#f39c12;height:56px;line-height:47px;text-align:center;border: 5px solid #f39c12;border-radius:50%;font-size:30px;color:#FFFFFF"><div class="fas fa-check-circle fa-lg"></div></div>
                                             </span>
                             <div style="margin-top: 25px;">{{step.title || step.wzTitle}}</div>
                         </li>
