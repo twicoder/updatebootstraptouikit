@@ -80,13 +80,15 @@
                         </div>
                     </div>
                     <div class="uk-grid">
-                        <button type="button" class="uk-button oc-button" ng-click="addInputSource(task.input.inputs)">{{'ocsp_web_streams_manage_045' | translate}}</button>
+                            <div class="uk-width-4-5 uk-push-1-5">
+                                    <button type="button" class="uk-button oc-button" ng-click="addInputSource(task.input.inputs)">{{'ocsp_web_streams_manage_045' | translate}}</button>
+                            </div>
+                        </div>
+                    <div class="uk-grid">
                         <div class="uk-width-1-5">
-                                <button type="button" class="uk-button oc-button" ng-click="addInputSource(task.input.inputs)">{{'ocsp_web_streams_manage_045' | translate}}</button>
                         </div>
                         <div class="uk-width-4-5">
-                                <button type="button" class="uk-button oc-button" ng-click="addInputSource(task.input.inputs)">{{'ocsp_web_streams_manage_045' | translate}}</button>
-                            <div class="uk-width-9-10 uk-push-1-10">
+                            <div class="uk-width-9-10">
                                 <div class="uk-accordion" data-uk-accordion data="{collapse: true}" ng-repeat="item in task.input.inputs">
                                     <h3 class="uk-accordion-title">
                                         <i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': item.isOpen, 'glyphicon-chevron-right': !item.isOpen}"></i> &nbsp; {{'ocsp_web_streams_manage_038' | translate}} {{item.name}}
@@ -226,9 +228,10 @@
                     </div>
                     <div class="uk-grid" ng-if="!cep">
                         <div class=""></div>
-                        <div class="uk-width-1-1">
+                        <div class="uk-width-9-10">
                             <button type="button" class="uk-button oc-button" ng-click="addNewEvent(task.events)">{{'ocsp_web_streams_manage_016' | translate}}
                             </button>
+                            <br/>
                             <div class="uk-accordion" data-uk-accordion data="{collapse: false}" ng-repeat="item in task.events">
                                 <h3 class="uk-accordion-title">
                                     <i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': item.isOpen, 'glyphicon-chevron-right': !item.isOpen}"></i> &nbsp; {{'ocsp_web_streams_manage_031' | translate}} {{item.name}}
@@ -310,8 +313,8 @@
                         {{task.name}}
                     </h1>
                     <div class="uk-grid" ng-show="task.input.inputs !== undefined && task.input.inputs.length > 0">
-                        <label class="uk-width-1-5">{{'ocsp_web_streams_manage_038' | translate}}:</label>
-                        <div class="uk-width-4-5">
+                        <label class="uk-width-1-10 uk-push-1-10">{{'ocsp_web_streams_manage_038' | translate}}:</label>
+                        <div class="uk-width-4-5 uk-push-1-5">
                             <ul class="uk-list">
                                 <li ng-repeat="item in task.input.inputs" class="uk-width-9-10">
                                     <strong>{{item.name}}</strong>
@@ -321,8 +324,8 @@
 
                     </div>
                     <div ng-show="task.outputLabels !== undefined && task.outputLabels.length > 0" class="uk-grid">
-                        <label class="uk-width-1-5">{{'ocsp_web_common_024' | translate}}:</label>
-                        <div class="uk-width-4-5">
+                        <label class="uk-width-1-10 uk-push-1-10">{{'ocsp_web_common_024' | translate}}:</label>
+                        <div class="uk-width-4-5 uk-push-1-5">
                             <ul class="uk-list">
                                 <li ng-repeat="item in task.outputLabels" class="uk-width-9-10">
                                     <span class="badge">{{$index+1}}</span>&nbsp;{{item.name}}</li>
@@ -331,8 +334,8 @@
 
                     </div>
                     <div ng-show="task.events !== undefined && task.events.length > 0" class="uk-grid">
-                        <label class="uk-width-1-5">{{'ocsp_web_common_025' | translate}}:</label>
-                        <div class="uk-width-4-5">
+                        <label class="uk-width-1-10 uk-push-1-10">{{'ocsp_web_common_025' | translate}}:</label>
+                        <div class="uk-width-4-5 uk-push-1-5">
                             <ul class="uk-list">
                                 <li ng-repeat="item in task.events" class="uk-width-9-10">
                                     <strong>{{item.name}}</strong>({{item.output.datasource.type}})</li>

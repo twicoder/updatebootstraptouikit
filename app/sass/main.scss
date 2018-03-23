@@ -393,7 +393,6 @@ table tbody tr td div{
 
 .panelOfStreamConfigPage .leftPage > li > a{
   margin-left: 50px;
-  background-color:rgb(245,245,245);
 }
 
 .panelOfStreamConfigPage .leftPage .active{
@@ -514,30 +513,30 @@ a:active {
   letter-spacing: 0;
 }
 
-input {
-  background: #FFFFFF;
-  border: 1px solid #CCD5E0;
-  border-radius: 4px;
-}
+// input {
+//   background: #FFFFFF;
+//   border: 1px solid #CCD5E0;
+//   border-radius: 4px;
+// }
 
-input:hover {
-  background: #FFFFFF;
-  border: 1px solid #47B2FB;
-  border-radius: 4px;
-}
+// input:hover {
+//   background: #FFFFFF;
+//   border: 1px solid #47B2FB;
+//   border-radius: 4px;
+// }
 
-input:active {
-  background: #FFFFFF;
-  border: 1px solid #47B2FB;
-  box-shadow: 0 0 2px 0 #47B2FB;
-  border-radius: 4px;
-}
+// input:active {
+//   background: #FFFFFF;
+//   border: 1px solid #47B2FB;
+//   box-shadow: 0 0 2px 0 #47B2FB;
+//   border-radius: 4px;
+// }
 
-input[disabled='disabled'] {
-  background: #EFF2F7;
-  border: 1px solid #E0E6ED;
-  border-radius: 4px;
-}
+// input[disabled='disabled'] {
+//   background: #EFF2F7;
+//   border: 1px solid #E0E6ED;
+//   border-radius: 4px;
+// }
 
 .toggle-switch {
   background: #47B2FB;
@@ -656,3 +655,38 @@ input[disabled='disabled'] {
   border-top-right-radius: 3px;
   border-bottom-right-radius: 3px;
 }
+
+
+
+.container {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+@media (min-width: 576px) {
+  .container {
+    max-width: 540px;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 720px;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container {
+    max-width: 1140px;
+  }
+}
+

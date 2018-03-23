@@ -40,6 +40,10 @@ angular.module('ocspApp')
 
       init();
 
+      $scope.changeToTab = function(newTab){
+        $scope.tab = newTab;
+      }
+
 
       $scope.editLabelProperties = function (label) {
         $scope.labelName = label.name;
@@ -120,9 +124,8 @@ angular.module('ocspApp')
           $scope.jsonProperties.labelItems = finalLabelItems;
           label.properties = JSON.stringify($scope.jsonProperties);
           $scope.save();
-          modal.close();
         };
-
+        
       };
 
       $scope.upload = function () {

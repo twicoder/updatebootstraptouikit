@@ -12,14 +12,15 @@
                     <i class="fas fa-plus fa-2x"></i>
                 </button>
             </div>
+            <br/>
             <div class="">
 
                 <ul class="uk-tab" data-uk-switcher="{connect:'#labelConfigPopupSwitherListId'}">
                     <li>
-                        <a href="">Props</a>
+                        <a href="" ng-click="changeToTab('propitems')">Props</a>
                     </li>
                     <li>
-                        <a href="">Label Items</a>
+                        <a href="" ng-click="changeToTab('labelitems')">Label Items</a>
                     </li>
                 </ul>
 
@@ -102,9 +103,9 @@
 
             <div class="">
                 <br/>
-                <button type="button" class="uk-button oc-button" ng-click="saveNewLabelProperties()">
+                <a class="uk-button oc-button uk-modal-close" ng-click="saveNewLabelProperties()">
                     {{'ocsp_web_common_009' | translate}}
-                </button>
+                </a>
             </div>
         </form>
 

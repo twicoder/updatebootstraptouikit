@@ -41,9 +41,9 @@ angular.module('ocspcomponents', [])
             template:
             `
             <div>
-                <a wz-next="validateForm()" style="{{ nextstyle }}" class="wizardnextstep oc-button">{{nextstepname}}</a>
-                <a wz-next="submitMethod()" style="{{ laststyle }}" class="wizardnextstep oc-button">{{laststepname}}</a>
-                <a wz-previous style="{{ prestepstyle }}" class="wizardprevstep oc-button">{{prestepname}}</a>
+                <a wz-next="validateForm()" style="{{ nextstyle }}" class="wizardnextstep uk-button oc-button">{{nextstepname}}</a>
+                <a wz-next="submitMethod()" style="{{ laststyle }}" class="wizardnextstep uk-button oc-button">{{laststepname}}</a>
+                <a wz-previous style="{{ prestepstyle }}" class="wizardprevstep uk-button oc-button">{{prestepname}}</a>
             </div>
             `,
             link: function ($scope, $element, $attrs) {
@@ -150,7 +150,7 @@ angular.module('ocspcomponents')
                                                 <div style="display:block;background-color:#FFF;height:56px;line-height:47px;text-align:center;border: 5px solid #eee;border-radius:50%">{{$index+1}}</div>
                                             </span>
                             <span ng-if="currentStepNumber()>$index">
-                                                <div style="display:block;background-color:#f39c12;height:56px;line-height:47px;text-align:center;border: 5px solid #f39c12;border-radius:50%;font-size:30px;color:#FFFFFF"><div class="fas fa-check-circle fa-lg"></div></div>
+                                                <div style="display:block;background-color:#f39c12;height:56px;line-height:47px;text-align:center;border: 5px solid #f39c12;border-radius:50%;font-size:30px;color:#FFFFFF"><div class="fas fa-check"></div></div>
                                             </span>
                             <div style="margin-top: 25px;">{{step.title || step.wzTitle}}</div>
                         </li>
