@@ -544,7 +544,8 @@ angular.module('ocspApp')
             },
             events: []
           };
-          modal.close();
+          var modal = UIkit.modal("#createStreamPopupPageId");
+          modal.hide();
         };
 
         $scope.tryToSumit = function () {

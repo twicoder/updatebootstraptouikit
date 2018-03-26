@@ -129,9 +129,8 @@ angular.module('ocspcomponents')
                 }
 
                 scope.hideModal = function () {
-                    angular.element('.wizard-dialogue-mask').hide();
-                    angular.element('.wizard-dialogue-container').removeClass("animation-dialogue-in");
-                    angular.element('body,html').removeClass('forbid-scroll');
+                    var modal = UIkit.modal("#createStreamPopupPageId");
+                    modal.hide();
                 };
                 scope.showModal = function () {
                     angular.element('.wizard-dialogue-mask').show();

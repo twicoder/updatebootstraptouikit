@@ -156,12 +156,13 @@ angular.module('ocspApp')
     };
 
     $scope.save = function () {
-      if ($scope.mainForm.$invalid) {
-        angular.forEach($scope.mainForm.$error, function (field) {
-          angular.forEach(field, function (errorField) {
-            errorField.$setTouched();
-          });
-        });
+      if ($scope.mainFormUserManagement.$invalid) {
+        // angular.forEach($scope.mainFormUserManagement.$error, function (field) {
+        //   angular.forEach(field, function (errorField) {
+        //     console.log(errorField);
+        //     errorField.$setTouched();
+        //   });
+        // });
         Notification.error($filter('translate')('ocsp_web_common_032'));
       } else if ($scope.checkPassword()) {
         $http.post('/api/user/change', { "user": $scope.user }).success(function (data) {
@@ -169,7 +170,7 @@ angular.module('ocspApp')
             $scope.user.oldPassword=null;
             $scope.user.password=null;
             $scope.user.password2=null;
-            $scope.mainForm.$setUntouched();
+            $scope.mainFormUserManagement.$setUntouched();
             $scope.fieldsEditable = false;
             Notification.success($filter('translate')('ocsp_web_common_026'));
           } else {
@@ -181,9 +182,9 @@ angular.module('ocspApp')
 
     $scope.saveUsers = () => {
       console.log("$scope.mainForm:");
-      console.log($scope.mainForm);
-      if ($scope.mainForm.$invalid) {
-        angular.forEach($scope.mainForm.$error, function (field) {
+      console.log($scope.mainFormUserManagement);
+      if ($scope.mainFormUserManagement.$invalid) {
+        angular.forEach($scope.mainFormUserManagement.$error, function (field) {
           angular.forEach(field, function (errorField) {
             errorField.$setTouched();
           });
