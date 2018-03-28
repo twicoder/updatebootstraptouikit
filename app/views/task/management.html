@@ -32,7 +32,7 @@
 </script>
 
 <a href="#createStreamPopupPageId" data-uk-modal></a>
-<div id="createStreamPopupPageId" class="uk-modal uk-form">
+<div id="createStreamPopupPageId" class="uk-modal ">
     <div class="uk-modal-dialog uk-modal-dialog-large">
         <a class="uk-modal-close uk-close" ng-click="echoClick()"></a>
         <div class="uk-modal-header">
@@ -46,13 +46,13 @@
                     <div class="uk-grid">
                         <label class="uk-width-1-5">Stream Engine Type*</label>
                         <div ng-show="stormenabled" class="uk-width-4-5">
-                            <select class="uk-width-9-10" ng-model="task.enginetype" required>
+                            <select class="uk-width-9-10 form-control" ng-model="task.enginetype" required>
                                 <option value="SPARK" selected="true">SPARK</option>
                                 <option value="STORM">STORM</option>
                             </select>
                         </div>
                         <div ng-show="!stormenabled" class="uk-width-4-5">
-                            <select class="uk-width-9-10" ng-model="task.enginetype" required>
+                            <select class="uk-width-9-10 form-control" ng-model="task.enginetype" required>
                                 <option value="SPARK" selected="true">SPARK</option>
                             </select>
                         </div>
@@ -60,13 +60,13 @@
                     <div class="uk-grid">
                         <label class="uk-width-1-5">{{'ocsp_web_common_011' | translate}}*</label>
                         <div class="uk-width-4-5">
-                            <input type="text" name="name" class="uk-width-9-10" ng-model="task.name" required>
+                            <input type="text" name="name" class="uk-width-9-10 form-control" ng-model="task.name" required>
                         </div>
                     </div>
                     <div class="uk-grid" ng-show="task.enginetype === 'SPARK'">
                         <label class="uk-width-1-5">{{'ocsp_web_common_012' | translate}}</label>
                         <div class="uk-width-4-5">
-                            <textarea ng-model="task.description" class="uk-width-9-10" rows="6"></textarea>
+                            <textarea ng-model="task.description" class="uk-width-9-10 form-control" rows="6"></textarea>
                         </div>
                     </div>
                 </wz-step>
@@ -74,7 +74,7 @@
                     <div class="uk-grid">
                         <label class="uk-width-1-5">{{'ocsp_web_streams_manage_038' | translate}}*</label>
                         <div class="uk-width-4-5">
-                            <select class="uk-width-9-10" ng-model="task.input.datasource" ng-options="inputDatasource.name for inputDatasource in inputDatasources"
+                            <select class="uk-width-9-10 form-control" ng-model="task.input.datasource" ng-options="inputDatasource.name for inputDatasource in inputDatasources"
                                 ng-required="true">
                             </select>
                         </div>
@@ -100,25 +100,25 @@
                                         <div class="uk-grid">
                                             <label class="uk-width-1-5">{{'ocsp_web_streams_manage_010' | translate}}*</label>
                                             <div class="uk-width-4-5">
-                                                <input type="text" class="uk-width-3-4" ng-model="item.topic" required>
+                                                <input type="text" class="uk-width-3-4 form-control" ng-model="item.topic" required>
                                             </div>
                                         </div>
                                         <div class="uk-grid">
                                             <label class="uk-width-1-5">{{'ocsp_web_common_011' | translate}}*</label>
                                             <div class="uk-width-4-5">
-                                                <input type="text" class="uk-width-3-4" ng-model="item.name" required>
+                                                <input type="text" class="uk-width-3-4 form-control" ng-model="item.name" required>
                                             </div>
                                         </div>
                                         <div class="uk-grid">
                                             <label class="uk-width-1-5">{{'ocsp_web_streams_manage_011' | translate}}*</label>
                                             <div class="uk-width-4-5">
-                                                <tokenfield class="uk-width-3-4" ng-model="item.fields" required="true"></tokenfield>
+                                                <tokenfield class="uk-width-1-1" ng-model="item.fields" required="true"></tokenfield>
                                             </div>
                                         </div>
                                         <div class="uk-grid">
                                             <label class="uk-width-1-5">{{'ocsp_web_streams_manage_012' | translate}}*</label>
                                             <div class="uk-width-4-5">
-                                                <input type="text" class="uk-width-3-4" ng-model="item.delim" required>
+                                                <input type="text" class="uk-width-3-4 form-control" ng-model="item.delim" required>
                                             </div>
                                         </div>
                                     </div>
@@ -159,10 +159,10 @@
                                     <tbody>
                                         <tr ng-repeat="userfield in task.input.userFields">
                                             <td>
-                                                <input type="text" class="uk-width-1-1" ng-model="userfield.pname" required>
+                                                <input type="text" class="uk-width-1-1 form-control" ng-model="userfield.pname" required>
                                             </td>
                                             <td>
-                                                <input type="text" class="uk-width-1-1" ng-model="userfield.pvalue" required>
+                                                <input type="text" class="uk-width-1-1 form-control" ng-model="userfield.pvalue" required>
                                             </td>
                                             <td>
                                                 <a ng-click="remove(task.input.userFields, $index)">
@@ -178,13 +178,13 @@
                     <div class="uk-grid">
                         <label class="uk-width-1-5">{{'ocsp_web_streams_manage_013' | translate}}</label>
                         <div class="uk-width-4-5">
-                            <input type="text" class="uk-width-9-10" ng-model="task.input.filter_expr">
+                            <input type="text" class="uk-width-9-10 form-control" ng-model="task.input.filter_expr">
                         </div>
                     </div>
                     <div class="uk-grid">
                         <label class="uk-width-1-5">{{'ocsp_web_streams_manage_014' | translate}}*</label>
                         <div class="uk-width-4-5">
-                            <input type="text" class="uk-width-9-10" ng-model="task.input.uniqueKey" required>
+                            <input type="text" class="uk-width-9-10 form-control" ng-model="task.input.uniqueKey" required>
                         </div>
 
                     </div>
@@ -243,7 +243,7 @@
                                     <div class="uk-grid">
                                         <label class="uk-width-1-5">{{'ocsp_web_streams_manage_017' | translate}}*</label>
                                         <div class="uk-width-4-5">
-                                            <input class="uk-width-9-10" type="text" ng-model="item.name" required>
+                                            <input class="uk-width-9-10 form-control" type="text" ng-model="item.name" required>
                                         </div>
                                     </div>
                                     <div class="uk-grid">
@@ -257,33 +257,33 @@
                                     <div class="uk-grid">
                                         <label class="uk-width-1-5">{{'ocsp_web_streams_manage_019' | translate}}*</label>
                                         <div class="uk-width-4-5">
-                                            <input class="uk-width-9-10" type="text" ng-model="item.delim" required>
+                                            <input class="uk-width-9-10 form-control" type="text" ng-model="item.delim" required>
                                         </div>
                                     </div>
                                     <div class="uk-grid">
                                         <label class="uk-width-1-5">{{'ocsp_web_streams_manage_013' | translate}}</label>
                                         <div class="uk-width-4-5">
-                                            <input class="uk-width-9-10" type="text" ng-model="item.filter_expr">
+                                            <input class="uk-width-9-10 form-control" type="text" ng-model="item.filter_expr">
                                         </div>
                                     </div>
                                     <div class="uk-grid">
                                         <label class="uk-width-1-5">{{'ocsp_web_streams_manage_020' | translate}}({{'ocsp_web_common_023' | translate}})*</label>
                                         <div class="uk-width-4-5">
-                                            <input class="uk-width-9-10" type="number" ng-model="item.interval" ng-pattern="/^(0|[1-9][0-9]*)$/" required>
+                                            <input class="uk-width-9-10 form-control" type="number" ng-model="item.interval" ng-pattern="/^(0|[1-9][0-9]*)$/" required>
                                         </div>
 
                                     </div>
                                     <div class="uk-grid">
                                         <label class="uk-width-1-5">{{'ocsp_web_streams_manage_014' | translate}}*</label>
                                         <div class="uk-width-4-5">
-                                            <input class="uk-width-9-10" type="text" ng-model="item.output.uniqueKey" required>
+                                            <input class="uk-width-9-10 form-control" type="text" ng-model="item.output.uniqueKey" required>
                                         </div>
 
                                     </div>
                                     <div class="uk-grid">
                                         <label class="uk-width-1-5">{{'ocsp_web_streams_manage_021' | translate}}*</label>
                                         <div class="uk-width-4-5">
-                                            <select class="uk-width-9-10" ng-model="item.output.datasource" ng-options="datasource.name for datasource in datasources"
+                                            <select class="uk-width-9-10 form-control" ng-model="item.output.datasource" ng-options="datasource.name for datasource in datasources"
                                                 ng-required="true">
                                             </select>
                                         </div>
@@ -291,13 +291,13 @@
                                     <div class="uk-grid" ng-if="item.output.datasource.type == 'kafka'">
                                         <label class="uk-width-1-5">{{'ocsp_web_streams_manage_010' | translate}}*</label>
                                         <div class="uk-width-4-5">
-                                            <input class="uk-width-9-10" type="text" ng-model="item.output.topic" required>
+                                            <input class="uk-width-9-10 form-control" type="text" ng-model="item.output.topic" required>
                                         </div>
                                     </div>
                                     <div class="uk-grid" ng-if="item.output.datasource.type == 'codis'">
                                         <label class="uk-width-1-5">{{'ocsp_web_streams_manage_022' | translate}}*</label>
                                         <div class="uk-width-4-5">
-                                            <input class="uk-width-9-10" type="text" ng-model="item.output.codisKeyPrefix" required>
+                                            <input class="uk-width-9-10 form-control" type="text" ng-model="item.output.codisKeyPrefix" required>
                                         </div>
                                     </div>
                                     <div class="uk-grid">
