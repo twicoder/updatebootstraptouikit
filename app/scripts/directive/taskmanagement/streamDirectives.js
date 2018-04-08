@@ -265,11 +265,11 @@ angular.module('ocspApp')
                             </div>
                         </div>
                     </script>
-                    <div class="uk-accordion" data-uk-accordion>
-                        <h3 class="uk-accordion-title">
+                    <div class="uk-panel uk-panel-box">
+                        <h3 class="uk-panel-header">
                             <i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': item.isOpen, 'glyphicon-chevron-right': !item.isOpen}"></i> &nbsp;{{ 'ocsp_web_common_customize_property' | translate }}
                         </h3>
-                        <div class="uk-accordion-content">
+                        <div class="uk-panel-body">
                             <div class="uk-grid" ng-repeat="item in input.customParamsKV">
                                 <div class="uk-width-4-10">
                                     <span>{{item.pname}}</span>

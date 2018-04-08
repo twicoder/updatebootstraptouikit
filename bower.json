@@ -40,7 +40,11 @@
   "appPath": "app",
   "moduleName": "ocspApp",
   "overrides": {
-
+    "bootstrap": {
+      "main": [
+        "dist/js/bootstrap.js"
+      ]
+    },
     "echarts": {
       "main": [
         "dist/echarts.js"
