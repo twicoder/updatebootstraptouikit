@@ -1,10 +1,10 @@
 <div>
     <div class="uk-grid">
         <label ng-class="firstColumnWidthClass">{{'ocsp_web_streams_manage_038' | translate}}*</label>
-        <div ng-class="secondColumnClass">
+        <div ng-class="secondColumnWidthClass">
             <div class="uk-form-select" data-uk-form-select>
                 <span></span>
-                <select ng-model="selectedJob.input.datasource" ng-options="inputDatasource.name for inputDatasource in inputDatasources"
+                <select ng-model="selectedJob.input.datasource" class="form-control uk-width-1-1" ng-options="inputDatasource.name for inputDatasource in inputDatasources"
                     name="datasource" ng-disabled="isAdminUser || !streamEditable" ng-required="true">
                 </select>
             </div>
@@ -31,13 +31,13 @@
                 <div class="uk-width-1-1">
                     <div class="uk-grid">
                         <label ng-class="firstColumnWidthClass">{{'ocsp_web_streams_manage_010' | translate}}*</label>
-                        <input ng-class="secondColumnWidthClass" type="text" ng-model="item.topic" ng-readonly="isAdminUser || !streamEditable" name="inputTopic_{{$index}}"
+                        <input ng-class="secondColumnWidthClass" class="form-control" type="text" ng-model="item.topic" ng-readonly="isAdminUser || !streamEditable" name="inputTopic_{{$index}}"
                             required>
                         <span ng-class="thirdColumnWidthClass" class="redtip" ng-show="mainForm['inputTopic_' + $index].$touched && mainForm['inputTopic_' + $index].$error.required">{{'ocsp_web_common_027' | translate}}</span>
                     </div>
                     <div class="uk-grid">
                         <label ng-class="firstColumnWidthClass">{{'ocsp_web_common_011' | translate}}*</label>
-                        <input ng-class="secondColumnWidthClass" type="text" ng-model="item.name" ng-readonly="isAdminUser || !streamEditable" name="inputName_{{$index}}"
+                        <input ng-class="secondColumnWidthClass" class="form-control" type="text" ng-model="item.name" ng-readonly="isAdminUser || !streamEditable" name="inputName_{{$index}}"
                             required>
                         <span ng-class="thirdColumnWidthClass" class="redtip" ng-show="mainForm['inputName_' + $index].$touched && mainForm['inputName_' + $index].$error.required">{{'ocsp_web_common_027' | translate}}</span>
                     </div>
@@ -46,11 +46,11 @@
                         <div ng-class="secondColumnWidthClass" style="padding-left: 0px;">
                             <tokenfield ng-model="item.fields" name="inputFields_{{$index}}" required="true" readonly="{{cep || isAdminUser || !streamEditable}}"></tokenfield>
                         </div>
-                        <span ng-class="thirdColumnWidthClass" class="redtip" ng-show="mainForm['inputFields_' + $index].$touched && mainForm['inputFields_' + $index].$error.required">{{'ocsp_web_common_027' | translate}}</span>
+                        <span ng-class="thirdColumnWidthClass" class="redtip form-control" ng-show="mainForm['inputFields_' + $index].$touched && mainForm['inputFields_' + $index].$error.required">{{'ocsp_web_common_027' | translate}}</span>
                     </div>
                     <div class="uk-grid">
                         <label ng-class="firstColumnWidthClass">{{'ocsp_web_streams_manage_012' | translate}}*</label>
-                        <input ng-class="secondColumnWidthClass" type="text" ng-model="item.delim" ng-readonly="isAdminUser || !streamEditable" name="inputDelim_{{$index}}"
+                        <input ng-class="secondColumnWidthClass" class="form-control" type="text" ng-model="item.delim" ng-readonly="isAdminUser || !streamEditable" name="inputDelim_{{$index}}"
                             required>
                         <span ng-class="thirdColumnWidthClass" class="redtip" ng-show="mainForm['inputDelim_' + $index].$touched && mainForm['inputDelim_' + $index].$error.required">{{'ocsp_web_common_027' | translate}}</span>
                     </div>
@@ -95,11 +95,11 @@
                 <tbody>
                     <tr ng-repeat="userfield in selectedJob.input.userFields">
                         <td>
-                            <input type="text" class="form-control border0px" ng-readonly="isAdminUser || !streamEditable" ng-model="userfield.pname"
+                            <input type="text" class="form-control uk-width-1-1 border0px" ng-readonly="isAdminUser || !streamEditable" ng-model="userfield.pname"
                                 required>
                         </td>
                         <td>
-                            <input type="text" class="form-control border0px" ng-readonly="isAdminUser || !streamEditable" ng-model="userfield.pvalue"
+                            <input type="text" class="form-control uk-width-1-1 border0px" ng-readonly="isAdminUser || !streamEditable" ng-model="userfield.pvalue"
                                 required>
                         </td>
                         <td>
