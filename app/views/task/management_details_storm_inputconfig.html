@@ -1,22 +1,21 @@
 <div>
     <div class="uk-grid">
         <label ng-class="firstColumnWidthClass">{{'ocsp_web_streams_manage_038' | translate}}*</label>
-        <div ng-class="secondColumnClass">
+        <div ng-class="secondColumnWidthClass">
             <div class="uk-form-select" data-uk-form-select>
                 <span></span>
-                <select ng-model="selectedJob.input.datasource" ng-options="inputDatasource.name for inputDatasource in inputDatasources"
+                <select ng-model="selectedJob.input.datasource" class="form-control uk-width-1-1" ng-options="inputDatasource.name for inputDatasource in inputDatasources"
                     name="datasource" ng-disabled="isAdminUser || !streamEditable" ng-required="true">
                 </select>
             </div>
         </div>
-        <span ng-class="thirdColumnWidthClass" class="redtip" ng-show="mainStormForm.datasource.$touched && mainStormForm.datasource.$error.required">{{'ocsp_web_common_027' | translate}}</span>
+        <span ng-class="thirdColumnWidthClass" class="redtip" ng-show="mainForm.datasource.$touched && mainForm.datasource.$error.required">{{'ocsp_web_common_027' | translate}}</span>
     </div>
     <div class="uk-grid">
         <div ng-class="firstColumnWidthClass">
             <button type="button" class="uk-button oc-button" ng-disabled="isAdminUser || !streamEditable" ng-click="addInputSource(selectedJob.input.inputs)">{{'ocsp_web_streams_manage_045' | translate}}
             </button>
         </div>
-
     </div>
 
     <div class="uk-grid">
