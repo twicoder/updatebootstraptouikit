@@ -182,7 +182,7 @@ angular.module('ocspApp')
 			`
         };
     })
-    .directive('ocspParamEditor', function () {
+    .directive('ocspParamEditor', function ($uibModal) {
         return {
             restrict: 'AE',
             replace: false,
@@ -192,33 +192,33 @@ angular.module('ocspApp')
                 disabled: '='
             },
             controller: function ($scope) {
-                // $scope.addNewProperty = function (input) {
-                //     let modal = $uibModal.open({
-                //         animation: true,
-                //         ariaLabelledBy: 'modal-title-bottom',
-                //         ariaDescribedBy: 'modal-body-bottom',
-                //         templateUrl: 'addNewPropertyPage.html',
-                //         size: 'lg',
-                //         backdrop: 'static',
-                //         scope: $scope,
-                //         controller: ['$scope', function ($scope) {
-                //             $scope.newProperty = {
-                //                 pname: '',
-                //                 pvalue: ''
-                //             };
-                //             $scope.closeModal = function () {
-                //                 modal.close();
-                //             };
-                //             $scope.saveNewProperty = function () {
-                //                 if(!input.customParamsKV){
-                //                     input.customParamsKV = [];
-                //                 }
-                //                 input.customParamsKV.push($scope.newProperty);
-                //                 modal.close();
-                //             };
-                //         }]
-                //     });
-                // };
+                $scope.addNewProperty = function (input) {
+                    let modal = $uibModal.open({
+                        animation: true,
+                        ariaLabelledBy: 'modal-title-bottom',
+                        ariaDescribedBy: 'modal-body-bottom',
+                        templateUrl: 'addNewPropertyPage.html',
+                        size: 'lg',
+                        backdrop: 'static',
+                        scope: $scope,
+                        controller: ['$scope', function ($scope) {
+                            $scope.newProperty = {
+                                pname: '',
+                                pvalue: ''
+                            };
+                            $scope.closeModal = function () {
+                                modal.close();
+                            };
+                            $scope.saveNewProperty = function () {
+                                if(!input.customParamsKV){
+                                    input.customParamsKV = [];
+                                }
+                                input.customParamsKV.push($scope.newProperty);
+                                modal.close();
+                            };
+                        }]
+                    });
+                };
                 $scope.removeCustomProperty = function (input, property) {
                     if (input.customParamsKV) {
 
