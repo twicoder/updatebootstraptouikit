@@ -124,7 +124,7 @@
     <div class="uk-grid">
         <label ng-class="firstColumnWidthClass">{{'ocsp_web_streams_manage_014' | translate}}*</label>
         <div ng-class="secondColumnWidthClass" style="padding-left: 0px;">
-            <tokenfield inputs="{{selectedJob.input.fields}}" ng-model="selectedJob.input.uniqueKey" name="inputFields_spark_2" checkinputfield=true
+            <tokenfield inputs="{{getAllPossibleFields(selectedJob.input.fields,selectedJob.input.userFields)}}" ng-model="selectedJob.input.uniqueKey" name="inputFields_spark_2" checkinputfield=true
                 required="true" readonly="{{cep || isAdminUser || !streamEditable}}"></tokenfield>
         </div>
     </div>

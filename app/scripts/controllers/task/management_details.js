@@ -592,6 +592,7 @@ angular.module('ocspApp')
               $scope.selectedJob.input = arr.datainterface.data[0];
               $scope.selectedJob.output = arr.outputinterface.data;
               $scope.selectedJob.events = arr.events.data;
+              $scope.selectedJob.labels = [];
               $scope.selectedJob.events.forEach(item => {
                 item.outputFieldsInvalid = false;
                 item.outputFieldsInvalidMessage = "";
@@ -609,6 +610,7 @@ angular.module('ocspApp')
                   if (arr.labels.data[i].label_id === $scope.inputLabels[j].id) {
                     $scope.inputLabels[j].tick2 = true;
                     labels.push($scope.inputLabels[j]);
+                    $scope.selectedJob.labels.push($scope.inputLabels[j]);
                   }
                 }
               }
@@ -742,6 +744,7 @@ angular.module('ocspApp')
               $scope.selectedJob.input = arr.datainterface.data[0];
               $scope.selectedJob.output = arr.outputinterface.data;
               $scope.selectedJob.events = arr.events.data;
+              $scope.selectedJob.labels = [];
               $scope.selectedJob.events.forEach(item => {
                 item.outputFieldsInvalid = false;
                 item.outputFieldsInvalidMessage = "";
@@ -760,6 +763,7 @@ angular.module('ocspApp')
                   if (arr.labels.data[i].label_id === $scope.inputLabels[j].id) {
                     $scope.inputLabels[j].tick2 = true;
                     labels.push($scope.inputLabels[j]);
+                    $scope.selectedJob.labels.push($scope.inputLabels[j]);
                   }
                 }
               }
@@ -1020,12 +1024,16 @@ angular.module('ocspApp')
           }
           if ($scope.selectedJob.enginetype === 'SPARK') {
             $http.put("/api/task", { task: $scope.selectedJob }).success(function () {
+              // update page data after save the original data
+              fetchStreamDetails(currentStreamId);
               Notification.success($filter('translate')('ocsp_web_common_026'));
             });
             $scope.streamEditable = false;
             return true;
           } else if ($scope.selectedJob.enginetype === 'STORM') {
             $http.put("/api/job", { job: $scope.selectedJob }).success(function () {
+              // update page data after save the original data
+              fetchStreamDetails(currentStreamId);
               Notification.success($filter('translate')('ocsp_web_common_026'));
             });
             $scope.streamEditable = false;

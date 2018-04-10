@@ -9,7 +9,7 @@
             <h3 class="uk-accordion-title">
                 <i class="pull-left fas" ng-class="{'fa-chevron-down': item.isOpen, 'fa-chevron-right': !item.isOpen}"></i> &nbsp; {{'ocsp_web_streams_manage_031' | translate}} {{item.name}}
                 <a ng-if="!cep" class="pull-right" ng-hide="isAdminUser || !streamEditable" ng-click="$event.stopPropagation();$event.preventDefault();remove(selectedJob.events, $index)">
-                    <i class="fas fa-remove"></i>
+                    <i class="fas fa-minus"></i>
                 </a>
             </h3>
             <div class="uk-accordion-content">

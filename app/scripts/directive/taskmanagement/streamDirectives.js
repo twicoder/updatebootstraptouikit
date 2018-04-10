@@ -267,7 +267,7 @@ angular.module('ocspApp')
                     </script>
                     <div class="uk-panel uk-panel-box">
                         <h3 class="uk-panel-header">
-                            <i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': item.isOpen, 'glyphicon-chevron-right': !item.isOpen}"></i> &nbsp;{{ 'ocsp_web_common_customize_property' | translate }}
+                            <i class="pull-left fas" ng-class="{'fa-chevron-down': item.isOpen, 'fa-chevron-right': !item.isOpen}"></i> &nbsp;{{ 'ocsp_web_common_customize_property' | translate }}
                         </h3>
                         <div class="uk-panel-body">
                             <div class="uk-grid" ng-repeat="item in input.customParamsKV">
@@ -279,7 +279,7 @@ angular.module('ocspApp')
                                 </div>
                                 <div class="uk-width-1-10">
                                     <a ng-click="removeCustomProperty(input,item)" href="" ng-hide="disabled">
-                                        <i class="glyphicon glyphicon-minus-sign danger"></i>
+                                        <i class="fas fa-minus danger"></i>
                                     </a>
                                 </div>
                             </div>

@@ -24,7 +24,7 @@
             <h3 class="uk-accordion-title">
                 <i class="pull-left fas" ng-class="{'fa-chevron-down': item.isOpen, 'fa-chevron-right': !item.isOpen}"></i> &nbsp; {{'ocsp_web_streams_manage_038' | translate}} {{item.name}}
                 <a class="pull-right" ng-hide="isAdminUser || !streamEditable" ng-click="$event.stopPropagation();$event.preventDefault();remove(selectedJob.input.inputs, $index)">
-                    <i class="fas fa-remove"></i>
+                    <i class="fas fa-minus"></i>
                 </a>
             </h3>
             <div class="uk-accordion-content">
@@ -104,7 +104,7 @@
                         </td>
                         <td>
                             <a ng-hide="isAdminUser || !streamEditable" ng-click="remove(selectedJob.input.userFields, $index)">
-                                <i class="fas fa-remove"></i>
+                                <i class="fas fa-minus"></i>
                             </a>
                         </td>
                     </tr>
@@ -123,7 +123,7 @@
     <div class="uk-grid">
         <label ng-class="firstColumnWidthClass">{{'ocsp_web_streams_manage_014' | translate}}*</label>
         <div ng-class="secondColumnWidthClass" style="padding-left: 0px;">
-            <tokenfield inputs="{{selectedJob.input.fields}}" ng-model="selectedJob.input.uniqueKey" name="inputFields_spark_2" checkinputfield=true required="true" readonly="{{cep || isAdminUser || !streamEditable}}"></tokenfield>
+            <tokenfield inputs="{{getAllPossibleFields(selectedJob.input.fields,selectedJob.input.userFields)}}" ng-model="selectedJob.input.uniqueKey" name="inputFields_spark_2" checkinputfield=true required="true" readonly="{{cep || isAdminUser || !streamEditable}}"></tokenfield>
         </div>
     </div>
 
