@@ -66,7 +66,11 @@
         "dist/css/components/form-advanced.min.css",
         "dist/js/uikit.min.js",
         "dist/js/components/accordion.js",
-        "dist/js/components/upload.js"
+        "dist/js/components/upload.js",
+        "dist/fonts/fontawesome-webfont.ttf",
+        "dist/fonts/fontawesome-webfont.woff",
+        "dist/fonts/fontawesome-webfont.woff2",
+        "dist/fonts/FontAwesome.otf"
       ]
     }
   },

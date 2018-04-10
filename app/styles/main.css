@@ -119,6 +119,7 @@ a.oc-link:hover {
 .oc-button {
   background: #47B2FB;
   border-radius: 4px;
+  font-size: 12px;
 }
 
 .oc-button:hover {

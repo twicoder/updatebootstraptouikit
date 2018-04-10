@@ -211,10 +211,9 @@
                 <div class="uk-accordion" data-uk-accordion="{collapse: true}">
                     <div ng-repeat="data in datasource">
                         <div ng-if="data.type === 'kafka'" class="panel-default">
-
                             <h3 class="uk-accordion-title">
-                                <i class="fas" ng-class="{'fa-chevron-down': data.isOpen, 'glyphfaicon-chevron-right': !status.isOpen}"></i>
-                                &nbsp;{{data.name}}
+                                <i class="uk-icon-angle-right"></i>
+                                <span>{{data.name}}</span>
                                 <span ng-if="data.type === 'kafka'" class="label label-danger">Kafka</span>
                                 <span ng-if="data.type === 'codis'" class="label label-success">Codis</span>
                             </h3>
