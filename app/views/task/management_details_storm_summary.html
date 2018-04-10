@@ -9,7 +9,7 @@
                 <div class="uk-alert uk-alert-danger" role="alert" ng-show="selectedJob.id === undefined">
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span
                             aria-hidden="true">&times;</span></button>
-                    <strong><i class="glyphicon glyphicon-info-sign"></i></strong> {{'ocsp_web_streams_manage_004' | translate}}
+                    <strong><i class="fas fa-sign"></i></strong> {{'ocsp_web_streams_manage_004' | translate}}
                 </div>
                 <ul class="uk-list uk-list-space" ng-show="selectedJob.id !== undefined">
                     <li class="">
@@ -21,7 +21,7 @@
                         <h4>{{'ocsp_web_streams_manage_029' | translate}}:&nbsp;&nbsp;&nbsp;&nbsp;{{selectedJob.running_time | cusDate}}</h4>
                     </li>
                     <li class="" ng-if="isAdmin()">
-                        <h4>{{'ocsp_web_streams_owner' | translate}}: <i class="glyphicon glyphicon-user"></i> {{selectedJob.owner}}</h4>
+                        <h4>{{'ocsp_web_streams_owner' | translate}}: <i class="fas fa-user"></i> {{selectedJob.owner}}</h4>
                     </li>
                 </ul>
             </div>
@@ -57,7 +57,7 @@
                     <li ng-if="showItem==='eventdetails'" class="">
                         <h4>{{ 'ocsp_web_event_oneevent_statistics' | translate }}
                             <a class="pull-right" ng-click="goto('onestreamsummary')">
-                                <label class="glyphicon glyphicon-chevron-left"></label>&nbsp;{{ 'ocsp_web_common_turnback' | translate }}
+                                <label class="fas fa-chevron-left"></label>&nbsp;{{ 'ocsp_web_common_turnback' | translate }}
                             </a>
                         </h4>
                         <canvas class="chart chart-line" chart-data="event_detail_records" chart-labels="event_detail_times"

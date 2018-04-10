@@ -22,9 +22,9 @@
     <div class="uk-grid">
         <div class="uk-accordion uk-width-1-1" data-uk-accordion ng-repeat="item in selectedJob.input.inputs" data="{collapse: false}">
             <h3 class="uk-accordion-title">
-                <i class="pull-left glyphicon" ng-class="{'glyphicon-chevron-down': item.isOpen, 'glyphicon-chevron-right': !item.isOpen}"></i> &nbsp; {{'ocsp_web_streams_manage_038' | translate}} {{item.name}}
+                <i class="pull-left fas" ng-class="{'fa-chevron-down': item.isOpen, 'fa-chevron-right': !item.isOpen}"></i> &nbsp; {{'ocsp_web_streams_manage_038' | translate}} {{item.name}}
                 <a class="pull-right" ng-hide="isAdminUser || !streamEditable" ng-click="$event.stopPropagation();$event.preventDefault();remove(selectedJob.input.inputs, $index)">
-                    <i class="glyphicon glyphicon-remove"></i>
+                    <i class="fas fa-remove"></i>
                 </a>
             </h3>
             <div class="uk-accordion-content">
@@ -87,7 +87,7 @@
                         <th class="uk-width-7-10">{{'ocsp_web_streams_case_expression' | translate}}</th>
                         <th class="uk-width-1-10">
                             <a ng-hide="isAdminUser || !streamEditable" ng-click="addUserField(selectedJob.input)">
-                                <i class="glyphicon glyphicon-plus"></i>
+                                <i class="fas fa-plus"></i>
                             </a>
                         </th>
                     </tr>
@@ -104,7 +104,7 @@
                         </td>
                         <td>
                             <a ng-hide="isAdminUser || !streamEditable" ng-click="remove(selectedJob.input.userFields, $index)">
-                                <i class="glyphicon glyphicon-remove"></i>
+                                <i class="fas fa-remove"></i>
                             </a>
                         </td>
                     </tr>

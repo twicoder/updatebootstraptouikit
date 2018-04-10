@@ -136,7 +136,7 @@
                         <div ng-repeat="oneCategory in categorySet">
                             <div ng-if="notEmpty(propertyMap.get(oneCategory))">
                                 <h3 class="uk-accordion-title">
-                                    <i class="glyphicon" ng-class="{'glyphicon-chevron-down': isOpen, 'glyphicon-chevron-right': !isOpen}"></i>
+                                    <i class="fas" ng-class="{'fa-chevron-down': isOpen, 'fa-chevron-right': !isOpen}"></i>
                                     &nbsp;
                                     <label ng-if="oneCategory!=='userdefined' && oneCategory!==otherCategoryName ">{{ oneCategory }}&nbsp;{{ 'ocsp_web_common_configuration' | translate }}</label>
                                     <label ng-if="oneCategory==='userdefined'">{{ 'ocsp_web_common_customize' | translate }}&nbsp;{{ 'ocsp_web_common_configuration'
@@ -159,7 +159,7 @@
                                             </div>
                                             <div class="uk-width-1-10" style="margin-top:8px" ng-if="property.STREAM_SYSTEMPROP_CATEGORY && property.STREAM_SYSTEMPROP_CATEGORY.name === 'userdefined'">
                                                 <a ng-click="removeUserDefinedProperty(property)" ng-hide="!isAdmin()">
-                                                    <i class="glyphicon glyphicon-minus-sign danger"></i>
+                                                    <i class="fas fa-minus danger"></i>
                                                 </a>
                                             </div>
                                         </div>
@@ -213,7 +213,7 @@
                         <div ng-if="data.type === 'kafka'" class="panel-default">
 
                             <h3 class="uk-accordion-title">
-                                <i class="glyphicon" ng-class="{'glyphicon-chevron-down': data.isOpen, 'glyphicon-chevron-right': !status.isOpen}"></i>
+                                <i class="fas" ng-class="{'fa-chevron-down': data.isOpen, 'glyphfaicon-chevron-right': !status.isOpen}"></i>
                                 &nbsp;{{data.name}}
                                 <span ng-if="data.type === 'kafka'" class="label label-danger">Kafka</span>
                                 <span ng-if="data.type === 'codis'" class="label label-success">Codis</span>
