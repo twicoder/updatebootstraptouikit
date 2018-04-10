@@ -151,7 +151,7 @@
                                             <th width="60">{{'ocsp_web_streams_case_expression' | translate}}</th>
                                             <th width="10%">
                                                 <a ng-click="addUserField(task.input)">
-                                                    <i class="fa fa-plus"></i>
+                                                    <i class="fas fa-plus"></i>
                                                 </a>
                                             </th>
                                         </tr>
@@ -354,7 +354,7 @@
         <div class="">
             <button class="btn-create-stream" ng-class="{false:'oc-button'}[isAdminUser]" href="" ng-disabled="isAdminUser" ng-click="createOneStream()"
                 data-uk-modal="{target:'#createStreamPopupPageId'}">
-                <span class="fa fa-2x fa-plus" /> {{'ocsp_web_createstream' | translate }}
+                <span class="fas fa-plus" /> {{'ocsp_web_createstream' | translate }}
             </button>
             <div class="uk-grid">
                 <!-- leave for wizard -->
@@ -387,12 +387,12 @@
                                     <div class="btn-group">
                                         <font>
                                             <button href="" class="uk-button oc-button" ng-disabled="item.status !== 0 && item.status !== 'STOPPED' || isAdminUser" ng-click="updateStreamStatus(item,'start')">
-                                                <i class="fa fa-lg fa-play-circle"></i>
+                                                <i class="fas fa-lg fa-play-circle"></i>
                                             </button>
                                         </font>
                                         <font>
                                             <button href="" class="uk-button oc-button" ng-disabled="item.status === 0 || item.status === 'STOPPED' || isAdminUser" ng-click="updateStreamStatus(item,'stop')">
-                                                <i class="fa fa-lg fa-stop-circle"></i>
+                                                <i class="fas fa-lg fa-stop-circle"></i>
                                             </button>
                                         </font>
                                     </div>
