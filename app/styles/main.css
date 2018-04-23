@@ -771,3 +771,40 @@ input[type="button"].btn-block {
 .uk-button {
   color: #FFFFFF;
 }
+
+.uk-table {
+  border: 1px solid #CCD5E0;
+  border-radius: 2px;
+}
+
+.uk-table > thead {
+  background: #F9FAFC;
+  border: 1px solid #E0E6ED;
+  border-radius: 2px;
+}
+
+.uk-table > tbody {
+  background: #FFFFFF;
+  border: 1px solid #E0E6ED;
+  box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.12), 0 0 4px 0 rgba(0, 0, 0, 0.04);
+  border-radius: 2px;
+}
+
+.uk-table > tbody > tr > td {
+  font-family: MicrosoftYaHei;
+  font-size: 12px;
+  color: #475669;
+  letter-spacing: 0;
+}
+
+.label {
+  font-family: MicrosoftYaHei;
+  font-size: 10px;
+  color: #FFFFFF;
+  letter-spacing: 0;
+  line-height: 14px;
+}
+
+a {
+  font-size: 14px;
+}
