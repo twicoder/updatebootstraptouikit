@@ -175,9 +175,9 @@ angular.module('ocspApp')
             template:
                 `
 			<span>
-                <button ng-disabled="disabled" class="oc-button" style="height:35px;width:50px;" ng-click="changeStatus()">{{btnText}}</button>
+                <button ng-disabled="disabled" class="oc-button uk-button" style="height:35px;width:50px;" ng-click="changeStatus()">{{btnText}}</button>
                 &nbsp;
-				<button ng-disabled="disabled" class="oc-button" style="height:35px;width:50px;" ng-show="btnStatus==='save'" ng-click="cancel()">{{btnCancel}}</button>
+				<button ng-disabled="disabled" class="oc-button uk-button" style="height:35px;width:50px;" ng-show="btnStatus==='save'" ng-click="cancel()">{{btnCancel}}</button>
 			</span>
 			`
         };
