@@ -37,7 +37,7 @@ angular
     'ocspcomponents'
   ])
   .config(function ($routeProvider) {
-    const updateGlobalInfoTimerStatusFunc = function ($http, $rootScope, $location, $interval, moment) {
+    const updateGlobalInfoTimerStatusFunc = function ($http, $rootScope, $location, $interval) {
       $rootScope.lang = window.navigator.userLanguage || window.navigator.language;
       if ($rootScope.lang) {
         $rootScope.lang = $rootScope.lang.substr(0, 2);
@@ -230,7 +230,7 @@ angular
       $rootScope.styles = null;
       globalDataService.getCepEnableStatus().then((data) => {
         $rootScope.cep = JSON.parse(data);
-      }).catch(err => {});
+      }).catch(err => { console.log("JSON parse error:", err);});
       globalDataService.getStormEnableStatus().then(data => $rootScope.stormenabled = data.stormenabled);
       globalDataService.getProps().then((props) => {
         for (var index in props) {

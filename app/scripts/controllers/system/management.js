@@ -111,7 +111,6 @@ angular.module('ocspApp')
                 text: $filter('translate')("ocsp_web_common_021"),
                 action: function () {
                   $http.post("/api/datasource", { data: $scope.newDatasource }).success(function () {
-                    modal.close();
                     $scope.newDatasource = {};
                     Notification.success($filter('translate')('ocsp_web_common_026'));
                     init();
@@ -136,9 +135,6 @@ angular.module('ocspApp')
           "value": null,
           "status": 1,
           "description": ""
-        };
-        $scope.closeModal = function () {
-          modal.close();
         };
         $scope.saveNewSystemProp = function () {
           if ($("#idNewSystemProp .ng-invalid").length === 0) {

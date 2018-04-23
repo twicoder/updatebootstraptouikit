@@ -4,8 +4,8 @@
  * For label management main page controller
  */
 angular.module('ocspApp')
-  .controller('LabelManagementCtrl', ['$scope', '$http', 'Upload', 'Notification', '$timeout', '$rootScope', '$filter', 'NgTableParams', '$uibModal',
-    function ($scope, $http, Upload, Notification, $timeout, $rootScope, $filter, NgTableParams, $uibModal) {
+  .controller('LabelManagementCtrl', ['$scope', '$http', 'Upload', 'Notification', '$timeout', '$rootScope', '$filter', 'NgTableParams',
+    function ($scope, $http, Upload, Notification, $timeout, $rootScope, $filter, NgTableParams) {
       $rootScope.init('label');
 
       $scope.canEditLabels = false;
@@ -42,7 +42,7 @@ angular.module('ocspApp')
 
       $scope.changeToTab = function(newTab){
         $scope.tab = newTab;
-      }
+      };
 
 
       $scope.editLabelProperties = function (label) {
@@ -61,10 +61,6 @@ angular.module('ocspApp')
 
         $scope.listProperties = new NgTableParams({ 'count': '5' }, { counts: [], paginationMinBlocks: 4, paginationMaxBlocks: 7, dataset: $scope.jsonProperties.props });
         $scope.listLabelItems = new NgTableParams({ 'count': '5' }, { counts: [], paginationMinBlocks: 4, paginationMaxBlocks: 7, dataset: $scope.jsonProperties.labelItems });
-
-        $scope.closeModal = function () {
-          modal.close();
-        };
 
         $scope.deleteProperty = function (propertyToDelete) {
           if ($scope.tab === 'propitems') {
